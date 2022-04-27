@@ -27,8 +27,20 @@
     <div class="row">
         <div class="col-md-6 main-side">
 
+            <div class="justify-center align-center text-center">
                 <img class="icon" width="500" src="{{ asset('images/icon.png') }}" alt="">
-                
+                <img src="{{ asset('images/logo.png') }}" alt="">
+
+            </div>
+
+
+        </div>
+
+        <div class="col-md-6">
+            <h2>
+                Testimony For
+                Ogun State Crusade
+            </h2>
         </div>
 
 
