@@ -17,6 +17,6 @@ class TestimonyFormController extends Controller
 
     public function store(TestimonyRequest $request)
     {
-        
+        dd($request->all());
     }
 }

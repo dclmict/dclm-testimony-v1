@@ -33,7 +33,7 @@
         </div>
         
         <div class="mb-3">
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type your testimony below"></textarea name="content">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type your testimony below" name="content"></textarea>
         </div>
 
         <div class="row">
