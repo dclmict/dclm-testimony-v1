@@ -20,6 +20,18 @@
             margin-top: 10%;
         }
 
+        .main-button {
+            background: #226091;
+            border-radius: 5px;
+            color: white;
+            width : 207px;
+        }
+
+        a{
+            text-decoration: none;
+            color: black;
+        }
+
     </style>
 </head>
 
@@ -39,7 +51,7 @@
         <div class="col-md-6">
 
             @yield("content")
-            
+
         </div>
 
 
