@@ -37,10 +37,9 @@
         </div>
 
         <div class="col-md-6">
-            <h2>
-                Testimony For
-                Ogun State Crusade
-            </h2>
+
+            @yield("content")
+            
         </div>
 
 
