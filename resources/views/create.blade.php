@@ -30,5 +30,10 @@
     <div class="mb-3">
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type your testimony below"></textarea>
     </div>
+
+    <div class="row">
+        <button type="button" class="col btn btn-outline-primary"> Upload your testimony </button>
+        <button type="button" class="col justify-content-end  btn btn-primary" type="submit"> Submit </button>
+    </div>
 </div>
 @endsection
