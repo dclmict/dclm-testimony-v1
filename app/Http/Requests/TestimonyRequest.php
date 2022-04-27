@@ -23,7 +23,8 @@ class TestimonyRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $input = $this->request->all();
+        $rules = [
             'full_name'=>'required|string',
             'email'=>'required|email',
             'phone'=>'required|string',
@@ -32,6 +33,20 @@ class TestimonyRequest extends FormRequest
             'content'=>'required|string',
             'file_dir'=>'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
         ];
+
+        if (blank($input['content']) && blank($input['file_dir'])) {
+            $rules["content"] = 'required|string';
+            $rules["file_dir"] = 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi';
+        } elseif(blank($input['content'])) {
+            $rules["content"] = 'nullable|string';
+            $rules["file_dir"] = 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi';
+        }else{
+            $rules["content"] = 'required|string';
+            $rules["file_dir"] = 'nullable|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi';
+        }
+
+        return $rules;
+        
     }
 
     public function messages()
