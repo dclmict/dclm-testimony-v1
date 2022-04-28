@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 Route::get('/testimoy', [TestimonyFormController::class, 'show']);
 Route::post('/testimony', [TestimonyFormController::class, 'store'])->name("testimony.store");
+Route::post('/thanks', [TestimonyFormController::class, 'thanks'])->name("testimony.thanks");
