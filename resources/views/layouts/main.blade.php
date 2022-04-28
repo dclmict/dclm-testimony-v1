@@ -17,34 +17,39 @@
         /* align center */
         .icon {
 
-            margin-top: 10%;
+            /*             margin-top: 10%; */
         }
 
         .main-button {
             background: #226091;
             border-radius: 5px;
             color: white;
-            width : 207px;
+            width: 207px;
         }
 
-        a{
+        a {
             text-decoration: none;
             color: black;
         }
+
+
+
+       /*  @media only screen and (max-width=600px) {
+             .center-on-mobile {
+                text-align: center !important;
+
+            }
+        } */
 
     </style>
 </head>
 
 <body class="container-fluid">
     <div class="row">
-        <div class="col-md-6 main-side">
+        <div class="col-md-6  main-side d-flex flex-column justify-content-center align-items-center ">
 
-            <div class="justify-center align-center text-center">
-                <img class="icon" width="500" src="{{ asset('images/icon.png') }}" alt="">
-                <img src="{{ asset('images/logo.png') }}" alt="">
-
-            </div>
-
+            <img class="icon img-fluid" width="500" src="{{ asset('images/icon.png') }}" alt="">
+            <img width="200" class="img-fluid" src="{{ asset('images/logo.png') }}" alt="">
 
         </div>
 
