@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- imoort app.css --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    @stack('styles')
+    
     <title>Ogun state crusade testimony</title>
     <style>
         .main-side {
@@ -61,6 +64,8 @@
 
 
     </div>
+
+    @stack('scripts')
 </body>
 
 </html>

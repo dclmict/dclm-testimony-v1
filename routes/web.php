@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/testimoy', [TestimonyFormController::class, 'show']);
+Route::get('/testimony', [TestimonyFormController::class, 'show']);
 Route::post('/testimony', [TestimonyFormController::class, 'store'])->name("testimony.store");
 Route::post('/thanks', [TestimonyFormController::class, 'thanks'])->name("testimony.thanks");

@@ -34,7 +34,7 @@ class TestimonyRequest extends FormRequest
             'file_dir'=>'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
         ];
 
-        if (blank($input['content']) && isset($input['file_dir'])) {
+        if (blank($input['content']) && ( isset($input['file_dir'])  && blank($input['file_dir']))) {
             $rules["content"] = 'required|string';
             $rules["file_dir"] = 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi';
         } elseif(blank($input['content'])) {
