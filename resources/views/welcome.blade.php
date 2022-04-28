@@ -2,8 +2,8 @@
 
 
 @section('content')
-    <div class="d-none d-md-flex flex-column mt-3">
-        <div class="row align-self-center">
+    <div class="d-none d-md-flex flex-column" >
+        <div class="row align-self-center" style="position: absolute; top:0; margin-top:1%">
             <div class="col-md-auto">
                 <a href="#">Contact us</a>
             </div>
@@ -31,9 +31,9 @@
                 <span style="font-size: 26px; " class="mt-4 text-thin">
                     Testify to the goodness of God
                 </span>
-                <button class="btn main-button" style="margin-top:44px">
+                <a href="{{route('testimony.show')}}" class="btn main-button" style="margin-top:44px">
                     Share My Testimony
-                </button>
+                </a>
             </div>
 
 
