@@ -31,7 +31,7 @@
         <textarea class="form-control my-3" id="exampleFormControlTextarea1" rows="3" placeholder="Type your testimony below"></textarea>
     </div>
 
-    <div class="row ">
+    <div class="row my-5">
         <div class="col-md-6">
             <button type="button" class="btn col-12 btn-outline-primary mt-2"> Upload your testimony </button>
         </div>
