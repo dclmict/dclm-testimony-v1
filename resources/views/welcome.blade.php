@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="d-none d-md-flex flex-column mt-3">
-        <div class="row align-self-center" >
+        <div class="row align-self-center">
             <div class="col-md-auto">
                 <a href="#">Contact us</a>
             </div>
@@ -15,22 +15,28 @@
             </div>
         </div>
     </div>
-    <div class="d-flex flex-column justify-content-center" style="height: 93%">
+    <div class="d-flex flex-column justify-content-center" style="height: 93%; margin-left:10%">
         {{-- flex menu --}}
         <div class="d-flex">
-            <div class="d-flex flex-column center-on-mobile ">
-                <h1  style="font-size: 6vw">
-                    Testimony For
-                    Ogun State Crusade
-                </h1>
+            <div class="d-flex flex-column ">
+                <div class="d-flex flex-column">
+                    <span style="font-size: 36px;">
+                        Testimony For
+                    </span>
+                    <span style="font-size: 36px;">Ogun State Crusade</span>
+                </div>
 
-                <h2 style="font-size: 3vw">
+
+
+                <span style="font-size: 26px; " class="mt-4 text-thin">
                     Testify to the goodness of God
-                </h2>
+                </span>
                 <button class="btn main-button" style="margin-top:44px">
                     Share My Testimony
                 </button>
             </div>
+
+
         </div>
 
 
