@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TestimonyFormController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +24,6 @@ Route::get('thanks', function () {
 
 
 
+Route::get('/testimony', [TestimonyFormController::class, 'show']);
+Route::post('/testimony', [TestimonyFormController::class, 'store'])->name("testimony.store");
+Route::post('/thanks', [TestimonyFormController::class, 'thanks'])->name("testimony.thanks");
