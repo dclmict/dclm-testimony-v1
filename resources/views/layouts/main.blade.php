@@ -48,7 +48,7 @@
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6  align-self-center">
 
             @yield("content")
 

@@ -1,9 +1,9 @@
 @extends('layouts.main')
 @section('content')
-<div class="p-4">
-    <h1 class="text-center">
+<div class="p-4 my-auto align-items-end">
+    <h4 class="text-center my-5">
         Share your testimony
-    </h1>
+    </h4>
 
     <div class="my-3">
         {{-- <label for="exampleFormControlInput1" class="form-label">Email address</label> --}}
@@ -27,13 +27,18 @@
         </div>
     </div>
     
-    <div class="mb-3">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type your testimony below"></textarea>
+    <div class="form-group row">
+        <textarea class="form-control my-3" id="exampleFormControlTextarea1" rows="3" placeholder="Type your testimony below"></textarea>
     </div>
 
-    <div class="row">
-        <button type="button" class="col btn btn-outline-primary"> Upload your testimony </button>
-        <button type="button" class="col justify-content-end  btn btn-primary" type="submit"> Submit </button>
+    <div class="row ">
+        <div class="col-md-6">
+            <button type="button" class="btn col-12 btn-outline-primary mt-2"> Upload your testimony </button>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn col-12 btn-primary mt-2" type="submit"> Submit </button>
+        </div>
+        
     </div>
 </div>
 @endsection
