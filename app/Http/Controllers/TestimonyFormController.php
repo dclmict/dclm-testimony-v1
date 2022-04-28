@@ -12,13 +12,24 @@ class TestimonyFormController extends Controller
 {
     public function show()
     {
-        $countries = Country::orderByDesc("libelle")->get();
+        $countries = Country::orderBy("libelle")->get();
         
         return view('create', compact("countries"));
     }
 
     public function store(TestimonyRequest $request)
     {
-        $testimony = Testimony::store($request->except("file_dire"), $request->file_dire);
+        $testimony = Testimony::store(
+            $request->except("file_dire"), 
+            file_get_contents($request->file('file_dir')->getRealPath()),
+            $request->file('file_dir')->extension()
+        );
+
+        return redirect()->route("thanks");
+    }
+
+    public function thanks()
+    {
+        return view('thanks');
     }
 }
