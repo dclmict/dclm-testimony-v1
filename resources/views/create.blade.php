@@ -27,7 +27,7 @@
         </div>
     </div>
     
-    <div class="form-group row">
+    <div class="form-group">
         <textarea class="form-control my-3" id="exampleFormControlTextarea1" rows="3" placeholder="Type your testimony below"></textarea>
     </div>
 
