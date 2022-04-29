@@ -26,7 +26,7 @@ class TestimonyFormController extends Controller
         );
 
         //dd($testimony);
-       // return redirect()->route("thanks");
+        return redirect()->route("thanks");
     }
 
     public function thanks()
