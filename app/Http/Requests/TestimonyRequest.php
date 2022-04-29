@@ -52,11 +52,11 @@ class TestimonyRequest extends FormRequest
     public function messages()
     {
         return [
-            "required" => "Ce champ est obligatoire.",
-            "string" => "Ce champ est obligatoire.",
-            "email" => "Renseignez un email valide.",
-            "integer" => "Choisissez un pays.",
-            "mimetypes" => "Choisissez une vidéo.",
+            "required" => "Required",
+            "string" => "Required",
+            "email" => "This email is invalid.",
+            "integer" => "Choose a country.",
+            "mimetypes" => "Choose a video file.",
         ];
     }
 }

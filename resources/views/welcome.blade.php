@@ -5,13 +5,13 @@
     <div class="d-none d-md-flex flex-column" >
         <div class="row align-self-center" style="position: absolute; top:0; margin-top:1%">
             <div class="col-md-auto">
-                <a href="#">Contact us</a>
+                <a href="https://dclm.org/contact/" target="_blank">Contact us</a>
             </div>
             <div class="col-md-auto">
-                <a href="#">Go live</a>
+                 <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Go live</a>
             </div>
             <div class="col-md-auto">
-                <a href="#">Testify</a>
+                <a href="{{route('testimony.show')}}">Testify</a>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     @stack('styles')
-    
+
     <title>Ogun state crusade testimony</title>
     <style>
         .main-side {
@@ -80,10 +80,10 @@
                             <a href="#">Contact us</a>
                         </div>
                         <div class="col-md-auto">
-                            <a href="#">Go live</a>
+                             <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Go live</a>
                         </div>
                         <div class="col-md-auto">
-                            <a href="#">Testify</a>
+                            <a href="{{route('testimony.show')}}">Testify</a>
                         </div>
                     </div>
                 </div>
@@ -91,13 +91,13 @@
 
             <div class="d-flex d-md-none gap-4 mob-menu" >
                 <div class="col-md-auto">
-                    <a href="#">Contact us</a>
+                    <a href="https://dclm.org/contact/" target="_blank">Contact us</a>
                 </div>
                 <div class="col-md-auto">
-                    <a href="#">Go live</a>
+                     <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Go live</a>
                 </div>
                 <div class="col-md-auto">
-                    <a href="#">Testify</a>
+                    <a href="{{route('testimony.show')}}">Testify</a>
                 </div>
             </div>
             <img class="icon img-fluid" width="500" src="{{ asset('images/icon.png') }}" alt="">
