@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Testify to the greatness and goodness of God through the on-going global crusades" />
+    <meta name="keywords" content="DCLM, DCLM Webcast, DCLM Testimony, Pastor Kumuyi live, deeperLife, Pastor Kumuyi, Messages, live messages webcast, dclm, #DCLM" />
     {{-- imoort app.css --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
 
     @stack('styles')
 
-    <title>Ogun state crusade testimony</title>
+    <title>DCLM Testimony: Abeokuta Global Crusade </title>
     <style>
         .main-side {
             background: linear-gradient(178.89deg, #226091 -9.6%, #507DA0 0.42%, rgba(196, 196, 196, 0) 46.37%);
