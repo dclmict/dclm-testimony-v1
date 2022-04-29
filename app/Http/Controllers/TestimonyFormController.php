@@ -25,7 +25,8 @@ class TestimonyFormController extends Controller
             $request->has("file_dir") ? $request->file('file_dir')->extension() : null
         );
 
-        return redirect()->route("thanks");
+        //dd($testimony);
+       // return redirect()->route("thanks");
     }
 
     public function thanks()
