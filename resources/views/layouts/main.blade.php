@@ -97,7 +97,7 @@
                      <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Go live</a>
                 </div>
                 <div class="col-md-auto">
-                    <a href="{{route('testimony.show')}}">Testify</a>
+                    <a href="{{route('testimony.show')}}#testimony-section">Testify</a>
                 </div>
             </div>
             <img class="icon img-fluid" width="500" src="{{ asset('images/icon.png') }}" alt="">
