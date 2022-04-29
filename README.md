@@ -1,4 +1,4 @@
-COMMAND TO EXECUTE
+COMMAND & Procedure
 
 - add aws credentials to .env file
 - add database infos (mysql)
