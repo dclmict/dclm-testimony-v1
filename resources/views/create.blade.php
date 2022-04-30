@@ -21,13 +21,13 @@
             @csrf
             <div class="my-3">
 
-                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Fullname"
+                <input required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Fullname"
                     name="full_name" value="{{ old('full_name') }}">
                 <x-error name="full_name" />
             </div>
             <div class="form-group row">
                 <div class="my-3 col-md-6">
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" name="email"
+                    <input required type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" name="email"
                         value="{{ old('email') }}">
                     <x-error name="email" />
                 </div>
@@ -40,7 +40,7 @@
 
             <div class="form-group row">
                 <div class="my-3 col-md-6">
-                    <select name="country_id" class="form-control js-example-basic-single" id="country_id"
+                    <select  required name="country_id" class="form-control js-example-basic-single" id="country_id"
                         style="width: 100%;">
                         <option value="">Country</option>
                         @foreach ($countries as $country)
@@ -50,7 +50,7 @@
                     <x-error name="country_id" />
                 </div>
                 <div class="my-3 col-md-6">
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="city"
+                    <input required type="text" class="form-control" id="exampleFormControlInput1" placeholder="city"
                         value="{{ old('city') }}" name="city">
                     <x-error name="city" />
                 </div>
