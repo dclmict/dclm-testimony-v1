@@ -17,7 +17,7 @@
         <h4 class="text-center my-5">
             Share your testimony
         </h4>
-        <form action="{{ route('testimony.store') }}" method="POST" enctype="multipart/form-data" x-data="app()">
+        <form action="{{ route('testimony.store') }}" method="POST" enctype="multipart/form-data" x-data="app()" x-on:submit="submit()">
             @csrf
             <div class="my-3">
 
@@ -70,7 +70,7 @@
                     <x-error name="file_dir" />
                 </div>
                 <div class="col-md-6">
-                    <button x-on:click="submit()" class="btn col-12 btn-primary mt-2 d-flex justify-content-center align-items-center" type="submit"> <span
+                    <button  class="btn col-12 btn-primary mt-2 d-flex justify-content-center align-items-center" type="submit"> <span
                             x-text="button_text" >Submit </span>
                         <div x-show="loading" class="spinner-border text-white" role="status" id="spinner">
 
