@@ -29,7 +29,7 @@ class Testimony extends Model
 
         $fileName = $this->email . '-' . time() . '.' . $extension;
         try {
-            Storage::disk('s3')->put($fileName, $file);
+            Storage::disk('s3')->put("abeokuta-crusade/".$fileName, $file);
             $this->file_dir = $fileName;
             $this->save();
         } catch (\Throwable $th) {
