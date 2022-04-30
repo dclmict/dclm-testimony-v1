@@ -4,8 +4,8 @@ version: '3.8'
 services:
 
   # Nginx Service
-  nginx:
-    container_name: nginx
+  nginx1.21:
+    container_name: nginx1.21
     image: opeoniye/nginx:1.21
     ports:
       - 1000:80
@@ -16,6 +16,7 @@ services:
       - ./.docker/nginx/testify.conf:/etc/nginx/conf.d/testify.conf
       - ./.docker/nginx/ssl.conf:/etc/nginx/ssl.conf
       - /etc/letsencrypt/live/dclm.org:/var/keys/dclm.org
+    restart: always
     depends_on:
       - php8.1
 
@@ -28,3 +29,4 @@ services:
       - .:/var/www
       - ./.docker/php8.1/php.ini:/usr/local/etc/php/php.ini
       - ./.docker/php8.1/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    restart: always
