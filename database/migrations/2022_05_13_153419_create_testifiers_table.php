@@ -18,7 +18,8 @@ class CreateTestifiersTable extends Migration
             $table->string("email")->unique();
             $table->string("full_name");
             $table->string("phone");
-            
+            $table->foreignId("country_id");
+            $table->string("city");
             $table->timestamps();
         });
     }

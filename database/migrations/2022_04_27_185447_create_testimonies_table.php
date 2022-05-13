@@ -15,10 +15,6 @@ class CreateTestimoniesTable extends Migration
     {
         Schema::create('testimonies', function (Blueprint $table) {
             $table->id();
-            
-            $table->unsignedBigInteger("country_id");
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade')->onUpdate("cascade");
-            $table->string("city");
             $table->string("content")->nullable();
             $table->string("file_dir")->nullable();
             $table->engine = 'InnoDB';
