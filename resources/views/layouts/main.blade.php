@@ -9,6 +9,9 @@
     <meta name="keywords" content="DCLM, DCLM Webcast, DCLM Testimony, Pastor Kumuyi live, deeperLife, Pastor Kumuyi, Messages, live messages webcast, dclm, #DCLM" />
     {{-- imoort app.css --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dlcmbrand.css') }}">
+    
+
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
 
     @stack('styles')
