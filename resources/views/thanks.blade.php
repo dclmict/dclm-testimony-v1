@@ -1,7 +1,7 @@
 @extends("layouts.main")
 
 @section('content')
-    <div class="d-flex flex-column align-items-center justify-content-center gap-5">
+    <div class="d-flex flex-column align-items-center justify-content-center gap-5" id="thanks-section">
         <img width="300" class="img-fluid" src="{{ asset('images/logo.png') }}" alt="">
         <span class="text-center" style="font-size: 36px;">
             THANKS <br>
