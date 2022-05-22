@@ -16,6 +16,10 @@ class AlterTableTestimonies extends Migration
         //
         Schema::table("testimonies", function(Blueprint $table){
             $table->foreignId("testifier_id")->nullable();
+
+            $table->dropForeign("testimonies_country_id_foreign");
+            $table->dropColumn(["full_name", "country_id", "city" , "email" , "phone"]);
+
         });
     }
 

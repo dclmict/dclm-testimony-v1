@@ -19,8 +19,13 @@ class Testimony extends Model
         $testimony = self::make($data);
         $active = CrusadeTour::whereIsActive(true)->first();
 
+        $testifier = Testifier::existOrCreate($data);
+        $testimony->testifier()->associate($testifier);
+
         /* Warning : make sure $active is not null */
         $testimony->crusadeTour()->associate($active);
+
+        $testimony->save();
 
         if ($file) {
 
