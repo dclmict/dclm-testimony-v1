@@ -38,8 +38,10 @@ class Testimony extends Model
 
 
         $fileName = $this->email . '-' . time() . '.' . $extension;
+        $active = CrusadeTour::whereIsActive(true)->first();
+
         try {
-            Storage::disk('s3')->put("abeokuta-crusade/" . $fileName, $file);
+            Storage::disk('s3')->put($active->slug."/" . $fileName, $file);
             $this->file_dir = $fileName;
             $this->save();
         } catch (\Throwable $th) {
