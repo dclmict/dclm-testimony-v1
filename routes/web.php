@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 })->name("home");
 
+Auth::routes();
+
 Route::get('/admin', function () {
     return view('Admin.layout.main');
 })->name("admin");
@@ -27,7 +29,8 @@ Route::get('thanks', function () {
 })->name('thanks');
 
 
-
 Route::get('/testimony', [TestimonyFormController::class, 'show'])->name("testimony.show");
 Route::post('/testimony', [TestimonyFormController::class, 'store'])->name("testimony.store");
 Route::post('/thanks', [TestimonyFormController::class, 'thanks'])->name("testimony.thanks");
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
