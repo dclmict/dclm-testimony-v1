@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name("home");
 
+Route::get('/admin', function () {
+    return view('Admin.layout.main');
+})->name("admin");
+
 Route::get('thanks', function () {
     return view('thanks');
 })->name('thanks');
