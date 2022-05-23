@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Country;
 use App\Models\Testimony;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,12 +10,10 @@ class Testifier extends Model
 {
     use HasFactory;
 
+
     protected $fillable = ["full_name", "country_id" , "city", "phone", "email"];
 
-    public function testimonies()
-    {
-        return $this->hasMany(Testimony::class);
-    }
+  
 
     public static function existOrCreate($data)
     {
@@ -39,3 +36,9 @@ class Testifier extends Model
         return $this->belongsTo(Country::class);
     }
 }
+
+    public function testimonies(){
+        return $this->hasMany(Testimony::class);
+    }
+}
+

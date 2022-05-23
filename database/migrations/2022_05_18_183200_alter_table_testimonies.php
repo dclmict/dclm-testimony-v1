@@ -14,6 +14,7 @@ class AlterTableTestimonies extends Migration
     public function up()
     {
         //
+
         Schema::table("testimonies", function (Blueprint $table) {
             $table->foreignId("testifier_id")->nullable();
 
@@ -23,6 +24,7 @@ class AlterTableTestimonies extends Migration
             } catch (\Throwable $th) {
                 //throw $th;
             }
+
         });
     }
 
@@ -34,7 +36,9 @@ class AlterTableTestimonies extends Migration
     public function down()
     {
         //
+
         Schema::table("testimonies", function (Blueprint $table) {
+
             $table->dropForeign("testimonies_testifier_id_foreign");
             $table->dropColumn("testifier_id");
         });

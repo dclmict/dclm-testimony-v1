@@ -11,6 +11,9 @@
         content="DCLM, DCLM Webcast, DCLM Testimony, Pastor Kumuyi live, deeperLife, Pastor Kumuyi, Messages, live messages webcast, dclm, #DCLM" />
     {{-- imoort app.css --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dlcmbrand.css') }}">
+    
+
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
 
     @stack('styles')
@@ -160,7 +163,9 @@
                     alt="">
 
                 <div class="mt-5">
+
                     <a href="{{route('testimony.show')}}#testimony-section" class="btn main-button mb-5">SHARE MY TESTIMONY</a>
+
                 </div>
             </div>
         </div>
