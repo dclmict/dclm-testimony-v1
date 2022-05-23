@@ -24,6 +24,8 @@
 
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -47,7 +49,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -61,6 +63,11 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.testimonies.list') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Testimonies</span></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
@@ -330,7 +337,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="{{ asset('images/undraw_profile.svg' )}}">
+                                <img class="img-profile rounded-circle"
+                                    src="{{ asset('images/undraw_profile.svg') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -362,10 +370,9 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-
+                    @yield('Admincontent')
                 </div>
                 <!-- /.container-fluid -->
 
@@ -426,13 +433,10 @@
     {{-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> --}}
     <script src=" {{ asset(' vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-
-
     <!-- Custom scripts for all pages-->
     {{-- <script src="js/sb-admin-2.min.js"></script> --}}
     <script src="js/sb-admin-2.min.js"></script>
-
-
+    @stack('dataTableScripts')
 </body>
 
 </html>

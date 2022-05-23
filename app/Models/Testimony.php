@@ -35,8 +35,6 @@ class Testimony extends Model
 
     public function saveFile($file, $extension)
     {
-
-
         $fileName = $this->email . '-' . time() . '.' . $extension;
         $active = CrusadeTour::whereIsActive(true)->first();
 
