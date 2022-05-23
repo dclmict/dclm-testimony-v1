@@ -4,7 +4,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TestimonyFormController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CrusadeTourController;
-use App\Http\Controllers\TestimonyFormController;
 
 /*
 |--------------------------------------------------------------------------
