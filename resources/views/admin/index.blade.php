@@ -18,5 +18,48 @@
 
             </div>
         </div>
+
+
+        <div class="col-md-6">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold text-dark text-center text-xs">Global Testimonies</h3>
+                            <h2 class="text-dark font-weigth-thin text-center">{{ App\Models\Testimony::count() }}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold text-dark text-center text-xs">Crusade Tours</h3>
+                            <h2 class="text-dark font-weigth-thin text-center">{{ App\Models\CrusadeTour::count() }}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold text-dark text-center text-xs">Countries</h3>
+                            <h2 class="text-dark font-weigth-thin text-center">{{ 0 }}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold text-dark text-center text-xs">Ongoing Crusade Testimonies</h3>
+                            <h2 class="text-dark font-weigth-thin text-center">{{ $active? $active->testimonies->count() :0 }}</h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 @endsection
