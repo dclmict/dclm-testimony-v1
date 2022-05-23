@@ -6,3 +6,4 @@ COMMAND & Procedure
 - composer require league/flysystem-aws-s3-v3 "~1.0" --update-with-all-dependencies
 - php artisan migrate
 - php artisan db:seed
+- php artisan db:seed --class=RoleSeeder
