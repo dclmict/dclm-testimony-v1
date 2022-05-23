@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TestimonyFormController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,21 +14,25 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes(); // laravel auth routes
 
 Route::get('/', function () {
     return view('welcome');
 })->name("home");
 
-Route::get('/admin', function () {
-    return view('Admin.layout.main');
-})->name("admin");
 
 Route::get('thanks', function () {
     return view('thanks');
 })->name('thanks');
 
 
-
 Route::get('/testimony', [TestimonyFormController::class, 'show'])->name("testimony.show");
 Route::post('/testimony', [TestimonyFormController::class, 'store'])->name("testimony.store");
 Route::post('/thanks', [TestimonyFormController::class, 'thanks'])->name("testimony.thanks");
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => ['auth', 'role:Admin']], function () {
+
+    Route::get('/admin', [AdminController::class, 'show'])->name("admin.show");
+});
