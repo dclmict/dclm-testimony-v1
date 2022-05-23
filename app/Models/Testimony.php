@@ -53,4 +53,11 @@ class Testimony extends Model
     {
         return $this->belongsTo(Testifier::class);
     }
+
+
+    public function crusadeTour()
+    {
+        return $this->belongsTo(CrusadeTour::class);
+    }
+
 }

@@ -163,7 +163,9 @@
                     alt="">
 
                 <div class="mt-5">
-                    <button class="main-button btn">SHARE MY TESTIMONY</button>
+
+                    <a href="{{route('testimony.show')}}#testimony-section" class="btn main-button mb-5">SHARE MY TESTIMONY</a>
+
                 </div>
             </div>
         </div>
