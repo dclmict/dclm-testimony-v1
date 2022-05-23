@@ -10,7 +10,6 @@ class Testifier extends Model
 {
     use HasFactory;
 
-
     public function testimonies(){
         return $this->hasMany(Testimony::class);
     }
