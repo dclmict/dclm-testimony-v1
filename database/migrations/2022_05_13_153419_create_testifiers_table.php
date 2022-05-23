@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTestimoniesTable extends Migration
+class CreateTestifiersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateTestimoniesTable extends Migration
      */
     public function up()
     {
-        Schema::create('testimonies', function (Blueprint $table) {
+        Schema::create('testifiers', function (Blueprint $table) {
             $table->id();
-            $table->string("content")->nullable();
-            $table->string("file_dir")->nullable();
-            $table->engine = 'InnoDB';
+            $table->string("email")->unique();
+            $table->string("full_name");
+            $table->string("phone");
+            $table->foreignId("country_id");
+            $table->string("city");
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateTestimoniesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testimonies');
+        Schema::dropIfExists('testifiers');
     }
 }

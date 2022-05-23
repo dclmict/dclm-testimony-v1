@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Testifier;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Testimony extends Model
 {
@@ -36,5 +37,11 @@ class Testimony extends Model
 
             Log::error($th->getMessage());
         }
+    }
+
+
+    public function testifier()
+    {
+        return $this->belongsTo(Testifier::class);
     }
 }
