@@ -13,7 +13,7 @@ class Testifier extends Model
 
     protected $fillable = ["full_name", "country_id" , "city", "phone", "email"];
 
-  
+
 
     public static function existOrCreate($data)
     {
@@ -35,7 +35,7 @@ class Testifier extends Model
     public function country(){
         return $this->belongsTo(Country::class);
     }
-}
+
 
     public function testimonies(){
         return $this->hasMany(Testimony::class);
