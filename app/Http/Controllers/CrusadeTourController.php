@@ -13,7 +13,7 @@ class CrusadeTourController extends Controller
 
     public function index()
     {
-        return view("admin.crusade-tours", ["crusadeTours" => CrusadeTour::all()]);
+        return view("admin.crusade-tour", ["crusadeTours" => CrusadeTour::all(), "ct" => null]);
     }
 
     public function create()
@@ -31,15 +31,19 @@ class CrusadeTourController extends Controller
 
         CrusadeTour::store($request->only(["slug"]));
 
-        return 1;
+        return redirect()->route("admin.crusade-tour.index");
     }
 
     public function active($id)
     {
 
-        $active = CrusadeTour::whereIsactive(true)->frist;
-        $active->is_active = false;
-        $active->save();
+        $active = CrusadeTour::whereIsActive(true)->first();
+
+        if ($active) {
+            $active->is_active = false;
+            $active->save();
+        }
+
 
         try {
             $current  = CrusadeTour::findOrFail($id);
@@ -47,6 +51,8 @@ class CrusadeTourController extends Controller
             $current->save();
         } catch (Exception $e) {
         }
+
+        return redirect()->route("admin.crusade-tour.index");
     }
 
     public function update($id, Request $request)
@@ -59,6 +65,7 @@ class CrusadeTourController extends Controller
             $current->save();
         } catch (Exception $e) {
         }
+        return redirect()->route("admin.crusade-tour.index");
     }
 
     public function delete($id)
@@ -70,5 +77,14 @@ class CrusadeTourController extends Controller
                 $current->delete();
         } catch (Exception $e) {
         }
+
+        return redirect()->route("admin.crusade-tour.index");
+    }
+
+    public function edit($id)
+
+    {
+        $ct = CrusadeTour::findOrFail($id);
+        return view("admin.crusade-tour", ["ct" => $ct, "crusadeTours" => CrusadeTour::all()]);
     }
 }

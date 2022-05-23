@@ -19,8 +19,8 @@ class AlterTableTestimonies extends Migration
             $table->foreignId("testifier_id")->nullable();
 
             try {
-                $table->dropForeign("testimonies_country_id_foreign");
-                $table->dropColumn(["full_name", "country_id", "city", "email", "phone"]);
+               // $table->dropForeign("testimonies_country_id_foreign");
+               // $table->dropColumn(["full_name", "country_id", "city", "email", "phone"]);
             } catch (\Throwable $th) {
                 //throw $th;
             }
