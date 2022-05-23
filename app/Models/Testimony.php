@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Testifier;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Testimony extends Model
 {
@@ -15,7 +16,16 @@ class Testimony extends Model
 
     public static function store(array $data, $file, $extension)
     {
-        $testimony = self::create($data);
+        $testimony = self::make($data);
+        $active = CrusadeTour::whereIsActive(true)->first();
+
+        $testifier = Testifier::existOrCreate($data);
+        $testimony->testifier()->associate($testifier);
+
+        /* Warning : make sure $active is not null */
+        $testimony->crusadeTour()->associate($active);
+
+        $testimony->save();
 
         if ($file) {
 
@@ -28,13 +38,21 @@ class Testimony extends Model
 
 
         $fileName = $this->email . '-' . time() . '.' . $extension;
+        $active = CrusadeTour::whereIsActive(true)->first();
+
         try {
-            Storage::disk('s3')->put("abeokuta-crusade/".$fileName, $file);
+            Storage::disk('s3')->put($active->slug."/" . $fileName, $file);
             $this->file_dir = $fileName;
             $this->save();
         } catch (\Throwable $th) {
 
             Log::error($th->getMessage());
         }
+    }
+
+
+    public function testifier()
+    {
+        return $this->belongsTo(Testifier::class);
     }
 }
