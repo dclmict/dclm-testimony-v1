@@ -36,13 +36,13 @@ class TestimonyRequest extends FormRequest
 
         if (blank($input['content']) && ( isset($input['file_dir'])  && blank($input['file_dir']))) {
             $rules["content"] = 'required|string';
-            $rules["file_dir"] = 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi';
+            $rules["file_dir"] = 'required|media';
         } elseif(blank($input['content'])) {
             $rules["content"] = 'nullable|string';
-            $rules["file_dir"] = 'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi';
+            $rules["file_dir"] = 'required|media';
         }else{
             $rules["content"] = 'required|string';
-            $rules["file_dir"] = 'nullable|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi';
+            $rules["file_dir"] = 'required|media';
         }
 
         return $rules;
@@ -56,7 +56,7 @@ class TestimonyRequest extends FormRequest
             "string" => "Required",
             "email" => "This email is invalid.",
             "integer" => "Choose a country.",
-            "mimetypes" => "Choose a video file.",
+            "media" => "Choose a media file.",
         ];
     }
 }
