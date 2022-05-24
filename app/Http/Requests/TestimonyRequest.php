@@ -42,7 +42,7 @@ class TestimonyRequest extends FormRequest
             $rules["file_dir"] = 'required';
         }else{
             $rules["content"] = 'required|string';
-            $rules["file_dir"] = 'required';
+            $rules["file_dir"] = 'nullable';
         }
 
         return $rules;
