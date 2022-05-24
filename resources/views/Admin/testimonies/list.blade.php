@@ -18,7 +18,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>City</th>
-                            <th>Country</th>
+                            {{-- <th>Country</th> --}}
                             <th>Content</th>
                             <th>file</th>
                             <th>Uploaded_at</th>
@@ -31,7 +31,7 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>City</th>
-                            <th>Country</th>
+                            {{-- <th>Country</th> --}}
                             <th>Content</th>
                             <th>file</th>
                             <th>Uploaded_at</th>
@@ -45,7 +45,7 @@
                                 <td>{{ $testimony->email}}</td>
                                 <td>{{ $testimony->phone }}</td>
                                 <td>{{ $testimony->city }}</td>
-                                <td>{{ $testimony->country->code }}</td>
+                                {{-- <td>{{ $testimony->country->code }}</td> --}}
                                 {{-- <td>{{ $testimony->country->libelle }}</td> --}}
                                 <td>{{ substr($testimony->content, 0, 20) }}...</td>
                                 <td>{{ $testimony->file_dir }}</td>
