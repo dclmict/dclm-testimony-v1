@@ -35,7 +35,7 @@ class Testimony extends Model
 
     public function saveFile($file, $extension)
     {
-        $fileName = $this->email . '-' . time() . '.' . $extension;
+        $fileName = $this->testifier->email . '-' . time() . '.' . $extension;
         $active = CrusadeTour::whereIsActive(true)->first();
 
         try {
@@ -63,5 +63,15 @@ class Testimony extends Model
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+
+    public function getFileTypeAttribute()
+    {
+        return $this->file_dir ? mime_content_type($this->file_dir) : null;
+    }
+
+    public function getPathAttribute(){
+        return $this->file_dir ? Storage::disk('s3')->get("dclm-testimony/" . $this->crusadeTour->slug . "/" . $this->file_dir) : null;
     }
 }
