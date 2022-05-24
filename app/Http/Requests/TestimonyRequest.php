@@ -31,18 +31,18 @@ class TestimonyRequest extends FormRequest
             'country_id'=>'required|integer',
             'city'=>'required|string',
             'content'=>'required|string',
-            'file_dir'=>'required|mimetypes:video/x-ms-asf,video/x-flv,video/mp4,application/x-mpegURL,video/MP2T,video/3gpp,video/quicktime,video/x-msvideo,video/x-ms-wmv,video/avi',
+            'file_dir'=>'required',
         ];
 
         if (blank($input['content']) && ( isset($input['file_dir'])  && blank($input['file_dir']))) {
             $rules["content"] = 'required|string';
-            $rules["file_dir"] = 'required|media';
+            $rules["file_dir"] = 'required';
         } elseif(blank($input['content'])) {
             $rules["content"] = 'nullable|string';
-            $rules["file_dir"] = 'required|media';
+            $rules["file_dir"] = 'required';
         }else{
             $rules["content"] = 'required|string';
-            $rules["file_dir"] = 'required|media';
+            $rules["file_dir"] = 'required';
         }
 
         return $rules;
