@@ -11,9 +11,10 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Testimony</h6>
-                    <h6 class="m-0 font-weight-bold text-primary">Testifier: {{ $testimony->full_name }}</h6>
+
+                   <h6 class="m-0 font-weight-bold text-primary">Testifier: {{$testimony->testifier->full_name}}</h6>
                     {{-- <h6 class="m-0 font-weight-bold text-primary">Country: {{ $testimony->Country->code }}</h6> --}}
-                    <h6 class="m-0 font-weight-bold text-primary">Phone: {{ $testimony->phone }}</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Phone: {{$testimony->testifier->phone}}</h6>
                     <a href="{{ $testimony->path }}"
                         target="_blank">{{ $testimony->path ? 'Media file' : 'No Media file' }}</a>
 
