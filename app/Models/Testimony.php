@@ -75,7 +75,7 @@ class Testimony extends Model
     {
 
         try {
-            return $this->file_dir ? Storage::disk('s3')->get("dclm-testimony/" . $this->crusadeTour->slug . "/" . $this->file_dir) : null;
+            return $this->file_dir ? Storage::disk('s3')->url("dclm-testimony/" . $this->crusadeTour->slug . "/" . $this->file_dir) : null;
         } catch (\Throwable $th) {
 
             Log::error($th->getMessage());
