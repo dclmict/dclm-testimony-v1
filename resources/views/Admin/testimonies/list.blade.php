@@ -17,9 +17,10 @@
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Country</th>
                             <th>City</th>
+                            <th>Country</th>
                             <th>Content</th>
+                            <th>file</th>
                             <th>Uploaded_at</th>
                         </tr>
                     </thead>
@@ -28,9 +29,10 @@
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Country</th>
                             <th>City</th>
+                            <th>Country</th>
                             <th>Content</th>
+                            <th>file</th>
                             <th>Uploaded_at</th>
                         </tr>
                     </tfoot>
@@ -40,6 +42,7 @@
                                 <td>{{ $testimony->full_name }}</td>
                                 <td>{{ $testimony->email}}</td>
                                 <td>{{ $testimony->phone }}</td>
+                                <td>{{ $testimony->city }}</td>
                                 <td>{{ $testimony->country->libelle }}</td>
                                 <td>{{ $testimony->content }}</td>
                                 <td>{{ $testimony->file_dir }}</td>
