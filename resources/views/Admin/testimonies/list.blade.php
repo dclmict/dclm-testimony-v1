@@ -22,6 +22,7 @@
                             <th>Content</th>
                             <th>file</th>
                             <th>Uploaded_at</th>
+                            <th> Action</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -34,6 +35,7 @@
                             <th>Content</th>
                             <th>file</th>
                             <th>Uploaded_at</th>
+                            <th> Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -43,10 +45,12 @@
                                 <td>{{ $testimony->email}}</td>
                                 <td>{{ $testimony->phone }}</td>
                                 <td>{{ $testimony->city }}</td>
-                                <td>{{ $testimony->country->libelle }}</td>
+                                <td>{{ $testimony->country->code }}</td>
+                                {{-- <td>{{ $testimony->country->libelle }}</td> --}}
                                 <td>{{ $testimony->content }}</td>
                                 <td>{{ $testimony->file_dir }}</td>
                                 <td>{{ $testimony->created_at }}</td>
+                                <td> <button  class="btn btn-primary"> View </button></td>
 
                                 
                             </tr>

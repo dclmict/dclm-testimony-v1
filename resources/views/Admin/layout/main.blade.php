@@ -20,7 +20,7 @@
     <!-- Custom styles for this template-->
 
 
-
+    <link rel="stylesheet" href="{{ asset('css/dlcmbrand.css') }}">
 
     <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 

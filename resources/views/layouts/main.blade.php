@@ -18,7 +18,7 @@
 
     @stack('styles')
 
-    <title>DCLM Testimony: Abeokuta Global Crusade </title>
+    <title>DCLM Testimony: May Global Crusade </title>
     <style>
         .main-side {
             background: linear-gradient(178.89deg, #226091 -9.6%, #507DA0 0.42%, rgba(196, 196, 196, 0) 46.37%);
