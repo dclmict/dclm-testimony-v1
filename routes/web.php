@@ -21,6 +21,10 @@ use App\Http\Controllers\TestimonyFormController;
 
 Auth::routes(); // laravel auth routes
 
+Route::get('/register', function () {
+    return redirect('/');
+});
+
 Route::get('/', function () {
     return view('welcome');
 })->name("home");
