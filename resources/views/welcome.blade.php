@@ -23,7 +23,7 @@
                     <span style="font-size: 36px;">
                         Testimony For
                     </span>
-                    <span style="font-size: 36px;">Ogun State Crusade</span>
+                    <span style="font-size: 36px;">May Global Crusade</span>
                 </div>
 
 
