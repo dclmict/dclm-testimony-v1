@@ -14,22 +14,24 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>Content</th>
+                            <th>Uploaded_at</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>Content</th>
+                            <th>Uploaded_at</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -38,9 +40,11 @@
                                 <td>{{ $testimony->full_name }}</td>
                                 <td>{{ $testimony->email}}</td>
                                 <td>{{ $testimony->phone }}</td>
-                                <td>{{ $testimony->country_id }}</td>
-                                <td>{{ $testimony->city }}</td>
+                                <td>{{ $testimony->country->libelle }}</td>
                                 <td>{{ $testimony->content }}</td>
+                                <td>{{ $testimony->file_dir }}</td>
+                                <td>{{ $testimony->created_at }}</td>
+
                                 
                             </tr>
                         @endforeach

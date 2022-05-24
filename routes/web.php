@@ -44,17 +44,19 @@ Route::get('/crusade-tours', [CrusadeTourController::class, 'index'])->name("cru
 
 
 // Admin Routes 
-Route::group(['middleware' => ['auth', 'role:Admin']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
 
-    Route::get('/admin', [AdminController::class, 'show'])->name("admin.show");
-    Route::prefix('admin')->group(function () {
-        
-        Route::get("/crusade-tour", [CrusadeTourController::class, 'index'])->name("admin.crusade-tour.index");
-        Route::put("/crusade-tour/{id}", [CrusadeTourController::class, 'update'])->name("admin.crusade-tour.update");
-        Route::get('/crusade-tour/{id}', [CrusadeTourController::class, 'delete'])->name("admin.crusade-tour.delete");
-        Route::get('/crusade-tour/{id}/edit', [CrusadeTourController::class, 'edit'])->name("admin.crusade-tour.edit");
+    Route::get('/', [AdminController::class, 'show'])->name("admin.show");
+    Route::get("/crusade-tour", [CrusadeTourController::class, 'index'])->name("admin.crusade-tour.index");
+    Route::put("/crusade-tour/{id}", [CrusadeTourController::class, 'update'])->name("admin.crusade-tour.update");
+    Route::get('/crusade-tour/{id}', [CrusadeTourController::class, 'delete'])->name("admin.crusade-tour.delete");
+    Route::get('/crusade-tour/{id}/edit', [CrusadeTourController::class, 'edit'])->name("admin.crusade-tour.edit");
 
-        Route::post('/crusade-tour', [CrusadeTourController::class, 'store'])->name("admin.crusade-tour.store");
-        Route::get('/crusade-tour/{id}/active', [CrusadeTourController::class, 'active'])->name("admin.crusade-tour.active");
-    });
+    Route::post('/crusade-tour', [CrusadeTourController::class, 'store'])->name("admin.crusade-tour.store");
+    Route::get('/crusade-tour/{id}/active', [CrusadeTourController::class, 'active'])->name("admin.crusade-tour.active");
+
+
+    // List testimonies
+
+    Route::get('/testimonies', [AdminController::class, 'testimoniesList'])->name("admin.testimonies.list");
 });

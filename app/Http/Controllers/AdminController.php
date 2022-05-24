@@ -18,7 +18,7 @@ class AdminController extends Controller
 
     public function testimoniesList()
     {
-        $testimonies = Testimony::with('testifier')->get();
+        $testimonies = Testimony::with('testifier')->with('country')->get();
         return view('Admin.testimonies.list', compact('testimonies'));
     }
 }

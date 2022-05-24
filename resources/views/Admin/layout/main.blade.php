@@ -20,7 +20,10 @@
     <!-- Custom styles for this template-->
 
 
-    <link rel="stylesheet" href="{{ asset('css/sb-admin-2.min.css') }}">
+
+
+    <link href="{{ asset('vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+
 
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 </head>
@@ -59,11 +62,6 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.testimonies.list') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Testimonies</span></a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
@@ -73,8 +71,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="admin/crusade-tour">Crusade Tours</a>
-                        <a class="collapse-item" href="admin/testionies">Testimonies</a>
+                        <a class="collapse-item" href="/admin/crusade-tour">Crusade Tours</a>
+                        <a class="collapse-item" href="/admin/testimonies">Testimonies</a>
                     </div>
                 </div>
             </li>
@@ -306,14 +304,11 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-                    @yield('Admincontent')
 
                     <!-- Page Heading   -->
+                    @yield('Admincontent')
 
-
-                        @yield('content')
+                    @yield('content')
 
 
 
@@ -379,6 +374,8 @@
     <!-- Core plugin JavaScript-->
     {{-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> --}}
     <script src=" {{ asset('/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+
 
     <!-- Custom scripts for all pages-->
     {{-- <script src="js/sb-admin-2.min.js"></script> --}}
