@@ -71,7 +71,16 @@ class Testimony extends Model
         return $this->file_dir ? mime_content_type($this->file_dir) : null;
     }
 
-    public function getPathAttribute(){
-        return $this->file_dir ? Storage::disk('s3')->get("dclm-testimony/" . $this->crusadeTour->slug . "/" . $this->file_dir) : null;
+    public function getPathAttribute()
+    {
+
+        try {
+            return $this->file_dir ? Storage::disk('s3')->get("dclm-testimony/" . $this->crusadeTour->slug . "/" . $this->file_dir) : null;
+        } catch (\Throwable $th) {
+
+            Log::error($th->getMessage());
+        }
+
+        return null;
     }
 }
