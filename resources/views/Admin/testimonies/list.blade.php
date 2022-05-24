@@ -41,14 +41,14 @@
                     <tbody>
                         @foreach ($testimonies as $testimony)
                             <tr>
-                                <td>{{ $testimony->full_name }}</td>
-                                <td>{{ $testimony->email}}</td>
-                                <td>{{ $testimony->phone }}</td>
-                                <td>{{ $testimony->city }}</td>
-                                {{-- <td>{{ $testimony->country->code }}</td> --}}
+                                <td>{{ $testimony->testifier->full_name }}</td>
+                                <td>{{ $testimony->testifier->email}}</td>
+                                <td>{{ $testimony->testifier->phone }}</td>
+                                <td>{{ $testimony->testifier->city }}</td>
+                                {{-- <td>{{ $testimony->testifier->code }}</td> --}}
                                 {{-- <td>{{ $testimony->country->libelle }}</td> --}}
-                                <td>{{ substr($testimony->content, 0, 20) }}...</td>
-                                <td>{{ $testimony->file_dir }}</td>
+                                <td>{{ substr($testimony->content, 0, 4) }}...</td>
+                                <td>{{ $testimony->file_dir  }}</td>
                                 <td>{{ $testimony->created_at }}</td>
                                 <td> <a href="{{ route("admin.testimonies.show", $testimony->id) }}"  class="btn btn-primary"> View </button></td>
 
