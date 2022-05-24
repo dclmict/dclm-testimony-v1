@@ -36,7 +36,6 @@ Route::get('/thanks#thanks-section', [TestimonyFormController::class, 'thanks'])
 
 //crusade-tour routes
 Route::get('/crusade-tour', [CrusadeTourController::class, 'create'])->name("crusade-tour.create");
-Route::post('/crusade-tour', [CrusadeTourController::class, 'store'])->name("crusade-tour.store");
 Route::get('/crusade-tours', [CrusadeTourController::class, 'index'])->name("crusade-tour.index");
 
 
@@ -48,5 +47,14 @@ Route::get('/crusade-tours', [CrusadeTourController::class, 'index'])->name("cru
 Route::group(['middleware' => ['auth', 'role:Admin']], function () {
 
     Route::get('/admin', [AdminController::class, 'show'])->name("admin.show");
-    Route::get('/admin/testimonies', [AdminController::class, 'testimoniesList'])->name("admin.testimonies.list");
+    Route::prefix('admin')->group(function () {
+        
+        Route::get("/crusade-tour", [CrusadeTourController::class, 'index'])->name("admin.crusade-tour.index");
+        Route::put("/crusade-tour/{id}", [CrusadeTourController::class, 'update'])->name("admin.crusade-tour.update");
+        Route::get('/crusade-tour/{id}', [CrusadeTourController::class, 'delete'])->name("admin.crusade-tour.delete");
+        Route::get('/crusade-tour/{id}/edit', [CrusadeTourController::class, 'edit'])->name("admin.crusade-tour.edit");
+
+        Route::post('/crusade-tour', [CrusadeTourController::class, 'store'])->name("admin.crusade-tour.store");
+        Route::get('/crusade-tour/{id}/active', [CrusadeTourController::class, 'active'])->name("admin.crusade-tour.active");
+    });
 });
