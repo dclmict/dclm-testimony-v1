@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function show()
+    public function index()
     {
         $active = CrusadeTour::whereIsActive(true)->first();
 
@@ -21,4 +21,13 @@ class AdminController extends Controller
         $testimonies = Testimony::with('testifier')->with('country')->get();
         return view('Admin.testimonies.list', compact('testimonies'));
     }
+
+    public function show(Testimony $testimony)
+    {
+        $testimony = Testimony::with('testifier')->with('country')->findOrFail($testimony->id);
+        return view('Admin.testimonies.show', compact('testimony'));
+        
+    }
+
+    
 }

@@ -46,7 +46,7 @@ Route::get('/crusade-tours', [CrusadeTourController::class, 'index'])->name("cru
 // Admin Routes 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
 
-    Route::get('/', [AdminController::class, 'show'])->name("admin.show");
+    Route::get('/', [AdminController::class, 'index'])->name("admin.show");
     Route::get("/crusade-tour", [CrusadeTourController::class, 'index'])->name("admin.crusade-tour.index");
     Route::put("/crusade-tour/{id}", [CrusadeTourController::class, 'update'])->name("admin.crusade-tour.update");
     Route::get('/crusade-tour/{id}', [CrusadeTourController::class, 'delete'])->name("admin.crusade-tour.delete");
@@ -59,4 +59,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     // List testimonies
 
     Route::get('/testimonies', [AdminController::class, 'testimoniesList'])->name("admin.testimonies.list");
+
+    Route::get('/testimonies/{testimony}', [AdminController::class, 'show'])->name("admin.testimonies.show");
 });

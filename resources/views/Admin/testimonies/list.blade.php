@@ -47,10 +47,10 @@
                                 <td>{{ $testimony->city }}</td>
                                 <td>{{ $testimony->country->code }}</td>
                                 {{-- <td>{{ $testimony->country->libelle }}</td> --}}
-                                <td>{{ $testimony->content }}</td>
+                                <td>{{ substr($testimony->content, 0, 20) }}...</td>
                                 <td>{{ $testimony->file_dir }}</td>
                                 <td>{{ $testimony->created_at }}</td>
-                                <td> <button  class="btn btn-primary"> View </button></td>
+                                <td> <a href="{{ route("admin.testimonies.show", $testimony->id) }}"  class="btn btn-primary"> View </button></td>
 
                                 
                             </tr>
