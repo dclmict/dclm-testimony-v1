@@ -20,8 +20,8 @@
                             <th>City</th>
                             {{-- <th>Country</th> --}}
                             <th>Content</th>
-                            <th>file</th>
-                            <th>Uploaded_at</th>
+                            <th>File</th>
+                            <th>Time</th>
                             <th> Action</th>
                         </tr>
                     </thead>
@@ -33,8 +33,8 @@
                             <th>City</th>
                             {{-- <th>Country</th> --}}
                             <th>Content</th>
-                            <th>file</th>
-                            <th>Uploaded_at</th>
+                            <th>File</th>
+                            <th>Time</th>
                             <th> Action</th>
                         </tr>
                     </tfoot>
