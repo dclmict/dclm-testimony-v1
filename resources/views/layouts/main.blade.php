@@ -152,7 +152,7 @@
             </div>
             <div class="d-flex flex-column align-items-center justify-content-center" style="margin-top:25vh">
                 <div>
-                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke">TESTIMONY FOR OGUN STATE
+                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke">TESTIMONY FOR MAY GLOBAL 
                         CRUSADE
                     </h1>
                 </div>
