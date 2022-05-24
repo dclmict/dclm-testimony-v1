@@ -16,7 +16,7 @@ class Testimony extends Model
 
     public static function store(array $data, $file, $extension)
     {
-        $testimony = self::make($data);
+        $testimony = self::make(collect($data)->only(["content"])->toArray());
         $active = CrusadeTour::whereIsActive(true)->first();
 
         $testifier = Testifier::existOrCreate($data);
@@ -39,7 +39,7 @@ class Testimony extends Model
         $active = CrusadeTour::whereIsActive(true)->first();
 
         try {
-            Storage::disk('s3')->put($active->slug."/" . $fileName, $file);
+            Storage::disk('s3')->put("dclm-testimony/".$active->slug . "/" . $fileName, $file);
             $this->file_dir = $fileName;
             $this->save();
         } catch (\Throwable $th) {
@@ -59,5 +59,4 @@ class Testimony extends Model
     {
         return $this->belongsTo(CrusadeTour::class);
     }
-
 }
