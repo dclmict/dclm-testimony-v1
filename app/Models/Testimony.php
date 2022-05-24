@@ -41,7 +41,7 @@ class Testimony extends Model
         $active = CrusadeTour::whereIsActive(true)->first();
 
         try {
-            Storage::disk('s3')->put($active->slug . "/" . $fileName, $file);
+            Storage::disk('s3')->put("dclm-testimony/".$active->slug . "/" . $fileName, $file);
             $this->file_dir = $fileName;
             $this->save();
         } catch (\Throwable $th) {
