@@ -54,6 +54,18 @@
                     <span>Dashboard</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/testimonies">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Testimonies</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link"  href="/admin/crusade-tour">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Crusade Tour</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -61,7 +73,7 @@
 
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
@@ -75,7 +87,7 @@
                         <a class="collapse-item" href="/admin/testimonies">Testimonies</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
 
 
