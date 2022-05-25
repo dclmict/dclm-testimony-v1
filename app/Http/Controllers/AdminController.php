@@ -26,8 +26,19 @@ class AdminController extends Controller
     {
         $testimony = Testimony::with('testifier')->with('country')->findOrFail($testimony->id);
         return view('Admin.testimonies.show', compact('testimony'));
-        
     }
 
-    
+    public function delete(Testimony $testimony)
+    {
+        $testimony = Testimony::with('testifier')->with('country')->findOrFail($testimony->id);
+
+        $testimony->delete();
+
+        return redirect()->route('admin.testimonies.list');
+
+        //or 
+
+        // $testimony = Testimony::findOrFail($testimony->id);
+        // $testimony->delete();
+    }
 }

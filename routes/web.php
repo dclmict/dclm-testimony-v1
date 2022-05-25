@@ -12,7 +12,7 @@ use App\Http\Controllers\TestimonyFormController;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
+|g
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
@@ -65,4 +65,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::get('/testimonies', [AdminController::class, 'testimoniesList'])->name("admin.testimonies.list");
 
     Route::get('/testimonies/{testimony}', [AdminController::class, 'show'])->name("admin.testimonies.show");
+
+    Route::get('/testimonies/delete/{testimony}', [AdminController::class, 'delete'])->name("admin.testimonies.delete");
 });

@@ -42,8 +42,8 @@
                         @foreach ($testimonies as $testimony)
                             <tr>
 
-                               <td>{{ $testimony->testifier->full_name }}</td>
-                                <td>{{ $testimony->testifier->email}}</td>
+                                <td>{{ $testimony->testifier->full_name }}</td>
+                                <td>{{ $testimony->testifier->email }}</td>
                                 <td>{{ $testimony->testifier->phone }}</td>
                                 <td>{{ $testimony->testifier->city }}</td>
                                 {{-- <td>{{ $testimony->country->code }}</td> --}}
@@ -54,10 +54,32 @@
                                 </td>
 
                                 <td>{{ $testimony->created_at }}</td>
-                                <td> <a href="{{ route('admin.testimonies.show', $testimony->id) }}"
-                                        class="btn btn-primary"> View </button></td>
+                                <td>
+                                    {{-- <div class="row">
+                                        <div class="col">
+                                            <a href="{{ route('admin.testimonies.show', $testimony->id) }}"
+                                                class="btn btn-sm btn-primary d-flex"><i class="far fa-eye mr-1"></i> View
+                                            </a>
 
+                                        </div>
 
+                                        <div class="col"> <a
+                                                href="{{ route('admin.testimonies.delete', $testimony->id) }}"
+                                                class="btn btn-sm btn-danger d-flex"
+                                                onclick="return confirm('Warning! This is a dangerous action. Are you sure about this ? ');"><i
+                                                    class="far fa-trash-alt mr-1"></i> Delete </a>
+
+                                        </div> --}}
+
+                                    <a href="{{ route('admin.testimonies.show', $testimony->id) }}"
+                                        class="btn btn-sm btn-white text-primary mr-2"><i class="far fa-eye mr-1"></i>
+                                        View</a>
+                                    <a href="{{ route('admin.testimonies.delete', $testimony->id) }}"
+                                        class="btn btn-sm btn-white text-danger mr-2"
+                                        onclick="return confirm('Warning! This is a dangerous action. Are you sure about this ? ');"><i
+                                            class="far fa-trash-alt mr-1"></i>Delete</a>
+
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
