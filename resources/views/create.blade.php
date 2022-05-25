@@ -63,8 +63,10 @@
             </div>
 
             <div class="row my-5">
+                <div class="text-muted font-weight-bold"> Upload your Picture or Video </div>
                 <div class="col-md-6">
                     {{-- <button type="button" class="btn col-12 btn-outline-primary mt-2"> Upload your testimony </button> --}}
+                   
                     <input type="file" name="file_dir" class="btn col-12 btn-outline-primary mt-2" id="file_dir"
                         value="{{ old('file_dir') }}">
                     <x-error name="file_dir" />
