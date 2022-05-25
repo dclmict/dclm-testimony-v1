@@ -75,7 +75,12 @@ class Testimony extends Model
     {
 
         try {
-            return $this->file_dir ? Storage::disk('s3')->url("dclm-testimony/" . $this->crusadeTour->slug . "/" . $this->file_dir) : null;
+            //get presigned url
+            //$url = Storage::disk('s3')->temporaryUrl("dclm-testimony/" . $this->crusade_tour->slug . "/" . $this->file_dir, now()->addMinutes(5));
+           $url= $this->file_dir !=null? Storage::disk('s3')
+                ->temporaryUrl("dclm-testimony/" . $this->crusadeTour->slug . "/" . $this->file_dir, now()->addDays(6)) : null;
+
+            return $url;
         } catch (\Throwable $th) {
 
             Log::error($th->getMessage());
