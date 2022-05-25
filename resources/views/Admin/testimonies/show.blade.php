@@ -18,7 +18,8 @@
                     <h6 class="m-0 font-weight-bold text-primary">Phone: </h6> {{ $testimony->testifier->phone }}
 
                     <h6 class="m-0 font-weight-bold text-primary">City: </h6> {{ $testimony->testifier->city }}
-                    <h6 class="m-0 font-weight-bold text-primary">Country: </h6> {{ $testimony->testifier->country->libelle }}
+                    <h6 class="m-0 font-weight-bold text-primary">Country: </h6>
+                    {{ $testimony->testifier->country->libelle }}
                     <a href="{{ $testimony->path }}"
                         target="_blank">{{ $testimony->path ? 'Media file' : 'No Media file' }}</a>
                     <div class="dropdown no-arrow">
@@ -42,9 +43,7 @@
                     <div class="row">
 
                         <span class="m-0 font-weight-bold text-primary">Testimony: </span> {{ $testimony->content }}
-                        dhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd
-                        dkskdhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd
-                        dkskdhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd dkskdhjdjdjbbjdbjd dksk
+
                     @section('user')
                         {{ $testimony->testifier->full_name }}
                     @endsection
