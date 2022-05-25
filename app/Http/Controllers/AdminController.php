@@ -12,7 +12,7 @@ class AdminController extends Controller
     public function index()
     {
         $active = CrusadeTour::whereIsActive(true)->first();
-        $user = 'edu';
+        $user = 'Admin';
 
         return view('admin.index', compact('active',))->with('user', $user);
     }
