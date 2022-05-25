@@ -38,8 +38,10 @@
 
                     <div class="row">
 
-                            {{ $testimony->content }}
-
+                           {{ $testimony->content }}
+                           @section ('user')
+                                {{ $testimony->testifier->full_name }}
+                            @endsection
 
                     </div>
 

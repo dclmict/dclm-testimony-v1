@@ -41,7 +41,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">GC-T ADMIN</div>
+                <div class="sidebar-brand-text mx-3">GC-T ADMIN   {{  Session::get('user'); }}</div>
             </a>
 
             <!-- Divider -->
@@ -52,6 +52,8 @@
                 <a class="nav-link" href="/admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
+
+                   
             </li>
 
             <li class="nav-item">
