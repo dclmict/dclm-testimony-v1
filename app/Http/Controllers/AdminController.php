@@ -30,8 +30,9 @@ class AdminController extends Controller
 
     public function delete(Testimony $testimony)
     {
-        $testimony = Testimony::with('testifier')->with('country')->findOrFail($testimony->id);
+        $testimony = Testimony::with('testifier')->findOrFail($testimony->id);
 
+      $testimony->testifier->delete();
         $testimony->delete();
 
         return redirect()->route('admin.testimonies.list');
