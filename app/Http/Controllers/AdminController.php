@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CrusadeTour;
 use App\Models\Testimony;
+use App\Models\CrusadeTour;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 
 class AdminController extends Controller
@@ -33,12 +35,24 @@ class AdminController extends Controller
     {
         $testimony = Testimony::with('testifier')->findOrFail($testimony->id);
 
-      $testimony->testifier->delete();
+        $testimony->testifier->delete();
+
+        //delete testimony file from s3
+        $active = CrusadeTour::whereIsActive(true)->first();
+        $file = $testimony->file_dir;
+        try {
+            Storage::disk('s3')->delete("dclm-testimony/" . $active->slug . "/" . $file);
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+        }
+
+
+
         $testimony->delete();
 
         return redirect()->route('admin.testimonies.list');
 
-        //or 
+        //or
 
         // $testimony = Testimony::findOrFail($testimony->id);
         // $testimony->delete();
