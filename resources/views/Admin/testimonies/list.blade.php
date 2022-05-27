@@ -53,7 +53,7 @@
                                         target="_blank">{{ $testimony->path ? 'Media file' : 'No Media file' }}</a>
                                 </td>
 
-                                <td>{{ $testimony->created_at->subDays(1)->format('d/m/Y') }} <br> {{$testimony->created_at->diffForHumans() ; }}</td>
+                                <td>{{ $testimony->created_at->format('d/m/Y') }} <br> {{$testimony->created_at->addMinute()->addSecond()->diffForHumans(null, true, false, 2);}}</td>
                                 <td>
                                     {{-- <div class="row">
                                         <div class="col">
