@@ -22,14 +22,18 @@
                                     <td>{{ $crusadeTour->id }}</td>
                                     <td>{{ $crusadeTour->slug }}</td>
 
-                                    <td>
+                                    <td class="d-flex flex-wrap justify-content-between ">
                                         <a href="{{ route('admin.crusade-tour.active', $crusadeTour->id) }}"
                                             class="btn btn-{{ $crusadeTour->is_active ? 'success' : 'primary' }} btn-sm">
                                             {{ $crusadeTour->is_active ? 'Ongoing' : 'Activate' }}</a>
                                         <a href="{{ route('admin.crusade-tour.edit', $crusadeTour->id) }}"
                                             class="btn btn-primary btn-sm">Edit</a>
+
+                                        <a class="btn btn-secondary btn-sm"
+                                            href="{{ route('admin.crusade-tour.exportPdf', $crusadeTour->id) }}"> Export
+                                            Testimonies</a>
                                         <a href="{{ route('admin.crusade-tour.delete', $crusadeTour->id) }}"
-                                            class="btn btn-danger btn-sm">Delete</a>
+                                            class="btn btn-danger btn-sm mt-1">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -44,7 +48,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    @if ($ct ==null)
+                    @if ($ct == null)
                         <h3>Add New</h3>
                         <form action="{{ route('admin.crusade-tour.store') }}" method="POST">
                             @csrf
@@ -59,13 +63,13 @@
                     @else
                         <h3>Modify Crusade Tour</h3>
 
-                         <form action="{{ route('admin.crusade-tour.update', $ct->id) }}" method="POST">
+                        <form action="{{ route('admin.crusade-tour.update', $ct->id) }}" method="POST">
                             @csrf
                             @method('PUT')
 
                             <div class="form-group">
                                 <label for="">Slug</label>
-                                <input type="text" required name="slug" class="form-control" value="{{ $ct ->slug }}">
+                                <input type="text" required name="slug" class="form-control" value="{{ $ct->slug }}">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
