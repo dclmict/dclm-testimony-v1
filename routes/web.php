@@ -47,7 +47,7 @@ Route::get('/crusade-tours', [CrusadeTourController::class, 'index'])->name("cru
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-// Admin Routes 
+// Admin Routes
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], function () {
 
     Route::get('/', [AdminController::class, 'index'])->name("admin.show");
@@ -58,6 +58,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
 
     Route::post('/crusade-tour', [CrusadeTourController::class, 'store'])->name("admin.crusade-tour.store");
     Route::get('/crusade-tour/{id}/active', [CrusadeTourController::class, 'active'])->name("admin.crusade-tour.active");
+    Route::get('/crusade-tour/{id}/exportPdf', [CrusadeTourController::class, 'exportPdf'])->name("admin.crusade-tour.exportPdf");
+
 
 
     // List testimonies

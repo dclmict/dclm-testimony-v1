@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CrusadeTour;
 use Exception;
+use Barryvdh\DomPDF\PDF;
+use App\Models\CrusadeTour;
 use Illuminate\Http\Request;
 
 class CrusadeTourController extends Controller
@@ -82,9 +83,18 @@ class CrusadeTourController extends Controller
     }
 
     public function edit($id)
-
     {
         $ct = CrusadeTour::findOrFail($id);
         return view("admin.crusade-tour", ["ct" => $ct, "crusadeTours" => CrusadeTour::all()]);
+    }
+
+    public function exportPdf($id)
+    {
+        $crusadeTour = CrusadeTour::findOrFail($id);
+        $pdf = app("dompdf.wrapper");
+        $pdf->setOptions(['dpi' => 150, 'default_font' => 'helvetica', 'enable_php' => true, 'chroot' => public_path()]);
+        $pdf->loadView("pdf.export", ["crusadeTour" => $crusadeTour]);
+
+        return $pdf->stream('crusade-tour.pdf');
     }
 }
