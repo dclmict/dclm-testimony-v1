@@ -35,7 +35,7 @@ class AdminController extends Controller
     {
         $testimony = Testimony::with('testifier')->findOrFail($testimony->id);
 
-        $testimony->testifier->delete();
+        //$testimony->testifier->delete(); dangerous line never delete the testifier
 
         //delete testimony file from s3
         $active = CrusadeTour::whereIsActive(true)->first();
