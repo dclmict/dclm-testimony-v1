@@ -42,10 +42,10 @@
                         @foreach ($testimonies as $testimony)
                             <tr>
 
-                                <td>{{ $testimony->testifier->full_name }}</td>
-                                <td>{{ $testimony->testifier->email }}</td>
-                                <td>{{ $testimony->testifier->phone }}</td>
-                                <td>{{ $testimony->testifier->city }}</td>
+                                <td>{{ $testimony->testifiers->full_name }}</td>
+                                <td>{{ $testimony->testifiers->email }}</td>
+                                <td>{{ $testimony->testifiers->phone }}</td>
+                                <td>{{ $testimony->testifiers->city }}</td>
                                 {{-- <td>{{ $testimony->country->code }}</td> --}}
                                 {{-- <td>{{ $testimony->country->libelle }}</td> --}}
                                 <td>{{ substr($testimony->content, 0, 20) }}...</td>
@@ -53,7 +53,7 @@
                                         target="_blank">{{ $testimony->path ? 'Media file' : 'No Media file' }}</a>
                                 </td>
 
-                                <td>{{ $testimony->created_at->subDays(1)->format('d/m/Y') }} <br> {{$testimony->created_at->diffForHumans() ; }}</td>
+                                <td>{{ $testimony->created_at->format('d/m/Y') }} <br> {{$testimony->created_at->addMinute()->addSecond()->diffForHumans(null, true, false, 2);}}</td>
                                 <td>
                                     {{-- <div class="row">
                                         <div class="col">
