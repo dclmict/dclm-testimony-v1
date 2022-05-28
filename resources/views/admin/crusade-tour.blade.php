@@ -29,7 +29,7 @@
                                         <a href="{{ route('admin.crusade-tour.edit', $crusadeTour->id) }}"
                                             class="btn btn-primary btn-sm">Edit</a>
 
-                                        <a class="btn btn-secondary btn-sm"
+                                        <a target="_blank" class="btn btn-secondary btn-sm"
                                             href="{{ route('admin.crusade-tour.exportPdf', $crusadeTour->id) }}"> Export
                                             Testimonies</a>
                                         <a href="{{ route('admin.crusade-tour.delete', $crusadeTour->id) }}"
