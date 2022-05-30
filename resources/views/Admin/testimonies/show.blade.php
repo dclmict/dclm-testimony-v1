@@ -5,23 +5,45 @@
 
 @section('Admincontent')
     <div class="row">
+
+        
         <div class="col">
             <!-- Dropdown Card Example -->
             <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class="card-header pt-2 pb-0 d-flex flex-row align-items-center justify-content-between">
 
-
-                    <h6 class="m-0 font-weight-bold text-primary">Testifier: </h6> {{ $testimony->testifier->full_name }}
-                    {{-- <h6 class="m-0 font-weight-bold text-primary">Country: {{ $testimony->Country->code }}</h6> --}}
-                    <h6 class="m-0 font-weight-bold text-primary">Email: </h6> {{ $testimony->testifier->email }}
-                    <h6 class="m-0 font-weight-bold text-primary">Phone: </h6> {{ $testimony->testifier->phone }}
-
-                    <h6 class="m-0 font-weight-bold text-primary">City: </h6> {{ $testimony->testifier->city }}
-                    <h6 class="m-0 font-weight-bold text-primary">Country: </h6>
-                    {{ $testimony->testifier->country->libelle }}
-                    <a href="{{ $testimony->path }}"
-                        target="_blank">{{ $testimony->path ? 'Media file' : 'No Media file' }}</a>
+                    <div class="col" >
+                          <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th >Testifier</th>
+                                        <td> {{ $testimony->testifier->full_name }}</td>
+                                        <th >City</th>
+                                        <td> {{ $testimony->testifier->city }}</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th >Email</th>
+                                        <td>{{ $testimony->testifier->email }}</td>
+                                        <th scope="row">Country</th>
+                                        <td> {{ $testimony->testifier->country->libelle }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th >Phone</th>
+                                        <td> {{ $testimony->testifier->phone }}
+                                        </td>
+                                        <th >Media-File</th>
+                                        <td> <a href="{{ $testimony->path }}"
+                                                target="_blank">{{ $testimony->path ? 'Media file' : 'No Media file' }}</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
