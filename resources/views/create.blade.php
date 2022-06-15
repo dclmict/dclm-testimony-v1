@@ -10,14 +10,39 @@
             height: 38px !important;
         }
 
+        #overlay {
+            position: fixed;
+            /* Sit on top of the page content */
+
+            /* Hidden by default */
+            width: 100%;
+            /* Full width (cover the whole page) */
+            height: 100%;
+            /* Full height (cover the whole page) */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Black background with opacity */
+            z-index: 2;
+            /* Specify a stack order in case you're using a different order for other elements */
+            cursor: pointer;
+            /* Add a pointer on hover */
+            padding-inline: 10%;
+        }
     </style>
 @endpush
 @section('content')
-    <div class="p-4 my-auto align-items-end" id="testimony-section">
+    <div class="p-4 my-auto align-items-end" id="testimony-section" x-data="app()">
+
+        <div id="overlay" class="row align-items-center justify-content-center" x-show="false">
+
+        </div>
         <h4 class="text-center my-5">
             Share your testimony
         </h4>
-        <form action="{{ route('testimony.store') }}" method="POST" enctype="multipart/form-data" x-data="app()" x-on:submit="submit()">
+        <form action="{{ route('testimony.store') }}" method="POST" enctype="multipart/form-data" x-on:submit="submit()">
             @csrf
             <div class="my-3">
 
@@ -27,8 +52,8 @@
             </div>
             <div class="form-group row">
                 <div class="my-3 col-md-6">
-                    <input required type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email" name="email"
-                        value="{{ old('email') }}">
+                    <input required type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email"
+                        name="email" value="{{ old('email') }}">
                     <x-error name="email" />
                 </div>
                 <div class="my-3 col-md-6">
@@ -40,7 +65,7 @@
 
             <div class="form-group row">
                 <div class="my-3 col-md-6">
-                    <select  required name="country_id" class="form-control js-example-basic-single" id="country_id"
+                    <select required name="country_id" class="form-control js-example-basic-single" id="country_id"
                         style="width: 100%;">
                         <option value="">Country</option>
                         @foreach ($countries as $country)
@@ -62,43 +87,40 @@
                 <x-error name="content" />
             </div>
 
-            <div class="row my-5">
+            <div class="row my-5" x-show="!loading">
                 <div class="text-muted font-weight-bold"> Upload your Picture or Video </div>
                 <div class="col-md-6">
                     {{-- <button type="button" class="btn col-12 btn-outline-primary mt-2"> Upload your testimony </button> --}}
-                   
+
                     <input type="file" name="file_dir" class="btn col-12 btn-outline-primary mt-2" id="file_dir"
                         value="{{ old('file_dir') }}">
                     <x-error name="file_dir" />
                 </div>
                 <div class="col-md-6">
-                    <button  class="btn col-12 btn-primary mt-2 d-flex justify-content-center align-items-center" type="submit"> <span
-                            x-text="button_text" >Submit </span>
+                    <button class="btn col-12 btn-primary mt-2 d-flex justify-content-center align-items-center"
+                        type="submit"> <span x-text="button_text">Submit </span>
                         <div x-show="loading" class="spinner-border text-white" role="status" id="spinner">
 
                         </div>
                     </button>
                 </div>
 
-                {{-- spiner bootstrap --}}
-
-                {{-- <div class="progress" >
-                    <div class="progress-bar" x-ref="progress_bar" :style="`width:${progressValue}+'%'`" role="progressbar"  aria-valuenow="0" aria-valuemin="0"
-                        aria-valuemax="100" x-text="progressValue+'%'">25%</div>
-                </div> --}}
+            </div>
+            <div class="progress" style="height: 30px" x-on:click="submit()" x-show="loading">
+                <div :style="`width: ${progress}%; transition: width 2s;`" class="progress-bar" role="progressbar"
+                    :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100">
+                    Sending your testimony...
+                </div>
+            </div>
         </form>
     </div>
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/alpine.min.js') }}">
-
-    </script>
+    <script src="{{ asset('js/alpine.min.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/jquery.form.js') }}">
-
-    </script>
+    <script src="{{ asset('js/jquery.form.js') }}"></script>
 
 
     <script src="{{ asset('js/select2.js') }}"></script>
@@ -116,26 +138,31 @@
     <script>
         window.app = function() {
             return {
-                loading: false,
+                loading: true,
                 button_text: 'Submit',
                 progressValue: 0,
+                progress: 50,
 
                 submit() {
                     this.loading = true;
                     this.button_text = 'Submitting...';
 
-                   /*  setInterval(() => {
-
-                        this.progressValue += Math.floor(Math.random() * 10);
-
-                        // $refs.progress_bar.style.width = this.progressValue + '%';
-                        //in nextick update $refs.progress_bar.style value
-
-                        if (this.progressValue >= 100) {
-                            this.progressValue = 99;
-                        }
+                    setInterval(() => {
+                        this.progress += Math.floor(Math.random() * 10);
                     }, 1000);
-                    */
+
+                    /*  setInterval(() => {
+
+                         this.progressValue += Math.floor(Math.random() * 10);
+
+                         // $refs.progress_bar.style.width = this.progressValue + '%';
+                         //in nextick update $refs.progress_bar.style value
+
+                         if (this.progressValue >= 100) {
+                             this.progressValue = 99;
+                         }
+                     }, 1000);
+                     */
 
                 },
 
