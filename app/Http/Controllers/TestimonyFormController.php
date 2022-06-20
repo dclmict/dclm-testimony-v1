@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TestimonyRequest;
 use App\Models\Country;
 use App\Models\Testimony;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,11 +20,15 @@ class TestimonyFormController extends Controller
 
     public function store(TestimonyRequest $request)
     {
-        $testimony = Testimony::store(
-            $request->except("file_dir"),
-            $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,
-            $request->has("file_dir") ? $request->file('file_dir')->extension() : null
-        );
+
+
+
+            $testimony = Testimony::store(
+                $request->except("file_dir"),
+                $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,
+                $request->has("file_dir") ? $request->file('file_dir')->extension() : null
+            );
+        
 
         //dd($testimony);
         return redirect()->route("thanks");
