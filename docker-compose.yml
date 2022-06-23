@@ -6,12 +6,12 @@ services:
     container_name: ddc-app
     image: richarvey/nginx-php-fpm
     environment:
-      GIT_REPO: 'github.com/dclmict/dclm-testimony'
-      GIT_EMAIL: 'opeoniye@gmail.com'
-      GIT_NAME: 'Samuel John'
-      GIT_BRANCH: 'progress-bar'
-      GIT_PERSONAL_TOKEN: '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'
-      WEBROOT: '/var/www/html/public'
+      GIT_REPO: ${GIT_REPO}
+      GIT_EMAIL: ${GIT_EMAIL}
+      GIT_NAME: ${GIT_NAME}
+      GIT_BRANCH: ${GIT_BRANCH}
+      GIT_PERSONAL_TOKEN: ${GIT_PERSONAL_TOKEN}
+      WEBROOT: ${WEBROOT}
     ports:
       - 1000:80
     networks:
