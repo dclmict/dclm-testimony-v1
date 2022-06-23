@@ -147,7 +147,7 @@
                     <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Go live</a>
                 </div>
                 <div class="col-md-auto">
-                    <a href="{{ route('testimony.show') }}#testimony-section">Testify</a>
+                    <a href="{{ route('testimony.show') }}">Testify</a>
                 </div>
             </div>
             <div class="d-flex flex-column align-items-center justify-content-center" style="margin-top:25vh">
