@@ -1,30 +1,26 @@
 # Services
 services:
 
-  # Nginx Service
-  nginx1.21:
-    container_name: nginx1.21
-    image: opeoniye/nginx:1.21
+  # DDC Service
+  ddc-app:
+    container_name: ddc-app
+    image: richarvey/nginx-php-fpm
+    environment:
+      GIT_REPO: 'github.com/dclmict/dclm-testimony'
+      GIT_EMAIL: 'opeoniye@gmail.com'
+      GIT_NAME: 'Samuel John'
+      GIT_BRANCH: 'progress-bar'
+      GIT_PERSONAL_TOKEN: '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'
+      WEBROOT: '/var/www/html/public'
     ports:
       - 1000:80
-      - 4443:443
-    volumes:
-      - .:/var/www
-      - ./.docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./.docker/nginx/testify.conf:/etc/nginx/conf.d/testify.conf
-      - ./.docker/nginx/ssl.conf:/etc/nginx/ssl.conf
-      - /etc/letsencrypt/live/dclm.org:/var/keys/dclm.org
+    networks:
+      - ddc
+    #volumes:
+      #- .:/var/www
+      #- ./.env:/var/www/html
     restart: always
-    depends_on:
-      - php8.1
 
-  # PHP8.1 Service
-  php8.1:
-    container_name: php8.1
-    image: opeoniye/php-fpm:8.1
-    working_dir: /var/www
-    volumes:
-      - .:/var/www
-      - ./.docker/php8.1/php.ini:/usr/local/etc/php/php.ini
-      - ./.docker/php8.1/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
-    restart: always
+networks:
+  ddc:
+    name: ddc
