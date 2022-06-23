@@ -23,7 +23,7 @@
                     <span style="font-size: 36px;">
                         Testimony For
                     </span>
-                    <span style="font-size: 36px;">May Global Crusade</span>
+                    <span style="font-size: 36px;">June Global Crusade</span>
                 </div>
 
 
