@@ -18,7 +18,7 @@
 
     @stack('styles')
 
-    <title>DCLM Testimony: May Global Crusade </title>
+    <title>DCLM Testimony: June Global Crusade </title>
     <style>
         .main-side {
             background: linear-gradient(178.89deg, #226091 -9.6%, #507DA0 0.42%, rgba(196, 196, 196, 0) 46.37%);
@@ -152,8 +152,7 @@
             </div>
             <div class="d-flex flex-column align-items-center justify-content-center" style="margin-top:25vh">
                 <div>
-                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke">TESTIMONY FOR MAY GLOBAL 
-                        CRUSADE
+                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke">TESTIMONY FOR JUNE GLOBAL CRUSADE
                     </h1>
                 </div>
                 <div class="bg-warning px-2 pt-2" style="opacity: 0.7">
@@ -164,7 +163,7 @@
 
                 <div class="mt-5">
 
-                    <a href="{{route('testimony.show')}}#testimony-section" class="btn main-button mb-5">SHARE MY TESTIMONY</a>
+                    <a href="{{route('testimony.show')}}" class="btn main-button mb-5">SHARE MY TESTIMONY</a>
 
                 </div>
             </div>
