@@ -8,7 +8,8 @@
     <div class="card shadow mb-4">
         
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Testimonies Table</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Testimonies Table</h6> <br/> <span>   You are currently viewing testimonies for the crusade: <span class="text-success">{{$active_crusade->slug }} </span> </span>
+        
         </div>
         <div class="card-body">
             <div class="table-responsive">
