@@ -2,9 +2,10 @@
 services:
 
   # DDC Service
-  ddc-app:
-    container_name: ddc-app
-    image: richarvey/nginx-php-fpm
+  testimony-app:
+    container_name: testimony-app
+    build: ./.docker
+    image: nginx-php-fpm
     environment:
       GIT_REPO: ${GIT_REPO}
       GIT_EMAIL: ${GIT_EMAIL}
@@ -13,14 +14,14 @@ services:
       GIT_PERSONAL_TOKEN: ${GIT_PERSONAL_TOKEN}
       WEBROOT: ${WEBROOT}
     ports:
-      - 1000:80
+      - 1001:80
     networks:
-      - ddc
-    #volumes:
-      #- .:/var/www
+      - testimony
+    # volumes:
+    #   - ./.docker/nginx/testify.conf:/etc/nginx/sites-available/default.conf
       #- ./.env:/var/www/html
     restart: always
 
 networks:
-  ddc:
-    name: ddc
+  testimony:
+    name: testimony
