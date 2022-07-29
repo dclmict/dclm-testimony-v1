@@ -1,11 +1,10 @@
 # Services
 services:
 
-  # DDC Service
+  # Testimony Service
   testimony-app:
     container_name: testimony-app
-    build: ./.docker
-    image: nginx-php-fpm
+    image: opeoniye/nginx-php-fpm
     environment:
       GIT_REPO: ${GIT_REPO}
       GIT_EMAIL: ${GIT_EMAIL}
