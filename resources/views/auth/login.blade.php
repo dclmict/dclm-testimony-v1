@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DCLM ICT TESTIMONY LOGIN </title>
+    <title>GCK TESTIMONY LOGIN </title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,8 +39,8 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">DCLM ADMIN TESTIMONY. 
-                                            Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">GCK TESTIMONY ADMIN
+                                            Welcome!</h1>
                                     </div>
 
                                     <form method="POST" class="user" action="{{ route('login') }}">

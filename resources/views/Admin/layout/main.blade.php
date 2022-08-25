@@ -41,7 +41,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">GC-T ADMIN
+                <div class="sidebar-brand-text mx-3">GCK TESTIMONY
 
                 </div>
             </a>
