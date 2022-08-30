@@ -13,12 +13,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dlcmbrand.css') }}">
     
-
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
 
     @stack('styles')
 
-    <title>DCLM Testimony: GCK || August Edition || Ondo State </title>
+    <title>DCLM Testimony || GCK August Edition </title>
     <style>
         .main-side {
             background: linear-gradient(178.89deg, #226091 -9.6%, #507DA0 0.42%, rgba(196, 196, 196, 0) 46.37%);
