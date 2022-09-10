@@ -1,4 +1,4 @@
-@extends('admin.layout.main')
+@extends('Admin.layout.main')
 @section('content')
     <h1 class="h3 mb-4 text-gray-800">Dashbord</h1>
 
