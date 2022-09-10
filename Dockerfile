@@ -1,7 +1,7 @@
 FROM richarvey/nginx-php-fpm
 
 #ARG appDir=/usr/src/app
-ARG gitBranch=progress-bar
+ARG gitBranch=v1
 
 # ------------------------------------------------------------------------------
 # Install and Build the application

@@ -23,7 +23,7 @@
                     <span style="font-size: 36px;">
                         Testimony For
                     </span>
-                    <span style="font-size: 36px;">June Global Crusade</span>
+                    <span style="font-size: 36px;">GCK || August Edition || Ondo State, Nigeria</span>
                 </div>
 
 

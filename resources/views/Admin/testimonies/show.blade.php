@@ -1,4 +1,4 @@
-@extends('Admin.layout.main')
+@extends('admin.layout.main')
 {{-- @push('dataTableCss')
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 @endpush --}}

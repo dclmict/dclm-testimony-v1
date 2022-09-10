@@ -13,12 +13,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dlcmbrand.css') }}">
     
-
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
 
     @stack('styles')
 
-    <title>DCLM Testimony: June Global Crusade </title>
+    <title>DCLM Testimony || GCK August Edition </title>
     <style>
         .main-side {
             background: linear-gradient(178.89deg, #226091 -9.6%, #507DA0 0.42%, rgba(196, 196, 196, 0) 46.37%);
@@ -152,7 +151,7 @@
             </div>
             <div class="d-flex flex-column align-items-center justify-content-center" style="margin-top:25vh">
                 <div>
-                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke">TESTIMONY FOR JUNE GLOBAL CRUSADE
+                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke">TESTIMONIES FOR JULY GLOBAL CRUSADE
                     </h1>
                 </div>
                 <div class="bg-warning px-2 pt-2" style="opacity: 0.7">
