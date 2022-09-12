@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @push('styles')
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
     <style>
         .select2-selection__rendered {
@@ -42,23 +43,24 @@
         <h4 class="text-center my-5">
             Share your testimony
         </h4>
-        <form action="{{ route('testimony.store') }}" method="POST" enctype="multipart/form-data" x-on:submit="submit()">
+        <form action="{{ route('testimony.store') }}" method="POST" enctype="multipart/form-data" @submit.prevent="submit">
+            {{-- x-on:submit="submt" --}}
             @csrf
             <div class="my-3">
 
                 <input required type="text" class="form-control" id="exampleFormControlInput1" placeholder="Fullname"
-                    name="full_name" value="{{ old('full_name') }}">
+                    name="full_name" value="{{ old('full_name') }}" x-model="attr.name">
                 <x-error name="full_name" />
             </div>
             <div class="form-group row">
                 <div class="my-3 col-md-6">
                     <input required type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email"
-                        name="email" value="{{ old('email') }}">
+                        name="email" value="{{ old('email') }}" x-model="attr.email">
                     <x-error name="email" />
                 </div>
                 <div class="my-3 col-md-6">
-                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Phone"
-                        name="phone" value="{{ old('phone') }}">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Phone"
+                        name="phone" value="{{ old('phone') }}" x-model="attr.phone">
                     <x-error name="phone" />
                 </div>
             </div>
@@ -66,7 +68,7 @@
             <div class="form-group row">
                 <div class="my-3 col-md-6">
                     <select required name="country_id" class="form-control js-example-basic-single" id="country_id"
-                        style="width: 100%;">
+                        style="width: 100%;" x-model="attr.country_id">
                         <option value="">Country</option>
                         @foreach ($countries as $country)
                             <option value="{{ $country->id }}">{{ $country->libelle }}</option>
@@ -76,14 +78,14 @@
                 </div>
                 <div class="my-3 col-md-6">
                     <input required type="text" class="form-control" id="exampleFormControlInput1" placeholder="city"
-                        value="{{ old('city') }}" name="city">
+                        value="{{ old('city') }}" name="city" x-model="attr.city">
                     <x-error name="city" />
                 </div>
             </div>
 
             <div class="mb-3">
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type your testimony below"
-                    name="content">{{ old('content') }}</textarea>
+                    name="content" x-model="attr.content">{{ old('content') }}</textarea>
                 <x-error name="content" />
             </div>
 
@@ -96,7 +98,8 @@
                         <img src="{{ asset('icons/upload.svg') }}"> <span x-text="file_upload_label"></span>
                     </label>
                     <input x-on:change="uploaded" type="file" name="file_dir" hidden
-                        class="btn col-12 btn-outline-primary mt-2" id="file_dir" value="{{ old('file_dir') }}">
+                        class="btn col-12 btn-outline-primary mt-2" id="file_dir" value="{{ old('file_dir') }}"
+                        x-model="attr.file_dir">
                     <x-error name="file_dir" />
 
                 </div>
@@ -142,6 +145,16 @@
     <script>
         window.app = function() {
             return {
+                form: new FormData,
+                attr: {
+                    name: "",
+                    email: "",
+                    phone: "",
+                    country_id: "",
+                    city: "",
+                    content: "",
+                    file_dr: "",
+                },
                 loading: false,
                 button_text: 'Submit',
                 progressValue: 0,
@@ -152,38 +165,62 @@
 
                 file_upload_label: 'Upload your Picture or Video',
 
-
                 submit() {
-                    this.loading = true;
-                    this.button_text = 'Submitting...';
+                    this.form.append('name', JSON.stringify(this.attr.name))
+                    this.form.append('email', JSON.stringify(this.attr.email))
+                    this.form.append('country_id', JSON.stringify(this.attr.country_id))
+                    this.form.append('city', JSON.stringify(this.attr.city))
+                    this.form.append('content', JSON.stringify(this.attr.content))
+                    this.form.append('file_dir', this.attr.file_dir)
+                    this.form.append('phone', JSON.stringify(this.attr.phone))
+                    // for (const value of this.form.values()) {
+                    //     console.log(value);
+                    // }
+                    // const config = {
 
-                    setInterval(() => {
-                        this.progress += Math.floor(Math.random() * 10);
-                        this.button_text = this.button_texts[Math.floor(Math.random() * this.button_texts
-                            .length)];
+                    // }
 
-                        if (this.progress >= 100) {
-                            this.progress = 100;
 
-                            this.button_text = "Submitted. Don't close yet...";
-                        }
-                    }, 1000);
+                    fetch(
+                            "{{ route('testimony.store') }}", {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                    'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content
+                                },
+                                body: this.form
+                            })
+                        .then(() => {
+                            console.log('it worked')
+                            this.loading = true;
+                            this.button_text = 'Submitting...';
+                            setInterval(() => {
+                                this.progress += Math.floor(Math.random() * 10);
+                                this.button_text = this.button_texts[Math.floor(Math.random() * this
+                                    .button_texts
+                                    .length)];
 
+                                if (this.progress >= 100) {
+                                    this.progress = 100;
+                                    this.button_text = "Submitted. Don't close yet...";
+                                }
+                            }, 1000);
+                        }).catch(() => {
+                            console.log('Something definitely went wrong')
+                        })
 
 
                 },
 
-                uploaded(event,position, total, percentComplete) {
-
-                    alert(position)
+                uploaded(event, position, total, percentComplete) {
 
                     if (event.target.files.length > 0) {
                         //ten last caracters of the file name
                         let file_name = "..." + event.target.files[0].name.substr(event.target.files[0].name.length -
-                            25);
+                            21);
                         this.file_upload_label = file_name
                     } else {
-                        this.file_upload_label = 'Upload your Picture or video';
+                        this.file_upload_label = 'Upload your Picture or o';
                     }
                 }
 
