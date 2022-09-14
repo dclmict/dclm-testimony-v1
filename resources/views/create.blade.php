@@ -186,9 +186,11 @@
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'multipart/form-data',
+                                    'Content-Type': 'application/json' ,
                                     'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content
                                 },
                                 body: this.form
+                                
                             })
                         .then(() => {
                             console.log('it worked')
@@ -202,7 +204,7 @@
 
                                 if (this.progress >= 100) {
                                     this.progress = 100;
-                                    this.button_text = "Submitted. Don't close yet...";
+                                    this.button_text = "Testimony successfully submitted !";
                                 }
                             }, 1000);
                         }).catch(() => {

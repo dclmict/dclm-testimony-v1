@@ -23,7 +23,9 @@ class TestimonyRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this->request->all());
         $input = $this->request->all();
+    
         $rules = [
             'full_name'=>'required|string',
             'email'=>'required|email',
