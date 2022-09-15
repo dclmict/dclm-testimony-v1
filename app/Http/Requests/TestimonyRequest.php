@@ -23,7 +23,7 @@ class TestimonyRequest extends FormRequest
      */
     public function rules()
     {
-        dd($this->request->all());
+       
         $input = $this->request->all();
     
         $rules = [

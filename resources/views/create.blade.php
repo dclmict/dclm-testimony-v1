@@ -166,7 +166,7 @@
                 file_upload_label: 'Upload your Picture or Video',
 
                 submit() {
-                    this.form.append('name', JSON.stringify(this.attr.name))
+                    this.form.append('full_name', JSON.stringify(this.attr.name))
                     this.form.append('email', JSON.stringify(this.attr.email))
                     this.form.append('country_id', JSON.stringify(this.attr.country_id))
                     this.form.append('city', JSON.stringify(this.attr.city))
@@ -179,21 +179,20 @@
                     // const config = {
 
                     // }
-
-
+            
                     fetch(
-                            "{{ route('testimony.store') }}", {
+                            '{{ route("testimony.store") }}', {
                                 method: 'POST',
                                 headers: {
-                                    'Content-Type': 'multipart/form-data',
-                                    'Content-Type': 'application/json' ,
+                                    // 'Content-Type': 'multipart/form-data',
+                                    // 'Content-Type': 'application/json' ,
+                                    //I had to comment that because what is supposed to be a solution is actually a problem.  I mean that above !
                                     'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content
                                 },
                                 body: this.form
                                 
                             })
                         .then(() => {
-                            console.log('it worked')
                             this.loading = true;
                             this.button_text = 'Submitting...';
                             setInterval(() => {
