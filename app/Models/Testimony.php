@@ -16,7 +16,7 @@ class Testimony extends Model
 
     public static function store(array $data, $file, $extension)
     {
-        dd('aite we are herer');
+        
         $testimony = self::make(collect($data)->only(["content"])->toArray());
         $active = CrusadeTour::whereIsActive(true)->first();
 

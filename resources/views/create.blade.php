@@ -147,13 +147,13 @@
             return {
                 form: new FormData,
                 attr: {
-                    name: "",
-                    email: "",
-                    phone: "",
-                    country_id: "",
-                    city: "",
-                    content: "",
-                    file_dr: "",
+                    name: null,
+                    email:null ,
+                    phone:null ,
+                    country_id: null ,
+                    city: null,
+                    content: null,
+                    file_dr: null,
                 },
                 loading: false,
                 button_text: 'Submit',
@@ -167,12 +167,12 @@
 
                 submit() {
                     this.form.append('full_name', JSON.stringify(this.attr.name))
-                    this.form.append('email', JSON.stringify(this.attr.email))
+                    this.form.append('emailk', JSON.stringify(this.attr.email))
                     this.form.append('country_id', JSON.stringify(this.attr.country_id))
-                    this.form.append('city', JSON.stringify(this.attr.city))
+                    this.form.append('cityf', JSON.stringify(this.attr.city))
                     this.form.append('content', JSON.stringify(this.attr.content))
                     this.form.append('file_dir', this.attr.file_dir)
-                    this.form.append('phone', JSON.stringify(this.attr.phone))
+                    this.form.append('phonev', JSON.stringify(this.attr.phone))
                     // for (const value of this.form.values()) {
                     //     console.log(value);
                     // }
@@ -184,15 +184,18 @@
                             '{{ route("testimony.store") }}', {
                                 method: 'POST',
                                 headers: {
-                                    // 'Content-Type': 'multipart/form-data',
-                                    // 'Content-Type': 'application/json' ,
+
+                        
+                                    'Accept': 'application/json',
+                                    
                                     //I had to comment that because what is supposed to be a solution is actually a problem.  I mean that above !
-                                    'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                 },
                                 body: this.form
                                 
                             })
                         .then(() => {
+                            console.log(response.data);
                             this.loading = true;
                             this.button_text = 'Submitting...';
                             setInterval(() => {
