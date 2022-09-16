@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class TestimonyRequest extends FormRequest
 {
@@ -16,6 +18,7 @@ class TestimonyRequest extends FormRequest
         return true;
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,19 +26,19 @@ class TestimonyRequest extends FormRequest
      */
     public function rules()
     {
-
-       dd($this->request->all());
-     
+    
         $input = $this->request->all();
+        //dd($input);
     
         $rules = [
-            'full_name'=>'required|string',
+            'full_name'=>'string',
             'email'=>'required|email',
             'phone'=>'required|integer',
             'country_id'=>'required|integer',
             'city'=>'required|string',
             'content'=>'required|string',
-            'file_dir'=>'required',
+            'file_dir'=>'required'
+
         ];
 
         if (blank($input['content']) && ( isset($input['file_dir'])  && blank($input['file_dir']))) {
@@ -53,6 +56,15 @@ class TestimonyRequest extends FormRequest
 
     }
 
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success'   => false,
+            'message'   => 'Validation errors',
+            'data'      => $validator->errors()
+        ]));
+    }
+
     public function messages()
     {
         return [
@@ -61,6 +73,7 @@ class TestimonyRequest extends FormRequest
             "email" => "This email is invalid.",
             "integer" => "Choose a country.",
             "media" => "Choose a media file.",
+         
         ];
     }
 }

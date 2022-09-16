@@ -20,7 +20,6 @@ class TestimonyFormController extends Controller
 
     public function store(TestimonyRequest $request)
     {
-      
         $testimony = Testimony::store(
             $request->except("file_dir"), //data
             

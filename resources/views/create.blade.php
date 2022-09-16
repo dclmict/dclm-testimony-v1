@@ -147,12 +147,12 @@
             return {
                 form: new FormData,
                 attr: {
-                    name: null,
-                    email:null ,
-                    phone:null ,
-                    country_id: null ,
-                    city: null,
-                    content: null,
+                    name: 'chidi chuk',
+                    email:'chidi@gmail.com' ,
+                    phone: +2348103845153 ,
+                    country_id: 164 ,
+                    city: 'kogi',
+                    content: 'work please',
                     file_dr: null,
                 },
                 loading: false,
@@ -166,19 +166,14 @@
                 file_upload_label: 'Upload your Picture or Video',
 
                 submit() {
-                    this.form.append('full_name', JSON.stringify(this.attr.name))
-                    this.form.append('emailk', JSON.stringify(this.attr.email))
-                    this.form.append('country_id', JSON.stringify(this.attr.country_id))
-                    this.form.append('cityf', JSON.stringify(this.attr.city))
-                    this.form.append('content', JSON.stringify(this.attr.content))
+                    this.form.append('full_name',this.attr.name)
+                    this.form.append('email', this.attr.email)
+                    this.form.append('country_id', this.attr.country_id)
+                    this.form.append('city', this.attr.city)
+                    this.form.append('content', this.attr.content)
                     this.form.append('file_dir', this.attr.file_dir)
-                    this.form.append('phonev', JSON.stringify(this.attr.phone))
-                    // for (const value of this.form.values()) {
-                    //     console.log(value);
-                    // }
-                    // const config = {
+                    this.form.append('phone', this.attr.phone)
 
-                    // }
             
                     fetch(
                             '{{ route("testimony.store") }}', {
