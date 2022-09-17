@@ -147,13 +147,13 @@
             return {
                 form: new FormData,
                 attr: {
-                    name: 'chidi chuk',
-                    email:'chidi@gmail.com' ,
-                    phone: +2348103845153 ,
-                    country_id: 164 ,
-                    city: 'kogi',
-                    content: 'work please',
-                    file_dr: null,
+                    name: "chidi chuk",
+                    email: 'chidi@gmail.com',
+                    phone: "+2348103845153",
+                    country_id: "164",
+                    city: "kogi",
+                    content: "work please",
+                    file_dir:"",
                 },
                 loading: false,
                 button_text: 'Submit',
@@ -166,28 +166,33 @@
                 file_upload_label: 'Upload your Picture or Video',
 
                 submit() {
-                    this.form.append('full_name',this.attr.name)
-                    this.form.append('email', this.attr.email)
-                    this.form.append('country_id', this.attr.country_id)
-                    this.form.append('city', this.attr.city)
-                    this.form.append('content', this.attr.content)
-                    this.form.append('file_dir', this.attr.file_dir)
-                    this.form.append('phone', this.attr.phone)
 
-            
+                    let payload = JSON.stringify({
+                        full_name: this.attr.name,
+                        email: this.attr.email,
+                        country_id: this.attr.country_id,
+                        city: this.attr.city,
+                        content: this.attr.content,
+                        phone: this.attr.phone
+                    });
+
+                    this.form.append('file_dir', this.attr.file_dir)
+                    this.form.append('payload', payload);
+
+                    for (const value of this.form.values()) {
+                        console.log(value);
+                    }
+
                     fetch(
-                            '{{ route("testimony.store") }}', {
+                            '{{ route('testimony.store') }}', {
                                 method: 'POST',
                                 headers: {
-
-                        
-                                    'Accept': 'application/json',
-                                    
+                                    'Content-Type': 'multipart/form-data',
                                     //I had to comment that because what is supposed to be a solution is actually a problem.  I mean that above !
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                 },
                                 body: this.form
-                                
+
                             })
                         .then(() => {
                             console.log(response.data);
