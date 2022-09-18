@@ -5,20 +5,21 @@ services:
   testimony-app:
     container_name: testimony-app
     image: opeoniye/nginx-php-fpm
-    environment:
-      GIT_REPO: ${GIT_REPO}
-      GIT_EMAIL: ${GIT_EMAIL}
-      GIT_NAME: ${GIT_NAME}
-      GIT_BRANCH: ${GIT_BRANCH}
-      GIT_PERSONAL_TOKEN: ${GIT_PERSONAL_TOKEN}
-      WEBROOT: ${WEBROOT}
+    # environment:
+      # GIT_REPO: ${GIT_REPO}
+      # GIT_EMAIL: ${GIT_EMAIL}
+      # GIT_NAME: ${GIT_NAME}
+      # GIT_BRANCH: ${GIT_BRANCH}
+      # GIT_PERSONAL_TOKEN: ${GIT_PERSONAL_TOKEN}
+      # WEBROOT: ${WEBROOT}
     ports:
       - 1001:80
     networks:
       - testimony
-    # volumes:
-    #   - ./.docker/nginx/testify.conf:/etc/nginx/sites-available/default.conf
-      #- ./.env:/var/www/html
+    volumes:
+      - ./:/var/www/html
+      - ./.docker/testify.conf:/etc/nginx/sites-available/default.conf
+      # - ./.env:/var/www/html/.env
     restart: always
 
 networks:
