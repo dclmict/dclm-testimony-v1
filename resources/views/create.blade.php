@@ -91,18 +91,12 @@
                 <div class="text-muted font-weight-bold"> Upload your Picture or Video </div>
                 <div class="col-md-6">
                     {{-- <button type="button" class="btn col-12 btn-outline-primary mt-2"> Upload your testimony </button> --}}
-<<<<<<< HEAD
-
-                    <input type="file" name="file_dir" class="btn col-12 btn-outline-primary mt-2" id="file_dir"
-                        value="{{ old('file_dir') }}">
-=======
                     <label for="file_dir" class="btn btn-outline-primary col-12">
 
                         <img src="{{ asset('icons/upload.svg') }}"> <span x-text="file_upload_label"></span>
                     </label>
                     <input x-on:change="uploaded" type="file" name="file_dir" hidden
                         class="btn col-12 btn-outline-primary mt-2" id="file_dir" value="{{ old('file_dir') }}">
->>>>>>> eac09abc77fb47cc328c0e6ffac6b1d3c26cc023
                     <x-error name="file_dir" />
 
                 </div>
@@ -116,17 +110,10 @@
                 </div>
 
             </div>
-<<<<<<< HEAD
-            <div class="progress" style="height: 30px" x-on:click="submit()" x-show="loading">
-                <div :style="`width: ${progress}%; transition: width 2s;`" class="progress-bar" role="progressbar"
-                    :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100">
-                    Sending your testimony...
-=======
             <div class="progress" style="height: 30px" x-show="loading">
                 <div :style="`width: ${progress}%; transition: width 2s;`" class="progress-bar" role="progressbar"
                     :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" x-text="button_text">
 
->>>>>>> eac09abc77fb47cc328c0e6ffac6b1d3c26cc023
                 </div>
             </div>
         </form>
@@ -158,9 +145,6 @@
                 loading: true,
                 button_text: 'Submit',
                 progressValue: 0,
-<<<<<<< HEAD
-                progress: 50,
-=======
                 progress: 00,
                 button_texts: ['Uploading file...', 'Sending your testimony...', 'Submitting your testimony...',
                     'Wait a while...', 'Almost Done ...'
@@ -168,7 +152,6 @@
 
                 file_upload_label: 'Upload your Picture or Video',
 
->>>>>>> eac09abc77fb47cc328c0e6ffac6b1d3c26cc023
 
                 submit() {
                     this.loading = true;
@@ -176,22 +159,6 @@
 
                     setInterval(() => {
                         this.progress += Math.floor(Math.random() * 10);
-<<<<<<< HEAD
-                    }, 1000);
-
-                    /*  setInterval(() => {
-
-                         this.progressValue += Math.floor(Math.random() * 10);
-
-                         // $refs.progress_bar.style.width = this.progressValue + '%';
-                         //in nextick update $refs.progress_bar.style value
-
-                         if (this.progressValue >= 100) {
-                             this.progressValue = 99;
-                         }
-                     }, 1000);
-                     */
-=======
                         this.button_text = this.button_texts[Math.floor(Math.random() * this.button_texts
                             .length)];
 
@@ -203,7 +170,6 @@
                     }, 1000);
 
 
->>>>>>> eac09abc77fb47cc328c0e6ffac6b1d3c26cc023
 
                 },
 
