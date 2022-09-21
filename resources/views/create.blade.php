@@ -43,7 +43,7 @@
         <h4 class="text-center my-5">
             Share your testimony
         </h4>
-        <form action="{{ route('testimony.store') }}" method="POST" enctype="multipart/form-data" @submit.prevent="submit">
+        <form @submit.prevent="submit">
             {{-- x-on:submit="submt" --}}
             @csrf
             <div class="my-3">
@@ -97,9 +97,8 @@
 
                         <img src="{{ asset('icons/upload.svg') }}"> <span x-text="file_upload_label"></span>
                     </label>
-                    <input x-on:change="uploaded" type="file" name="file_dir" hidden
-                        class="btn col-12 btn-outline-primary mt-2" id="file_dir" value="{{ old('file_dir') }}"
-                        x-model="attr.file_dir">
+                    <input @onchange="uploaded" type="file" name="file_dir" hidden class="btn col-12 btn-outline-primary mt-2" id="file_dir"
+                        value="{{ old('file_dir') }}" x-model="attr.file_dir">
                     <x-error name="file_dir" />
 
                 </div>
@@ -125,12 +124,13 @@
 
 @push('scripts')
     <script src="{{ asset('js/alpine.min.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    <script src="{{asset('js/axios.min.js')}}"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/jquery.form.js') }}"></script>
+    <script src="{{ asset('js/jquery.form.js') }}"></script> --}}
 
 
-    <script src="{{ asset('js/select2.js') }}"></script>
+    {{-- <script src="{{ asset('js/select2.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
@@ -140,20 +140,22 @@
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();
         });
-    </script>
+    </script> --}}
 
     <script>
         window.app = function() {
+
             return {
-                form: new FormData,
+
+                form: new FormData(),
                 attr: {
                     name: "chidi chuk",
                     email: 'chidi@gmail.com',
                     phone: "+2348103845153",
                     country_id: "164",
                     city: "kogi",
-                    content: "work please",
-                    file_dir:"",
+                    content: 'we move and move to the promise land',
+                    file_dir: '',
                 },
                 loading: false,
                 button_text: 'Submit',
@@ -167,35 +169,30 @@
 
                 submit() {
 
-                    let payload = JSON.stringify({
-                        full_name: this.attr.name,
-                        email: this.attr.email,
-                        country_id: this.attr.country_id,
-                        city: this.attr.city,
-                        content: this.attr.content,
-                        phone: this.attr.phone
-                    });
+                    this.form.append('full_name', this.attr.name),
+                        this.form.append('email', this.attr.email),
+                        this.form.append('country_id', this.attr.country_id),
+                        this.form.append('city', this.attr.city),
+                        this.form.append('content', this.attr.content),
+                        this.form.append('phone', this.attr.phone),
 
-                    this.form.append('file_dir', this.attr.file_dir)
-                    this.form.append('payload', payload);
-
+                        this.form.append('file_dir', document.getElementById('file_dir').files[0])
                     for (const value of this.form.values()) {
                         console.log(value);
                     }
+                    // no need for multiform part, axios has a way of doing that by itself
+                    //also, 
 
-                    fetch(
-                            '{{ route('testimony.store') }}', {
-                                method: 'POST',
+                    axios.post(
+                            '{{ route('testimony.store') }}', this.form, {
+
                                 headers: {
-                                    'Content-Type': 'multipart/form-data',
-                                    //I had to comment that because what is supposed to be a solution is actually a problem.  I mean that above !
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    // 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                 },
-                                body: this.form
 
                             })
                         .then(() => {
-                            console.log(response.data);
+                            // console.log(response.data);
                             this.loading = true;
                             this.button_text = 'Submitting...';
                             setInterval(() => {
@@ -212,7 +209,6 @@
                         }).catch(() => {
                             console.log('Something definitely went wrong')
                         })
-
 
                 },
 

@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 
 class TestimonyRequest extends FormRequest
 {
@@ -18,20 +16,6 @@ class TestimonyRequest extends FormRequest
         return true;
     }
 
-      /**
-   * Prepare the data for validation.
-   *
-   * @return void
-   *             
-   * @throws \JsonException
-   */
-  protected function prepareForValidation(): void
-
-{
-  
-    $this->merge(json_decode($this->payload, true, 512, JSON_THROW_ON_ERROR));
-
-}
     /**
      * Get the validation rules that apply to the request.
      *
@@ -39,43 +23,29 @@ class TestimonyRequest extends FormRequest
      */
     public function rules()
     {
-    
         $input = $this->request->all();
-        //dd($input);
-    
         $rules = [
-            'full_name'=>'string',
-            'email'=>'required|email',
-            'phone'=>'required|integer',
-            'country_id'=>'required|integer',
-            'city'=>'required|string',
-            'content'=>'required|string',
-            'file_dir'=>'required'
-
+            'full_name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'country_id' => 'required|integer',
+            'city' => 'required|string',
+            'content' => 'required|string',
+            'file_dir' => 'required',
         ];
 
-        if (blank($input['content']) && ( isset($input['file_dir'])  && blank($input['file_dir']))) {
+        if (blank($input['content']) && (isset($input['file_dir'])  && blank($input['file_dir']))) {
             $rules["content"] = 'required|string';
             $rules["file_dir"] = 'required';
-        } elseif(blank($input['content'])) {
+        } elseif (blank($input['content'])) {
             $rules["content"] = 'nullable|string';
             $rules["file_dir"] = 'required';
-        }else{
+        } else {
             $rules["content"] = 'required|string';
             $rules["file_dir"] = 'nullable';
         }
 
         return $rules;
-
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ]));
     }
 
     public function messages()
@@ -86,7 +56,6 @@ class TestimonyRequest extends FormRequest
             "email" => "This email is invalid.",
             "integer" => "Choose a country.",
             "media" => "Choose a media file.",
-         
         ];
     }
 }

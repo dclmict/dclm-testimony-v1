@@ -20,16 +20,16 @@ class TestimonyFormController extends Controller
 
     public function store(TestimonyRequest $request)
     {
+
         $testimony = Testimony::store(
-            $request->except("file_dir"), //data
-            
-            $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null, //file
-            $request->has("file_dir") ? $request->file('file_dir')->extension() : null // extension 
+            $request->except("file_dir"),
+            $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,
+            $request->has("file_dir") ? $request->file('file_dir')->extension() : null
         );
 
-        return "thnaks it isfixed";
+
         //dd($testimony);
-       
+        return response(['msg' => 'Succesful']);
     }
 
     public function thanks()
