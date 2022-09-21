@@ -199,7 +199,7 @@
                             if (percentCompleted === 100) {
                                 bar.previousElementSibling.textContent = `Upload complete!`
                             }
-                        }.bind(this) //attach or bind this function to use this alpinejs instance
+                        }.bind(this) //attach or bind this function to use alpinejs (this) instance nside the onUploadProgress 
                     }
                     axios.post(
                             '{{ route('testimony.store') }}', this.form, config, {
