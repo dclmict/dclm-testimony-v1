@@ -23,7 +23,7 @@
                     <span style="font-size: 36px;">
                         Testimony For
                     </span>
-                    <span style="font-size: 36px;">May Global Crusade</span>
+                    <span style="font-size: 36px;">GCK || August Edition || Ondo State, Nigeria</span>
                 </div>
 
 
@@ -31,7 +31,7 @@
                 <span style="font-size: 26px; " class="mt-4 text-thin">
                     Testify to the goodness of God
                 </span>
-                <a href="{{route('testimony.show')}}#testimony-section" class="btn main-button mb-5" style="margin-top:44px">
+                <a href="{{route('testimony.show')}}" class="btn main-button mb-5" style="margin-top:44px">
                     Share My Testimony
                 </a>
             </div>

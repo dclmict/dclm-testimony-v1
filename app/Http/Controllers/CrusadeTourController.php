@@ -40,12 +40,13 @@ class CrusadeTourController extends Controller
 
         $active = CrusadeTour::whereIsActive(true)->first();
 
+        //set the current crusade active status to false
         if ($active) {
             $active->is_active = false;
             $active->save();
         }
 
-
+        // set the crusadeTour  the user clicked to true 
         try {
             $current  = CrusadeTour::findOrFail($id);
             $current->is_active = true;
