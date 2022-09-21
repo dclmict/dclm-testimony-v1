@@ -6,9 +6,11 @@
         .select2-selection__rendered {
             line-height: 38px !important;
         }
+
         .select2-container .select2-selection--single {
             height: 38px !important;
         }
+
         #overlay {
             position: fixed;
             /* Sit on top of the page content */
@@ -94,8 +96,9 @@
 
                         <img src="{{ asset('icons/upload.svg') }}"> <span x-text="file_upload_label"></span>
                     </label>
-                    <input x-on:change="uploaded" type="file" name="file_dir" hidden class="btn col-12 btn-outline-primary mt-2" id="file_dir"
-                        value="{{ old('file_dir') }}" x-model="attr.file_dir">
+                    <input x-on:change="uploaded" type="file" name="file_dir" hidden
+                        class="btn col-12 btn-outline-primary mt-2" id="file_dir" value="{{ old('file_dir') }}"
+                        x-model="attr.file_dir">
                     <x-error name="file_dir" />
 
                 </div>
@@ -109,6 +112,11 @@
                 </div>
 
             </div>
+            <!-- Progress bar -->
+            <div>
+                <label for="progress-bar">0%</label>
+                <progress id="progress-bar" value="0" max="100"></progress>
+            </div>
             <div class="progress" style="height: 30px" x-show="loading">
                 <div :style="`width: ${progress}%; transition: width 2s;`" class="progress-bar" role="progressbar"
                     :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" x-text="button_text">
@@ -121,7 +129,7 @@
 
 @push('scripts')
     <script src="{{ asset('js/alpine.min.js') }}"></script>
-    <script src="{{asset('js/axios.min.js')}}"></script>
+    <script src="{{ asset('js/axios.min.js') }}"></script>
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{{ asset('js/jquery.form.js') }}"></script> --}}
@@ -160,6 +168,7 @@
                 ],
                 file_upload_label: 'Upload your Picture or Video',
                 submit() {
+                    const bar = document.getElementById('progress-bar');
                     this.form.append('full_name', this.attr.name),
                         this.form.append('email', this.attr.email),
                         this.form.append('country_id', this.attr.country_id),
@@ -172,26 +181,46 @@
                     }
                     // no need for multiform part, axios has a way of doing that by itself
                     //also, 
+
+                    // Axios
+                    const config = {
+                        onUploadProgress: function(progressEvent) {
+                            this.loading = true;
+                            this.progress = Math.round((progressEvent.loaded / progressEvent.total) *
+                                100);
+                                this.button_text =  this.progress 
+                                if ( this.progress == 100) {
+                                    this.button_text = "Submitted! Thanks"
+                                }
+                            const percentCompleted = Math.round((progressEvent.loaded / progressEvent.total) *
+                                100);
+                            bar.setAttribute('value', percentCompleted);
+                            bar.previousElementSibling.textContent = `${percentCompleted}%`
+                            if (percentCompleted === 100) {
+                                bar.previousElementSibling.textContent = `Upload complete!`
+                            }
+                        }.bind(this) //attach or bind this function to use this alpinejs instance
+                    }
                     axios.post(
-                            '{{ route('testimony.store') }}', this.form, {
+                            '{{ route('testimony.store') }}', this.form, config, {
                                 headers: {
                                     // 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                 },
                             })
                         .then(() => {
                             // console.log(response.data);
-                            this.loading = true;
-                            this.button_text = 'Submitting...';
-                            setInterval(() => {
-                                this.progress += Math.floor(Math.random() * 10);
-                                this.button_text = this.button_texts[Math.floor(Math.random() * this
-                                    .button_texts
-                                    .length)];
-                                if (this.progress >= 100) {
-                                    this.progress = 100;
-                                    this.button_text = "Testimony successfully submitted !";
-                                }
-                            }, 1000);
+                         
+                      
+                            // setInterval(() => {
+                            //     this.progress += Math.floor(Math.random() * 10);
+                            //     this.button_text = this.button_texts[Math.floor(Math.random() * this
+                            //         .button_texts
+                            //         .length)];
+                            //     if (this.progress >= 100) {
+                            //         this.progress = 100;
+                            //         this.button_text = "Testimony successfully submitted !";
+                            //     }
+                            // }, 1000);
                         }).catch(() => {
                             console.log('Something definitely went wrong')
                         })
@@ -209,4 +238,4 @@
             }
         }
     </script>
-@endpush 
+@endpush
