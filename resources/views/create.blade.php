@@ -6,15 +6,12 @@
         .select2-selection__rendered {
             line-height: 38px !important;
         }
-
         .select2-container .select2-selection--single {
             height: 38px !important;
         }
-
         #overlay {
             position: fixed;
             /* Sit on top of the page content */
-
             /* Hidden by default */
             width: 100%;
             /* Full width (cover the whole page) */
@@ -97,7 +94,7 @@
 
                         <img src="{{ asset('icons/upload.svg') }}"> <span x-text="file_upload_label"></span>
                     </label>
-                    <input @onchange="uploaded" type="file" name="file_dir" hidden class="btn col-12 btn-outline-primary mt-2" id="file_dir"
+                    <input x-on:change="uploaded" type="file" name="file_dir" hidden class="btn col-12 btn-outline-primary mt-2" id="file_dir"
                         value="{{ old('file_dir') }}" x-model="attr.file_dir">
                     <x-error name="file_dir" />
 
@@ -136,7 +133,6 @@
             $('.js-example-basic-single').select2();
             placeholder: 'Select an option';
         });
-
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();
         });
@@ -144,9 +140,7 @@
 
     <script>
         window.app = function() {
-
             return {
-
                 form: new FormData(),
                 attr: {
                     name: "chidi chuk",
@@ -154,7 +148,7 @@
                     phone: "+2348103845153",
                     country_id: "164",
                     city: "kogi",
-                    content: 'we move and move to the promise land',
+                    content: 'another thing to be done ',
                     file_dir: '',
                 },
                 loading: false,
@@ -164,32 +158,25 @@
                 button_texts: ['Uploading file...', 'Sending your testimony...', 'Submitting your testimony...',
                     'Wait a while...', 'Almost Done ...'
                 ],
-
                 file_upload_label: 'Upload your Picture or Video',
-
                 submit() {
-
                     this.form.append('full_name', this.attr.name),
                         this.form.append('email', this.attr.email),
                         this.form.append('country_id', this.attr.country_id),
                         this.form.append('city', this.attr.city),
                         this.form.append('content', this.attr.content),
                         this.form.append('phone', this.attr.phone),
-
                         this.form.append('file_dir', document.getElementById('file_dir').files[0])
                     for (const value of this.form.values()) {
                         console.log(value);
                     }
                     // no need for multiform part, axios has a way of doing that by itself
                     //also, 
-
                     axios.post(
                             '{{ route('testimony.store') }}', this.form, {
-
                                 headers: {
                                     // 'X-CSRF-TOKEN': '{{ csrf_token() }}',
                                 },
-
                             })
                         .then(() => {
                             // console.log(response.data);
@@ -200,7 +187,6 @@
                                 this.button_text = this.button_texts[Math.floor(Math.random() * this
                                     .button_texts
                                     .length)];
-
                                 if (this.progress >= 100) {
                                     this.progress = 100;
                                     this.button_text = "Testimony successfully submitted !";
@@ -209,11 +195,8 @@
                         }).catch(() => {
                             console.log('Something definitely went wrong')
                         })
-
                 },
-
                 uploaded(event, position, total, percentComplete) {
-
                     if (event.target.files.length > 0) {
                         //ten last caracters of the file name
                         let file_name = "..." + event.target.files[0].name.substr(event.target.files[0].name.length -
@@ -223,8 +206,7 @@
                         this.file_upload_label = 'Upload your Picture or o';
                     }
                 }
-
             }
         }
     </script>
-@endpush
+@endpush 
