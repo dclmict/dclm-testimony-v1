@@ -17,7 +17,7 @@
 
     @stack('styles')
 
-    <title>DCLM Testimony || GCK August Edition </title>
+    <title>DCLM Testimony || GCK September Edition </title>
     <style>
         .main-side {
             background: linear-gradient(178.89deg, #226091 -9.6%, #507DA0 0.42%, rgba(196, 196, 196, 0) 46.37%);
@@ -96,10 +96,13 @@
                 <div class="d-none d-md-flex flex-column mt-3" style="position: absolute; top:0">
                     <div class="row align-self-center menu">
                         <div class="col-md-auto">
-                            <a href="#">Contact us</a>
+                            <a href="/">Home</a>
                         </div>
                         <div class="col-md-auto">
-                            <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Go live</a>
+                            <a href="https://dclm.org/contact/" target="_blank">Contact us</a>
+                        </div>
+                        <div class="col-md-auto">
+                            <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Watch Live</a>
                         </div>
                         <div class="col-md-auto">
                             <a href="{{ route('testimony.show') }}">Testify</a>
@@ -110,10 +113,13 @@
 
             <div class="d-flex d-md-none gap-4 mob-menu">
                 <div class="col-md-auto">
+                    <a href="/">Home</a>
+                </div>
+                <div class="col-md-auto">
                     <a href="https://dclm.org/contact/" target="_blank">Contact us</a>
                 </div>
                 <div class="col-md-auto">
-                    <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Go live</a>
+                    <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Watch Live</a>
                 </div>
                 <div class="col-md-auto">
                     <a href="{{ route('testimony.show') }}">Testify</a>
@@ -140,10 +146,13 @@
         <div class="col-md-12 main-side-mobile">
             <div class="d-flex gap-4 justify-content-center mt-3 mob-menu-v2">
                 <div class="col-md-auto">
+                    <a href="/">Home</a>
+                </div>
+                <div class="col-md-auto">
                     <a href="https://dclm.org/contact/" target="_blank">Contact us</a>
                 </div>
                 <div class="col-md-auto">
-                    <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Go live</a>
+                    <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Watch Live</a>
                 </div>
                 <div class="col-md-auto">
                     <a href="{{ route('testimony.show') }}">Testify</a>
@@ -162,7 +171,7 @@
 
                 <div class="mt-5">
 
-                    <a href="{{route('testimony.show')}}" class="btn main-button mb-5">SHARE MY TESTIMONY</a>
+                    <a href="{{route('testimony.show')}}" class="btn main-button mb-5">Share My Testimony</a>
 
                 </div>
             </div>

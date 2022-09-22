@@ -25,28 +25,27 @@ class TestimonyRequest extends FormRequest
     {
         $input = $this->request->all();
         $rules = [
-            'full_name'=>'required|string',
-            'email'=>'required|email',
-            'phone'=>'required|string',
-            'country_id'=>'required|integer',
-            'city'=>'required|string',
-            'content'=>'required|string',
-            'file_dir'=>'required',
+            'full_name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'country_id' => 'required|integer',
+            'city' => 'required|string',
+            'content' => 'required|string',
+            'file_dir' => 'required',
         ];
 
-        if (blank($input['content']) && ( isset($input['file_dir'])  && blank($input['file_dir']))) {
+        if (blank($input['content']) && (isset($input['file_dir'])  && blank($input['file_dir']))) {
             $rules["content"] = 'required|string';
             $rules["file_dir"] = 'required';
-        } elseif(blank($input['content'])) {
+        } elseif (blank($input['content'])) {
             $rules["content"] = 'nullable|string';
             $rules["file_dir"] = 'required';
-        }else{
+        } else {
             $rules["content"] = 'required|string';
             $rules["file_dir"] = 'nullable';
         }
 
         return $rules;
-
     }
 
     public function messages()

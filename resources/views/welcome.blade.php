@@ -5,13 +5,16 @@
     <div class="d-none d-md-flex flex-column" >
         <div class="row align-self-center" style="position: absolute; top:0; margin-top:1%">
             <div class="col-md-auto">
+                <a href="/">Home</a>
+            </div>
+            <div class="col-md-auto">
                 <a href="https://dclm.org/contact/" target="_blank">Contact us</a>
             </div>
             <div class="col-md-auto">
-                 <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Go live</a>
+                <a href="https://www.youtube.com/c/DCLMHQ" target="_blank">Watch Live</a>
             </div>
             <div class="col-md-auto">
-                <a href="{{route('testimony.show')}}">Testify</a>
+                <a href="{{ route('testimony.show') }}">Testify</a>
             </div>
         </div>
     </div>
@@ -21,7 +24,7 @@
             <div class="d-flex flex-column ">
                 <div class="d-flex flex-column">
                     <span style="font-size: 36px;">
-                        Testimony For
+                        Testimonies For
                     </span>
                     <span style="font-size: 36px;">{{$active_crusade->name}}</span>
                 </div>

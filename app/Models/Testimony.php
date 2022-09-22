@@ -19,7 +19,10 @@ class Testimony extends Model
         $testimony = self::make(collect($data)->only(["content"])->toArray());
         $active = CrusadeTour::whereIsActive(true)->first();
 
+
+        //make sure tht
         $testifier = Testifier::existOrCreate($data);
+
         $testimony->testifier()->associate($testifier);
 
         /* Warning : make sure $active is not null */
@@ -37,7 +40,6 @@ class Testimony extends Model
     {
         $fileName = $this->testifier->email . '-' . time() . '.' . $extension;
         $active = CrusadeTour::whereIsActive(true)->first();
-
         try {
             Storage::disk('s3')->put("dclm-testimony/" . $active->slug . "/" . $fileName, $file);
             $this->file_dir = $fileName;
@@ -76,8 +78,8 @@ class Testimony extends Model
 
         try {
             //get presigned url
-            //$url = Storage::disk('s3')->temporaryUrl("dclm-testimony/" . $this->crusade_tour->slug . "/" . $this->file_dir, now()->addMinutes(5));
-           $url= $this->file_dir !=null? Storage::disk('s3')
+            //$url = Storage::disk('s3')->temporaryUrl("dclm-testimony/" . $this->crusade_tour->slug . "/" . $this->file_dir, now()->addMinutes(5))
+            $url = $this->file_dir != null ? Storage::disk('s3')
                 ->temporaryUrl("dclm-testimony/" . $this->crusadeTour->slug . "/" . $this->file_dir, now()->addDays(6)) : null;
 
             return $url;
