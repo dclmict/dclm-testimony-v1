@@ -34,7 +34,7 @@ Route::get('thanks', function () {
 })->name('thanks');
 
 Route::get('/testimony', [TestimonyFormController::class, 'show'])->name("testimony.show");
-Route::post('/testimony', [TestimonyFormController::class, 'store'])->name("testimony.store");
+Route::post('/testimony/store', [TestimonyFormController::class, 'store'])->name("testimony.store");
 
 Route::get('/thanks#thanks-section', [TestimonyFormController::class, 'thanks'])->name("testimony.thanks");
 
