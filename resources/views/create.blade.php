@@ -1,4 +1,7 @@
-@extends('layouts.main')
+@php
+    $active_crusade = App\Models\CrusadeTour::where('is_active', true)->first();
+@endphp
+@extends('layouts.main', ["active_crusade"=>$active_crusade])
 @push('styles')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
