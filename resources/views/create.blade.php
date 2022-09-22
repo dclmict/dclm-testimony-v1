@@ -359,8 +359,6 @@
                                 },
                             })
                         .then(() => {
-
-
                             console.log(response.data);
                         }).catch(() => {
                             console.log('Something definitely went wrong')
