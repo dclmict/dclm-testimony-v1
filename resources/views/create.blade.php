@@ -2,6 +2,7 @@
 @push('styles')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
+
     <style>
         .select2-selection__rendered {
             line-height: 38px !important;
@@ -30,6 +31,111 @@
             cursor: pointer;
             /* Add a pointer on hover */
             padding-inline: 10%;
+        }
+
+
+        .modal-confirm {
+            color: #434e65;
+            width: 525px;
+        }
+
+        .modal-confirm .modal-content {
+            padding: 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .modal-confirm .modal-header {
+            background: #47c9a2;
+            border-bottom: none;
+            position: relative;
+            text-align: center;
+            margin: -20px -20px 0;
+            border-radius: 5px 5px 0 0;
+            padding: 35px;
+        }
+
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 36px;
+            margin: 10px 0;
+        }
+
+        .modal-confirm .form-control,
+        .modal-confirm .btn {
+            min-height: 40px;
+            border-radius: 3px;
+        }
+
+        .modal-confirm .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #fff;
+            text-shadow: none;
+            opacity: 0.5;
+        }
+
+        .modal-confirm .close:hover {
+            opacity: 0.8;
+        }
+
+        .modal-confirm .icon-box {
+            color: #fff;
+            width: 95px;
+            height: 95px;
+            display: inline-block;
+            border-radius: 50%;
+            z-index: 9;
+            border: 5px solid #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .modal-confirm .icon-box i {
+            font-size: 64px;
+            margin: -4px 0 0 -4px;
+        }
+
+        .modal-confirm.modal-dialog {
+            margin-top: 80px;
+        }
+
+        .modal-confirm .btn,
+        .modal-confirm .btn:active {
+            color: #fff;
+            border-radius: 4px;
+            background: #eeb711 !important;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            border-radius: 30px;
+            margin-top: 10px;
+            padding: 6px 20px;
+            border: none;
+        }
+
+        .modal-confirm .btn:hover,
+        .modal-confirm .btn:focus {
+            background: #eda645 !important;
+            outline: none;
+        }
+
+        .modal-confirm .btn span {
+            margin: 1px 3px 0;
+            float: left;
+        }
+
+        .modal-confirm .btn i {
+            margin-left: 1px;
+            font-size: 20px;
+            float: right;
+        }
+
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
         }
     </style>
 @endpush
@@ -112,11 +218,6 @@
                 </div>
 
             </div>
-            <!-- Progress bar -->
-            <div>
-                <label for="progress-bar">0%</label>
-                <progress id="progress-bar" value="0" max="100"></progress>
-            </div>
             <div class="progress" style="height: 30px" x-show="loading">
                 <div :style="`width: ${progress}%; transition: width 2s;`" class="progress-bar" role="progressbar"
                     :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" x-text="button_text">
@@ -125,17 +226,61 @@
             </div>
         </form>
     </div>
+
+    <!-- Modal HTML -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" x-ref="modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class=" modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                Submitted Successfully !
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Share another testimony ?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE876;</i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body text-center">
+                    <h4>Great!</h4>
+                    <p>Your account has been created successfully.</p>
+                    <button class="btn btn-success" data-dismiss="modal"><span>Start Exploring</span> <i
+                            class="material-icons">&#xE5C8;</i></button>
+                </div>
+            </div>
+        </div>
+    </div> --}}
 @endsection
 
 @push('scripts')
     <script src="{{ asset('js/alpine.min.js') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/jquery.form.js') }}"></script> --}}
+    <script src="{{ asset('js/jquery.form.js') }}"></script>
 
 
-    {{-- <script src="{{ asset('js/select2.js') }}"></script>
+    <script src="{{ asset('js/select2.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
@@ -144,10 +289,12 @@
         $(document).on('select2:open', () => {
             document.querySelector('.select2-search__field').focus();
         });
-    </script> --}}
+    </script>
 
     <script>
+        var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
         window.app = function() {
+
             return {
                 form: new FormData(),
                 attr: {
@@ -188,18 +335,16 @@
                             this.loading = true;
                             this.progress = Math.round((progressEvent.loaded / progressEvent.total) *
                                 100);
-                                this.button_text =  this.progress 
-                                if ( this.progress == 100) {
-                                    this.button_text = "Submitted! Thanks"
-                                }
-                            const percentCompleted = Math.round((progressEvent.loaded / progressEvent.total) *
-                                100);
-                            bar.setAttribute('value', percentCompleted);
-                            bar.previousElementSibling.textContent = `${percentCompleted}%`
-                            if (percentCompleted === 100) {
-                                bar.previousElementSibling.textContent = `Upload complete!`
+                            this.button_text = this.progress
+                            if (this.progress === 100) {
+
+                                myModal.show()
+                                this.button_text = "Submitted! Thanks"
                             }
-                        }.bind(this) //attach or bind this function to use alpinejs (this) instance nside the onUploadProgress 
+
+                        }.bind(
+                            this
+                        ) //attach or bind this function to use alpinejs (this) instance nside the onUploadProgress 
                     }
                     axios.post(
                             '{{ route('testimony.store') }}', this.form, config, {
@@ -208,23 +353,13 @@
                                 },
                             })
                         .then(() => {
-                            // console.log(response.data);
-                         
-                      
-                            // setInterval(() => {
-                            //     this.progress += Math.floor(Math.random() * 10);
-                            //     this.button_text = this.button_texts[Math.floor(Math.random() * this
-                            //         .button_texts
-                            //         .length)];
-                            //     if (this.progress >= 100) {
-                            //         this.progress = 100;
-                            //         this.button_text = "Testimony successfully submitted !";
-                            //     }
-                            // }, 1000);
+                            console.log(response.data);
                         }).catch(() => {
                             console.log('Something definitely went wrong')
                         })
                 },
+
+                //fucntion to shorten higlight the text once an image has been selected
                 uploaded(event, position, total, percentComplete) {
                     if (event.target.files.length > 0) {
                         //ten last caracters of the file name
