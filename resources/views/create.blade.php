@@ -240,11 +240,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                Submitted Successfully !
+                    Submitted Successfully !
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Share another testimony ?</button>
+                    <a href="{{route('testimony.show')}}"><button type="button" class="btn btn-primary">Share another testimony ?</button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -298,12 +299,12 @@
             return {
                 form: new FormData(),
                 attr: {
-                    name: "chidi chuk",
-                    email: 'chidi@gmail.com',
-                    phone: "+2348103845153",
-                    country_id: "164",
-                    city: "kogi",
-                    content: 'another thing to be done ',
+                    name: "",
+                    email: '',
+                    phone: "",
+                    country_id: "",
+                    city: "",
+                    content: '',
                     file_dir: '',
                 },
                 loading: false,
@@ -337,9 +338,14 @@
                                 100);
                             this.button_text = this.progress
                             if (this.progress === 100) {
-
+                                this.loading = false
+                                this.button_text = "Submit"
                                 myModal.show()
-                                this.button_text = "Submitted! Thanks"
+                                var myModalEl = document.getElementById('exampleModal')
+                                myModalEl.addEventListener('hidden.bs.modal', function(event) {
+                                    location.reload();
+                                })
+
                             }
 
                         }.bind(
@@ -353,6 +359,8 @@
                                 },
                             })
                         .then(() => {
+
+
                             console.log(response.data);
                         }).catch(() => {
                             console.log('Something definitely went wrong')
@@ -368,6 +376,15 @@
                         this.file_upload_label = file_name
                     } else {
                         this.file_upload_label = 'Upload your Picture or o';
+                    }
+                },
+                //clear input
+                clearFileInput(ctrl) {
+                    try {
+                        ctrl.value = null;
+                    } catch (ex) {}
+                    if (ctrl.value) {
+                        ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
                     }
                 }
             }
