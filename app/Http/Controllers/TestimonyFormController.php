@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TestimonyRequest;
 use App\Models\Country;
+use App\Models\CrusadeTour;
 use App\Models\Testimony;
 use Exception;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class TestimonyFormController extends Controller
                 $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,
                 $request->has("file_dir") ? $request->file('file_dir')->extension() : null
             );
-        
+
 
         //dd($testimony);
         return redirect()->route("thanks");
@@ -36,6 +37,6 @@ class TestimonyFormController extends Controller
 
     public function thanks()
     {
-        return view('thanks');
+        return view('thanks', ["active_crusade"=>CrusadeTour::whereIsActive(true)->first()]);
     }
 }

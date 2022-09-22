@@ -1,4 +1,4 @@
-@extends("layouts.main")
+@extends("layouts.main", ["active_crusade"=>$active_crusade])
 
 
 @section('content')
@@ -23,7 +23,7 @@
                     <span style="font-size: 36px;">
                         Testimony For
                     </span>
-                    <span style="font-size: 36px;">GCK || August Edition || Ondo State, Nigeria</span>
+                    <span style="font-size: 36px;">{{$active_crusade->name}}</span>
                 </div>
 
 

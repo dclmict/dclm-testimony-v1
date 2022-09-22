@@ -27,10 +27,12 @@ class CrusadeTourController extends Controller
 
     public function store(Request $request)
     {
-        //
-        $request->validate(["slug" => "required|unique:crusade_tours"]);
+        //ù
 
-        CrusadeTour::store($request->only(["slug"]));
+        $request->validate(["slug" => "required|unique:crusade_tours", "name" => "required", "banner_path" => "required"]);
+
+        $ct=new CrusadeTour();
+        $ct->store($request->only(["slug", "name"]), $request->file("banner_path"));
 
         return redirect()->route("admin.crusade-tour.index");
     }
@@ -46,7 +48,7 @@ class CrusadeTourController extends Controller
             $active->save();
         }
 
-        // set the crusadeTour  the user clicked to true 
+        // set the crusadeTour  the user clicked to true
         try {
             $current  = CrusadeTour::findOrFail($id);
             $current->is_active = true;
@@ -59,11 +61,18 @@ class CrusadeTourController extends Controller
 
     public function update($id, Request $request)
     {
-        $request->validate(["slug" => "required|unique:crusade_tours"]);
+        $request->validate(["slug" => "required", "name" => "required"]);
 
         try {
             $current  = CrusadeTour::findOrFail($id);
             $current->slug = $request->slug;
+            $current->name = $request->name;
+
+
+            if($request->hasFile("banner_path")){
+                $current->deleteBanner();
+                $current->banner_path = $current->storeFile($request->file("banner_path"));
+            }
             $current->save();
         } catch (Exception $e) {
         }
@@ -75,8 +84,10 @@ class CrusadeTourController extends Controller
         try {
             $current  = CrusadeTour::findOrFail($id);
 
-            if ($current->testimonies->count() == 0)
+            if ($current->testimonies->count() == 0) {
+                $current->deleteBanner();
                 $current->delete();
+            }
         } catch (Exception $e) {
         }
 

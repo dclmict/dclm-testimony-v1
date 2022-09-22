@@ -12,7 +12,7 @@
     {{-- imoort app.css --}}
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dlcmbrand.css') }}">
-    
+
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
 
     @stack('styles')
@@ -121,7 +121,7 @@
             </div>
             <img class="icon img-fluid" width="500" src="{{ asset('images/icon.png') }}" alt="">
             @if (!request()->routeIs('thanks'))
-                <img width="200" class="img-fluid" src="{{ asset('images/logo.png') }}" alt="">
+                <img width="200" class="img-fluid" src="{{$active_crusade->banner}}" alt="">
             @endif
 
 
@@ -151,7 +151,7 @@
             </div>
             <div class="d-flex flex-column align-items-center justify-content-center" style="margin-top:25vh">
                 <div>
-                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke">TESTIMONIES FOR JULY GLOBAL CRUSADE
+                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke"> {{$active_crusade->name}}
                     </h1>
                 </div>
                 <div class="bg-warning px-2 pt-2" style="opacity: 0.7">

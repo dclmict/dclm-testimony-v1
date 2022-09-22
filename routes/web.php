@@ -1,12 +1,13 @@
 <?php
 
 
+use App\Models\Testimony;
+use App\Models\CrusadeTour;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CrusadeTourController;
 use App\Http\Controllers\TestimonyFormController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Auth::routes(); // laravel auth routes
 // });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['active_crusade'=>CrusadeTour::whereIsActive(true)->first()]);
 })->name("home");
 
 Route::get('thanks', function () {
