@@ -19,7 +19,7 @@ class CrusadeTour extends Model
 
 
         if ($file) {
-            $crusadeTour->banner_path=  $crusadeTour->saveFile($file);
+            $crusadeTour->banner_path=  $crusadeTour->storeFile($file);
         }
 
         $crusadeTour->save();
