@@ -305,7 +305,7 @@
                     country_id: "",
                     city: "",
                     content: '',
-                    file_dir: '',
+                  
                 },
                 loading: false,
                 button_text: 'Submit',

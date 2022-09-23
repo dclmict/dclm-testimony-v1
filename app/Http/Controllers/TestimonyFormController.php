@@ -23,8 +23,9 @@ class TestimonyFormController extends Controller
         $testimony = Testimony::store(
             $request->except("file_dir"),
            
-            $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,
-            $request->has("file_dir") ? $request->file('file_dir')->extension() : null
+            // chnage has('file_dir') to hasFile("file_dir")
+            $request->hasFile("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,
+            $request->hasFile("file_dir") ? $request->file('file_dir')->extension() : null
         );
 
 
