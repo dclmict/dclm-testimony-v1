@@ -172,7 +172,7 @@
 
             <div class="form-group row">
                 <div class="my-3 col-md-6">
-                    <select required name="country_id" class="form-control js-example-basic-single" id="country_id"
+                    <select name="country_id" class="form-control js-example-basic-single" id="country_id"
                         style="width: 100%;" x-model="attr.country_id">
                         <option value="">Country</option>
                         @foreach ($countries as $country)
