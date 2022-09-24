@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @push('styles')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link href="{{ asset('css/select2.css') }}" rel="stylesheet" />
+    {{-- <link href="{{ asset('css/select2.css') }}" rel="stylesheet" /> --}}
 
     <style>
         .select2-selection__rendered {
@@ -148,7 +148,7 @@
         <h4 class="text-center my-5">
             Share your testimony
         </h4>
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" autocomplete="off">
             {{-- x-on:submit="submt" --}}
             @csrf
             <div class="my-3">
@@ -172,19 +172,19 @@
 
             <div class="form-group row">
                 <div class="my-3 col-md-6">
-                    <select name="country_id" class="form-control js-example-basic-single" id="country_id"
-                        style="width: 100%;" x-model="attr.country_id">
-                        <option value="">Country</option>
+                    <select class="form-select" id="country_id" x-model="attr.country_id" autocomplete="off" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option value="3"> testing </option>
                         @foreach ($countries as $country)
                             <option value="{{ $country->id }}">{{ $country->libelle }}</option>
                         @endforeach
                     </select>
-                    <x-error name="country_id" />
+
                 </div>
                 <div class="my-3 col-md-6">
                     <input required type="text" class="form-control" id="exampleFormControlInput1" placeholder="city"
-                        value="{{ old('city') }}" name="city" x-model="attr.city">
-                    <x-error name="city" />
+                        x-model="attr.city">
+
                 </div>
             </div>
 
@@ -244,7 +244,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="{{route('testimony.show')}}"><button type="button" class="btn btn-primary">Share another testimony ?</button>
+                    <a href="{{ route('testimony.show') }}"><button type="button" class="btn btn-primary">Share another
+                            testimony ?</button>
                     </a>
                 </div>
             </div>
@@ -271,25 +272,40 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/alpine.min.js') }}"></script>
+    {{-- SO you want to mind how you stack  the javascripts for now  --}}
     <script src="{{ asset('js/axios.min.js') }}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="{{ asset('js/jquery.form.js') }}"></script>
 
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
 
-    <script src="{{ asset('js/select2.js') }}"></script>
+    <script src="{{ asset('js/alpine.min.js') }}"></script>
+
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script> --}}
+
+    {{-- <script src="{{ asset('js/jquery.form.js') }}"></script> --}}
+
+{{-- 
+    <script src="{{ asset('js/select2.js') }}"></script> --}}
     <script>
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-            placeholder: 'Select an option';
-        });
-        $(document).on('select2:open', () => {
-            document.querySelector('.select2-search__field').focus();
-        });
+        // let it be for now, jquery plugin is classing with boorstap js...we can manage it 
+        // $(document).ready(function() {
+        //     $('.js-example-basic-single').select2();
+        //     $('#country_id').select2().val();
+        //     placeholder: 'Select an option';
+
+        //     $(document).on('select2:open', () => {
+        //         document.querySelector('.select2-search__field').focus();
+        //     });
+        // });
     </script>
 
     <script>
@@ -300,12 +316,12 @@
                 form: new FormData(),
                 attr: {
                     name: "",
-                    email: '',
+                    email: "",
                     phone: "",
                     country_id: "",
                     city: "",
-                    content: '',
-                  
+                    content: "",
+
                 },
                 loading: false,
                 button_text: 'Submit',
@@ -317,6 +333,7 @@
                 file_upload_label: 'Upload your Picture or Video',
                 submit() {
                     const bar = document.getElementById('progress-bar');
+
                     this.form.append('full_name', this.attr.name),
                         this.form.append('email', this.attr.email),
                         this.form.append('country_id', this.attr.country_id),
@@ -376,15 +393,7 @@
                         this.file_upload_label = 'Upload your Picture or o';
                     }
                 },
-                //clear input
-                clearFileInput(ctrl) {
-                    try {
-                        ctrl.value = null;
-                    } catch (ex) {}
-                    if (ctrl.value) {
-                        ctrl.parentNode.replaceChild(ctrl.cloneNode(true), ctrl);
-                    }
-                }
+
             }
         }
     </script>
