@@ -390,7 +390,7 @@
                             21);
                         this.file_upload_label = file_name
                     } else {
-                        this.file_upload_label = 'Upload your Picture or o';
+                        this.file_upload_label = 'Upload your Picture or Video';
                     }
                 },
 

@@ -16,6 +16,9 @@
             <div class="col-md-auto">
                 <a href="{{ route('testimony.show') }}">Testify</a>
             </div>
+            <div class="col-md-auto">
+                <a href="{{ route('login') }}">Access</a>
+            </div>
         </div>
     </div>
     <div class="d-flex flex-column justify-content-center" style="height: 93%; margin-left:10%">

@@ -107,6 +107,9 @@
                         <div class="col-md-auto">
                             <a href="{{ route('testimony.show') }}">Testify</a>
                         </div>
+                        <div class="col-md-auto">
+                            <a href="{{ route('login') }}">Access</a>
+                        </div>
                     </div>
                 </div>
             @endif
@@ -124,13 +127,14 @@
                 <div class="col-md-auto">
                     <a href="{{ route('testimony.show') }}">Testify</a>
                 </div>
+                <div class="col-md-auto">
+                    <a href="{{ route('login') }}">Access</a>
+                </div>
             </div>
             <img class="icon img-fluid" width="500" src="{{ asset('images/icon.png') }}" alt="">
             @if (!request()->routeIs('thanks'))
                 <img width="200" class="img-fluid" src="{{ asset('images/logo.png') }}" alt="">
             @endif
-
-
         </div>
 
         <div class="col-md-6  align-self-center">
@@ -156,6 +160,9 @@
                 </div>
                 <div class="col-md-auto">
                     <a href="{{ route('testimony.show') }}">Testify</a>
+                </div>
+                <div class="col-md-auto">
+                    <a href="{{ route('login') }}">Access</a>
                 </div>
             </div>
             <div class="d-flex flex-column align-items-center justify-content-center" style="margin-top:25vh">
