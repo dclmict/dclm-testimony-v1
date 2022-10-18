@@ -22,9 +22,9 @@ use App\Http\Controllers\TestimonyFormController;
 
 Auth::routes(); // laravel auth routes
 
-// Route::get('/register', function () {
-//     return redirect('/');
-// });
+Route::get('/register', function () {
+    return redirect('/');
+});
 
 Route::get('/', function () {
     return view('welcome', ['active_crusade'=>CrusadeTour::whereIsActive(true)->first()]);
