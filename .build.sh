@@ -4,7 +4,7 @@
 # Check that networking is up.
 [ "$NETWORKING" = "no" ] && exit 0
 
-APP_IMAGE=ddc-web
+APP_IMAGE=dclm-testimony-app
 
 # -----------------------------------------------------------------------------
 
