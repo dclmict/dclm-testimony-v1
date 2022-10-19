@@ -28,7 +28,7 @@ class AlterCrusadeTour extends Migration
      */
     public function down()
     {
-        Schema::table('crusade-tours', function (Blueprint $table) {
+        Schema::table('crusade_tours', function (Blueprint $table) {
             //
         });
     }
