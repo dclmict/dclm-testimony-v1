@@ -177,7 +177,7 @@
                 <div class="my-3 col-md-6">
                     <select class="form-select" id="country_id" x-model="attr.country_id" autocomplete="off" required>
                         <option selected disabled value="">Choose...</option>
-                        <option value="3"> testing </option>
+                        {{-- <option value="3"> testing </option> --}}
                         @foreach ($countries as $country)
                             <option value="{{ $country->id }}">{{ $country->libelle }}</option>
                         @endforeach
