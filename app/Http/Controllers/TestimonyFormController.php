@@ -30,12 +30,11 @@ class TestimonyFormController extends Controller
         );
 
 
-
-            $testimony = Testimony::store(
+        /*   $testimony = Testimony::store(
                 $request->except("file_dir"),
                 $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,
                 $request->has("file_dir") ? $request->file('file_dir')->extension() : null
-            );
+            ); */
 
 
         //dd($testimony);
@@ -44,6 +43,6 @@ class TestimonyFormController extends Controller
 
     public function thanks()
     {
-        return view('thanks', ["active_crusade"=>CrusadeTour::whereIsActive(true)->first()]);
+        return view('thanks', ["active_crusade" => CrusadeTour::whereIsActive(true)->first()]);
     }
 }
