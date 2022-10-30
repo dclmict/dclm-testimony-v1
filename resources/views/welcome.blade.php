@@ -35,10 +35,10 @@
 
 
                 <span style="font-size: 26px; " class="mt-4 text-thin">
-                    Testify to the goodness of God
+                    Click the button below to testify to the goodness of God
                 </span>
                 <a href="{{route('testimony.show')}}" class="btn main-button mb-5" style="margin-top:44px">
-                    Share My Testimony
+                    Testify Now
                 </a>
             </div>
 

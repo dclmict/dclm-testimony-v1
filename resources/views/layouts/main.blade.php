@@ -17,7 +17,7 @@
 
     @stack('styles')
 
-    <title>DCLM Testimony || {{$active_crusade->name}} </title>
+    <title>GCK Testimonies || {{$active_crusade->name}} </title>
     <style>
         .main-side {
             background: linear-gradient(178.89deg, #226091 -9.6%, #507DA0 0.42%, rgba(196, 196, 196, 0) 46.37%);

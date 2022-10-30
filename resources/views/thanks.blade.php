@@ -4,8 +4,8 @@
     <div class="d-flex flex-column align-items-center justify-content-center gap-5" id="thanks-section">
         <img width="300" class="img-fluid" src="{{ asset('images/logo.png') }}" alt="">
         <span class="text-center" style="font-size: 36px;">
-            THANKS <br>
-            FOR YOUR TESTIMONY
+            Testimony has been submitted successfuly <br>
+            God bless you.
         </span>
         <a href="{{ route('testimony.show') }}" class="btn btn-primary dlcf_btn_color">
             <i class="fa fa-home"></i>
