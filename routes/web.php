@@ -22,19 +22,19 @@ use App\Http\Controllers\TestimonyFormController;
 
 Auth::routes(); // laravel auth routes
 
-Route::get('/register', function () {
-    return redirect('/');
-});
+// Route::get('/register', function () {
+//     return redirect('/');
+// });
 
-Route::get('/', function () {
-    return view('welcome', ['active_crusade'=>CrusadeTour::whereIsActive(true)->first()]);
-})->name("home");
+// Route::get('/h', function () {
+//     return view('welcome', []);
+// })->name("home");
 
 Route::get('thanks', function () {
     return view('thanks');
 })->name('thanks');
 
-Route::get('/testimony', [TestimonyFormController::class, 'show'])->name("testimony.show");
+Route::get('/', [TestimonyFormController::class, 'show'])->name("testimony.show");
 Route::post('/testimony/store', [TestimonyFormController::class, 'store'])->name("testimony.store");
 
 Route::get('/thanks#thanks-section', [TestimonyFormController::class, 'thanks'])->name("testimony.thanks");
