@@ -331,6 +331,7 @@
                 button_text: 'Submit',
                 progressValue: 0,
                 progress: 00,
+                //not in use
                 button_texts: ['Uploading file...', 'Sending your testimony...', 'Submitting your testimony...',
                     'Wait a while...', 'Almost Done ...'
                 ],

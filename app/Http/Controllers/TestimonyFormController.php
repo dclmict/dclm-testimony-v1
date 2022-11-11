@@ -15,8 +15,8 @@ class TestimonyFormController extends Controller
     public function show()
     {
         $countries = Country::orderBy("libelle")->get();
-
-        return view('create', compact("countries"));
+        $active_crusade = CrusadeTour::whereIsActive(true)->first();
+        return view('welcome', compact("countries", 'active_crusade'));
     }
 
     public function store(TestimonyRequest $request)
@@ -32,7 +32,7 @@ class TestimonyFormController extends Controller
 
         /*   $testimony = Testimony::store(
                 $request->except("file_dir"),
-                $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,
+                $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,modal-dialog-scrollable
                 $request->has("file_dir") ? $request->file('file_dir')->extension() : null
             ); */
 
