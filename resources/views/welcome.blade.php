@@ -32,9 +32,7 @@
                     <span style="font-size: 36px;">{{$active_crusade->name}}</span>
                 </div>
 
-
-
-                <span style="font-size: 26px; " class="mt-4 text-thin">
+             <span style="font-size: 26px; " class="mt-4 text-thin">
                     Click the button below to testify to the goodness of God
                 </span>
                 <a href="{{route('testimony.show')}}" class="btn main-button mb-5" style="margin-top:44px">
