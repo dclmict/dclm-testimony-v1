@@ -5,21 +5,18 @@ services:
   testimony-app:
     container_name: testimony-app
     image: richarvey/nginx-php-fpm:latest
-    # environment:
-      # GIT_REPO: ${GIT_REPO}
-      # GIT_EMAIL: ${GIT_EMAIL}
-      # GIT_NAME: ${GIT_NAME}
-      # GIT_BRANCH: ${GIT_BRANCH}
-      # GIT_PERSONAL_TOKEN: ${GIT_PERSONAL_TOKEN}
-      # WEBROOT: ${WEBROOT}
+    environment:
+      RUN_SCRIPTS: ${RUN_SCRIPTS}
     ports:
       - 1004:80
     networks:
       - dclm-testimony
     volumes:
       - ./:/var/www/html
-      - ./.docker/testify.conf:/etc/nginx/sites-available/default.conf
-      # - ./.env:/var/www/html/.env
+      - ./.docker/nginx/testify-prod.conf:/etc/nginx/sites-available/default.conf
+      - ./.docker/nginx/proxy:/etc/nginx/proxy_params
+      - ./.docker/nginx/ssl.conf:/etc/nginx/ssl.conf
+      - /etc/letsencrypt/live/dclm.org:/etc/letsencrypt/live/dclm.org
     restart: always
 
 networks:
