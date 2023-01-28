@@ -13,9 +13,9 @@ services:
       # GIT_PERSONAL_TOKEN: ${GIT_PERSONAL_TOKEN}
       # WEBROOT: ${WEBROOT}
     ports:
-      - 1004:80
+      - 1001:80
     networks:
-      - dclm-testimony
+      - bams
     volumes:
       - ./:/var/www/html
       - ./.docker/testify.conf:/etc/nginx/sites-available/default.conf
@@ -23,5 +23,6 @@ services:
     restart: always
 
 networks:
-  dclm-testimony:
-    name: testimony
+  bams:
+    name: bams-dev
+    external: true 
