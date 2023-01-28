@@ -4,7 +4,7 @@ services:
   # Testimony Service
   testimony-app:
     container_name: testimony-app
-    image: opeoniye/nginx-php-fpm
+    image: richarvey/nginx-php-fpm:latest
     # environment:
       # GIT_REPO: ${GIT_REPO}
       # GIT_EMAIL: ${GIT_EMAIL}

@@ -6,15 +6,5 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
-
     // create new function
-
-   
-
-
-
-
-
-
 }

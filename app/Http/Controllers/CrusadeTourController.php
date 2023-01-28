@@ -12,12 +12,12 @@ class CrusadeTourController extends Controller
     //
     public function index()
     {
-        return view("admin.crusade-tour", ["crusadeTours" => CrusadeTour::all(), "ct" => null]);
+        return view("Admin.crusade-tour", ["crusadeTours" => CrusadeTour::all(), "ct" => null]);
     }
 
     public function create()
     {
-        return view('admin.crusade-tour');
+        return view('Admin.crusade-tour');
     }
 
     public function store(Request $request)
@@ -25,7 +25,7 @@ class CrusadeTourController extends Controller
         $request->validate(["slug" => "required|unique:crusade_tours", "name" => "required", "banner_path" => "required"]);
         $ct=new CrusadeTour();
         $ct->store($request->only(["slug", "name"]), $request->file("banner_path"));
-        return redirect()->route("admin.crusade-tour.index");
+        return redirect()->route("Admin.crusade-tour.index");
     }
 
     public function active($id)
@@ -44,7 +44,7 @@ class CrusadeTourController extends Controller
             $current->save();
         } catch (Exception $e) {
         }
-        return redirect()->route("admin.crusade-tour.index");
+        return redirect()->route("Admin.crusade-tour.index");
     }
 
     public function update($id, Request $request)
@@ -63,7 +63,7 @@ class CrusadeTourController extends Controller
             $current->save();
         } catch (Exception $e) {
         }
-        return redirect()->route("admin.crusade-tour.index");
+        return redirect()->route("Admin.crusade-tour.index");
     }
 
     public function delete($id)
@@ -77,13 +77,13 @@ class CrusadeTourController extends Controller
         } catch (Exception $e) {
         }
 
-        return redirect()->route("admin.crusade-tour.index");
+        return redirect()->route("Admin.crusade-tour.index");
     }
 
     public function edit($id)
     {
         $ct = CrusadeTour::findOrFail($id);
-        return view("admin.crusade-tour", ["ct" => $ct, "crusadeTours" => CrusadeTour::all()]);
+        return view("Admin.crusade-tour", ["ct" => $ct, "crusadeTours" => CrusadeTour::all()]);
     }
 
     public function exportPdf($id)
