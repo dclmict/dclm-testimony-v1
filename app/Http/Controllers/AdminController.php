@@ -49,7 +49,7 @@ class AdminController extends Controller
         }
 
         $testimony->delete();
-        return redirect()->route('Admin.testimonies.list');
+        return redirect()->route('admin.testimonies.list');
         //or
         // $testimony = Testimony::findOrFail($testimony->id);
         // $testimony->delete();

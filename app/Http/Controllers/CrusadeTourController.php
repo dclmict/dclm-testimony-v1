@@ -25,7 +25,7 @@ class CrusadeTourController extends Controller
         $request->validate(["slug" => "required|unique:crusade_tours", "name" => "required", "banner_path" => "required"]);
         $ct=new CrusadeTour();
         $ct->store($request->only(["slug", "name"]), $request->file("banner_path"));
-        return redirect()->route("Admin.crusade-tour.index");
+        return redirect()->route("admin.crusade-tour.index");
     }
 
     public function active($id)
@@ -44,7 +44,7 @@ class CrusadeTourController extends Controller
             $current->save();
         } catch (Exception $e) {
         }
-        return redirect()->route("Admin.crusade-tour.index");
+        return redirect()->route("admin.crusade-tour.index");
     }
 
     public function update($id, Request $request)
@@ -63,7 +63,7 @@ class CrusadeTourController extends Controller
             $current->save();
         } catch (Exception $e) {
         }
-        return redirect()->route("Admin.crusade-tour.index");
+        return redirect()->route("admin.crusade-tour.index");
     }
 
     public function delete($id)
@@ -77,7 +77,7 @@ class CrusadeTourController extends Controller
         } catch (Exception $e) {
         }
 
-        return redirect()->route("Admin.crusade-tour.index");
+        return redirect()->route("admin.crusade-tour.index");
     }
 
     public function edit($id)
