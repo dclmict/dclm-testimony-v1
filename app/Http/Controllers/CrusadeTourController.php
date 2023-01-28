@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 class CrusadeTourController extends Controller
 {
     //
-
-
     public function index()
     {
         return view("admin.crusade-tour", ["crusadeTours" => CrusadeTour::all(), "ct" => null]);
@@ -19,29 +17,20 @@ class CrusadeTourController extends Controller
 
     public function create()
     {
-        //
-
         return view('admin.crusade-tour');
     }
 
-
     public function store(Request $request)
     {
-        //ù
-
         $request->validate(["slug" => "required|unique:crusade_tours", "name" => "required", "banner_path" => "required"]);
-
         $ct=new CrusadeTour();
         $ct->store($request->only(["slug", "name"]), $request->file("banner_path"));
-
         return redirect()->route("admin.crusade-tour.index");
     }
 
     public function active($id)
     {
-
         $active = CrusadeTour::whereIsActive(true)->first();
-
         //set the current crusade active status to false
         if ($active) {
             $active->is_active = false;
@@ -55,7 +44,6 @@ class CrusadeTourController extends Controller
             $current->save();
         } catch (Exception $e) {
         }
-
         return redirect()->route("admin.crusade-tour.index");
     }
 
@@ -67,7 +55,6 @@ class CrusadeTourController extends Controller
             $current  = CrusadeTour::findOrFail($id);
             $current->slug = $request->slug;
             $current->name = $request->name;
-
 
             if($request->hasFile("banner_path")){
                 $current->deleteBanner();
@@ -83,7 +70,6 @@ class CrusadeTourController extends Controller
     {
         try {
             $current  = CrusadeTour::findOrFail($id);
-
             if ($current->testimonies->count() == 0) {
                 $current->deleteBanner();
                 $current->delete();
@@ -106,7 +92,6 @@ class CrusadeTourController extends Controller
         $pdf = app("dompdf.wrapper");
         $pdf->setOptions(['dpi' => 150, 'default_font' => 'helvetica', 'enable_php' => true, 'chroot' => public_path()]);
         $pdf->loadView("pdf.export", ["crusadeTour" => $crusadeTour]);
-
         return $pdf->stream('crusade-tour.pdf');
     }
 }

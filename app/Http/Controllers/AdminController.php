@@ -16,7 +16,7 @@ class AdminController extends Controller
         $active = CrusadeTour::whereIsActive(true)->first();
         $user = 'Admin';
 
-        return view('admin.index', compact('active',))->with('user', $user);
+        return view('Admin.index', compact('active',))->with('user', $user);
     }
 
     public function testimoniesList()
@@ -38,9 +38,7 @@ class AdminController extends Controller
     public function delete(Testimony $testimony)
     {
         $testimony = Testimony::with('testifier')->findOrFail($testimony->id);
-
         //$testimony->testifier->delete(); dangerous line never delete the testifier
-
         //delete testimony file from s3
         $active = CrusadeTour::whereIsActive(true)->first();
         $file = $testimony->file_dir;
@@ -50,14 +48,9 @@ class AdminController extends Controller
             Log::error($th->getMessage());
         }
 
-
-
         $testimony->delete();
-
-        return redirect()->route('admin.testimonies.list');
-
+        return redirect()->route('Admin.testimonies.list');
         //or
-
         // $testimony = Testimony::findOrFail($testimony->id);
         // $testimony->delete();
     }
