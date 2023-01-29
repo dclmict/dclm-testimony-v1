@@ -9,6 +9,7 @@ services:
       RUN_SCRIPTS: ${RUN_SCRIPTS}
     ports:
       - 1004:80
+      - 4004:443
     networks:
       - dclm-testimony
     volumes:
