@@ -16,7 +16,7 @@ services:
       - ./.docker/nginx/testify-prod.conf:/etc/nginx/sites-available/default.conf
       - ./.docker/nginx/proxy:/etc/nginx/proxy_params
       - ./.docker/nginx/ssl.conf:/etc/nginx/ssl.conf
-      #- ./certbot:/var/www/certbot
+      - /etc/letsencrypt:/etc/letsencrypt
     restart: always
 
 networks:
