@@ -7,14 +7,22 @@ This is a laravel app to collect testimonies from our online community and globa
 App url: [DCLM Testimony](https://testimony.dclm.org)
 
 ## How to Run
+### Monolith architecture
+- enter src director `cd src`
+- create .env file `cp .env.example .env`
 - add aws credentials to .env file
-- add database infos (mysql)
-- composer install
-- composer require league/flysystem-aws-s3-v3 "~1.0" --update-with-all-dependencies
-- php artisan migrate
-- php artisan db:seed
-- php artisan db:seed --class=RoleSeeder
+- add database credentials to .env file
+- install dependencies `composer install`
+- run `php artisan key:generate`
+- run `php artisan migrate`
+- run `php artisan db:seed`
+- run `php artisan optimize:clear`
 
+### Microservices architecture (Docker)
+- run `make dev`
+- run `make key`
+- run `make migrate`
+- run `make seed`
 ## Credit
 
 App built and released by [DCLM Developers Community](https://developers.dclm.org).

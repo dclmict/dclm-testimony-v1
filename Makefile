@@ -1,25 +1,29 @@
-exec:
-	docker compose exec -it testimony-app sh
-up:
-	docker compose --env-file ./src/.env.dev up --detach
+bams:
+	docker compose -f docker-compose-dev.yml --env-file ./src/.env.dev exec -it testimony-app sh
+aws:
+	docker compose -f docker-compose-prod.yml --env-file ./src/.env exec -it testimony-app sh
 dev:
 	docker compose -f docker-compose-dev.yml --env-file ./src/.env.dev up --detach
 prod:
 	docker compose -f docker-compose-prod.yml --env-file ./src/.env up --detach
-down:
-	docker compose down
+ddev:
+	docker compose -f docker-compose-dev.yml --env-file ./src/.env.dev down
+dprod:
+	docker compose -f docker-compose-prod.yml --env-file ./src/.env down
 start:
-	docker compose start
+	docker compose -f docker-compose-dev.yml --env-file ./src/.env.dev start
 restart:
-	docker compose restart
+	docker compose -f docker-compose-dev.yml --env-file ./src/.env.dev restart
 stop:
-	docker compose stop
-log:
-	docker compose logs -f testimony-app
+	docker compose -f docker-compose-dev.yml --env-file ./src/.env.dev stop
+logdev:
+	docker compose -f docker-compose-dev.yml --env-file ./src/.env.dev logs -f testimony-app
+logprod:
+	docker compose -f docker-compose-prod.yml logs -f --env-file ./src/.env testimony-app
 destroy:
 	docker compose down --volumes
 build:
-	docker compose up --detach --build
+	docker compose -f docker-compose-dev.yml --env-file ./src/.env.dev up --detach --build
 key:
  	docker compose exec testimony-app php artisan key:generate
 migrate:
