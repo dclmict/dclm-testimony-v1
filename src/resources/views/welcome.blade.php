@@ -237,7 +237,7 @@
                                 </div>
                                 <div class="my-3 col-md-6">
                                     <input required type="text" class="form-control" id="exampleFormControlInput1"
-                                        placeholder="city" x-model="attr.city">
+                                        placeholder="City" x-model="attr.city">
 
                                 </div>
                             </div>
@@ -249,7 +249,7 @@
                             </div>
 
                             <div class="row mb-5 " x-show="!loading">
-                                <div class="text-muted font-weight-bold"> Upload your Picture or Video </div>
+                                <div class="text-muted font-weight-bold"> Upload your picture or video </div>
                                 <div class="col-md-12">
                                     {{-- <button type="button" class="btn col-12 btn-outline-primary mt-2"> Upload your testimony </button> --}}
                                     <label for="file_dir" class="btn btn-outline-primary col-12">
@@ -310,12 +310,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Submitted Successfully !
+                    Submitted Successfully!
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="{{ route('testimony.show') }}"><button type="button" class="btn btn-primary">Share another
-                            testimony ?</button>
+                    <a href="{{ route('testimony.show') }}">
+                        <button type="button" class="btn btn-primary">Share another testimony?</button>
                     </a>
                 </div>
             </div>
@@ -325,13 +325,9 @@
 @push('scripts')
     {{-- SO you want to mind how you stack  the javascripts for now  --}}
     <script src="{{ asset('js/axios.min.js') }}"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-
-
-
     <script src="{{ asset('js/alpine.min.js') }}"></script>
     <script>
         var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
@@ -357,10 +353,9 @@
                 button_texts: ['Uploading file...', 'Sending your testimony...', 'Submitting your testimony...',
                     'Wait a while...', 'Almost Done ...'
                 ],
-                file_upload_label: 'Upload your Picture or Video',
+                file_upload_label: 'Upload your picture or video',
                 submit() {
                     const bar = document.getElementById('progress-bar');
-
                     this.form.append('full_name', this.attr.name),
                         this.form.append('email', this.attr.email),
                         this.form.append('country_id', this.attr.country_id),
@@ -389,7 +384,6 @@
                                 myModalEl.addEventListener('hidden.bs.modal', function(event) {
                                     location.reload();
                                 })
-
                             }
 
                         }.bind(
@@ -417,7 +411,7 @@
                             21);
                         this.file_upload_label = file_name
                     } else {
-                        this.file_upload_label = 'Upload your Picture or Video';
+                        this.file_upload_label = 'Upload your picture or video';
                     }
                 },
 

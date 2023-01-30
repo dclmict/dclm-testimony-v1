@@ -12,4 +12,4 @@
 # Based on https://gist.github.com/2206527
 
 
-openssl dhparam -out /etc/ssl/certs/dhparams.pem 4096
+#openssl dhparam -out /etc/ssl/certs/dhparams.pem 4096

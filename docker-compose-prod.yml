@@ -4,19 +4,21 @@ services:
   # Testimony Service
   testimony-app:
     container_name: testimony-app
-    image: richarvey/nginx-php-fpm:latest
+    image: opeoniye/nginx-php-fpm:latest
     environment:
       RUN_SCRIPTS: ${RUN_SCRIPTS}
+      PUID: ${PUID}
+      PGID: ${PGID}
     ports:
       - 1004:80
       - 4004:443
     networks:
       - dclm-testimony
     volumes:
-      - ./:/var/www/html
-      - ./.docker/nginx/testify-prod.conf:/etc/nginx/sites-available/default.conf
-      - ./.docker/nginx/proxy:/etc/nginx/proxy_params
-      - ./.docker/nginx/ssl.conf:/etc/nginx/ssl.conf
+      - ./src:/var/www/html
+      - ./docker/nginx/testify-prod.conf:/etc/nginx/sites-available/default.conf
+      - ./docker/nginx/proxy:/etc/nginx/proxy_params
+      - ./docker/nginx/ssl.conf:/etc/nginx/ssl.conf
       - /etc/letsencrypt:/etc/letsencrypt
     restart: always
 

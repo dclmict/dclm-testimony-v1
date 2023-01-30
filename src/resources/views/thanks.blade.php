@@ -9,7 +9,7 @@
         </span>
         <a href="{{ route('testimony.show') }}" class="btn btn-primary dlcf_btn_color">
             <i class="fa fa-home"></i>
-            Share another Testimony ?
+            Share another Testimony?
         </a>
         <div class="d-flex flex-column align-items-center gap-3" style="margin-top: 10vh">
             Connect with us

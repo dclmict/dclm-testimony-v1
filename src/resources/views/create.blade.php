@@ -185,7 +185,7 @@
 
                 </div>
                 <div class="my-3 col-md-6">
-                    <input required type="text" class="form-control" id="exampleFormControlInput1" placeholder="city"
+                    <input required type="text" class="form-control" id="exampleFormControlInput1" placeholder="City"
                         x-model="attr.city">
 
                 </div>
@@ -198,7 +198,7 @@
             </div>
 
             <div class="row my-5" x-show="!loading">
-                <div class="text-muted font-weight-bold"> Upload your Picture or Video </div>
+                <div class="text-muted font-weight-bold"> Upload your picture or video </div>
                 <div class="col-md-6">
                     {{-- <button type="button" class="btn col-12 btn-outline-primary mt-2"> Upload your testimony </button> --}}
                     <label for="file_dir" class="btn btn-outline-primary col-12">
@@ -243,12 +243,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Submitted Successfully !
+                    Submitted Successfully!
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <a href="{{ route('testimony.show') }}"><button type="button" class="btn btn-primary">Share another
-                            testimony ?</button>
+                            testimony?</button>
                     </a>
                 </div>
             </div>
@@ -335,7 +335,7 @@
                 button_texts: ['Uploading file...', 'Sending your testimony...', 'Submitting your testimony...',
                     'Wait a while...', 'Almost Done ...'
                 ],
-                file_upload_label: 'Upload your Picture or Video',
+                file_upload_label: 'Upload your picture or video',
                 submit() {
                     const bar = document.getElementById('progress-bar');
 
@@ -395,7 +395,7 @@
                             21);
                         this.file_upload_label = file_name
                     } else {
-                        this.file_upload_label = 'Upload your Picture or Video';
+                        this.file_upload_label = 'Upload your picture or video';
                     }
                 },
 
