@@ -4,7 +4,7 @@ services:
   # Testimony Service
   testimony-app:
     container_name: testimony-app
-    image: opeoniye/nginx-php-fpm:latest
+    image: opeoniye/nginx-php-fpm:2.1.2
     environment:
       RUN_SCRIPTS: ${RUN_SCRIPTS}
       PUID: ${PUID}
