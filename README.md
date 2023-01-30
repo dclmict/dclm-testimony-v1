@@ -8,7 +8,7 @@ App url: [DCLM Testimony](https://testimony.dclm.org)
 
 ## How to Run
 ### Monolith architecture
-- enter src director `cd src`
+- enter app director `cd app`
 - create .env file `cp .env.example .env`
 - add aws credentials to .env file
 - add database credentials to .env file

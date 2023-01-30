@@ -13,10 +13,10 @@ services:
     networks:
       - bams
     volumes:
-      - ./src:/var/www/html
-      - ./docker/nginx/testify-dev.conf:/etc/nginx/sites-available/default.conf
-      - ./docker/nginx/proxy:/etc/nginx/proxy_params
-      - ./docker/nginx/ssl.conf:/etc/nginx/ssl.conf
+      - ./app:/var/www/html
+      - ./ops/docker/nginx/testify-dev.conf:/etc/nginx/sites-available/default.conf
+      - ./ops/docker/nginx/proxy:/etc/nginx/proxy_params
+      - ./ops/docker/nginx/ssl.conf:/etc/nginx/ssl.conf
       - ~/dev/keys/mac:/var/keys/mac
     restart: always
 
