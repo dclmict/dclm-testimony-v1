@@ -15,10 +15,10 @@ services:
     networks:
       - dclm-testimony
     volumes:
-      - ./app:/var/www/html
-      - ./ops/docker/nginx/testify-prod.conf:/etc/nginx/sites-available/default.conf
-      - ./ops/docker/nginx/proxy:/etc/nginx/proxy_params
-      - ./ops/docker/nginx/ssl.conf:/etc/nginx/ssl.conf
+      - .:/var/www/html
+      - ../ops/docker/nginx/testify-prod.conf:/etc/nginx/sites-available/default.conf
+      - ../ops/docker/nginx/proxy:/etc/nginx/proxy_params
+      - ../ops/docker/nginx/ssl.conf:/etc/nginx/ssl.conf
       - /etc/letsencrypt:/etc/letsencrypt
     restart: always
 
