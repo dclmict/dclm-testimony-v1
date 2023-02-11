@@ -16,4 +16,4 @@ yarn-error.log
 /.idea
 /.vscode
 draft.txt
-.setup.txt
+docker-compose.yml
