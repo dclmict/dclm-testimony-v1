@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Models\Testimony;
 use App\Models\CrusadeTour;
 use Illuminate\Support\Facades\Auth;
@@ -51,7 +50,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::post('/crusade-tour', [CrusadeTourController::class, 'store'])->name("admin.crusade-tour.store");
     Route::get('/crusade-tour/{id}/active', [CrusadeTourController::class, 'active'])->name("admin.crusade-tour.active");
     Route::get('/crusade-tour/{id}/exportPdf', [CrusadeTourController::class, 'exportPdf'])->name("admin.crusade-tour.exportPdf");
-
 
     // List testimonies
     Route::get('/testimonies', [AdminController::class, 'testimoniesList'])->name("admin.testimonies.list");
