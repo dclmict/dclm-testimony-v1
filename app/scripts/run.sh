@@ -12,4 +12,8 @@
 # Based on https://gist.github.com/2206527
 
 
+# create dhparam for ssl
 #openssl dhparam -out /etc/ssl/certs/dhparams.pem 4096
+
+# make app run on /testimony/ location
+ln -s /var/www/html/public testimony

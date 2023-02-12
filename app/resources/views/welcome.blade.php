@@ -165,13 +165,13 @@
             <div class="d-flex flex-column ">
                 <div class="d-flex flex-column">
                     <span style="font-size: 36px;">
-                        Testimonies For
+                        GCK Testimonies:
                     </span>
                     <span style="font-size: 36px;">{{ $active_crusade->name }}</span>
                 </div>
 
                 <span style="font-size: 26px; " class="mt-4 text-thin">
-                    Click the button below to testify to the goodness of God
+                    
                 </span>
                 {{-- <a href="{{ route('testimony.show') }}" class="btn main-button mb-5" style="margin-top:44px">
                     Testify Now
@@ -187,9 +187,6 @@
     </div>
 
     {{-- modal start  --}}
-
-
-
     <div id="testimony-section" x-data="app()">
         <form @submit.prevent="submit" autocomplete="off">
             {{-- x-on:submit="submt" --}}
@@ -198,7 +195,7 @@
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Testify to the goodness of God</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">GCK Testimonies: {{ $active_crusade->name }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

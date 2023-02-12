@@ -13,7 +13,7 @@ services:
       - 1001:80
       - 4001:443
     networks:
-      - dclm-testimony
+      - dclm
     volumes:
       - .:/var/www/html
       - ../ops/docker/nginx/testify.prod.conf:/etc/nginx/sites-available/default.conf
@@ -23,5 +23,6 @@ services:
     restart: always
 
 networks:
-  dclm-testimony:
-    name: testimony
+  dclm:
+    name: dclm
+    external: true
