@@ -17,7 +17,7 @@
 
     @stack('styles')
 
-    <title>GCK Testimonies || {{$active_crusade->name}} </title>
+    <title>GCK Testimonies || {{$active_crusade->name ?? ''}} </title>
     <style>
         .main-side {
             background: linear-gradient(178.89deg, #226091 -9.6%, #507DA0 0.42%, rgba(196, 196, 196, 0) 46.37%);
@@ -133,7 +133,7 @@
             </div>
             <img class="icon img-fluid" width="500" src="{{ asset('images/icon.png') }}" alt="">
             @if (!request()->routeIs('thanks'))
-                <img width="200" class="img-fluid" src="{{$active_crusade->banner}}" alt="">
+                <img width="200" class="img-fluid" src="{{$active_crusade->banner ?? ''}}" alt="">
             @endif
         </div>
 
@@ -167,7 +167,7 @@
             </div>
             <div class="d-flex flex-column align-items-center justify-content-center" style="margin-top:25vh">
                 <div>
-                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke"> {{$active_crusade->name}}
+                    <h1 class="text-center" style="font-size: 20px; color:whitesmoke"> {{$active_crusade->name ?? ''}}
                     </h1>
                 </div>
                 <div class="bg-warning px-2 pt-2" style="opacity: 0.7">
