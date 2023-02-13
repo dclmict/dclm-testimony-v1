@@ -8,8 +8,7 @@ App url: [DCLM Testimony](https://testimony.dclm.org)
 
 ## How to Run
 ### Monolith architecture
-- make sure you have [docker compose](https://docs.docker.com/compose/install/) installed
-- make sure [PHP 7.4](https://www.php.net/releases/7_4_0.php) is installed on your server
+- make sure [PHP 8](https://www.php.net/manual/en/install.php) is installed on your server
 - make sure you have [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) installed
 - create a directory: `mkdir -p <directory-name>`
 - run `git clone https://github.com/dclmict/dclm-events.git .`
@@ -22,6 +21,7 @@ App url: [DCLM Testimony](https://testimony.dclm.org)
 - run `php artisan migrate`
 - run `php artisan db:seed`
 - run `php artisan optimize:clear`
+- run `php artisan serve`
 
 ### Microservices architecture (Docker)
 - make sure you have [docker compose](https://docs.docker.com/compose/install/) installed
