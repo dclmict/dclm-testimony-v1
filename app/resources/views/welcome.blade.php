@@ -167,7 +167,7 @@
                     <span style="font-size: 36px;">
                         GCK Testimonies:
                     </span>
-                    <span style="font-size: 36px;">{{ $active_crusade->name }}</span>
+                    <span style="font-size: 36px;">{{ $active_crusade->name  ?? ''}}</span>
                 </div>
 
                 <span style="font-size: 26px; " class="mt-4 text-thin">
@@ -195,7 +195,7 @@
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">GCK Testimonies: {{ $active_crusade->name }}</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">GCK Testimonies: {{ $active_crusade->name ?? '' }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
