@@ -6,7 +6,6 @@ services:
     container_name: testimony-app
     image: tiredofit/nginx-php-fpm:8.2-debian
     environment:
-      DEBUG_MODE: ${DEBUG_MODE}
       TIMEZONE: ${TIMEZONE}
       CONTAINER_NAME: ${CONTAINER_NAME}
       NGINX_WEBROOT: ${NGINX_WEBROOT}
