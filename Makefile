@@ -1,10 +1,14 @@
 up:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up --detach
+	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up -d
 
 dev:
 	cp ./ops/.env.dev ./app/.env
 	cp ./docker-compose-dev.yml ./app/docker-compose.yml
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up --detach
+	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up -d
+
+prod:
+	cp ./docker-compose-prod.yml ./app/docker-compose.yml
+	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up -d
 
 build:
 	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up --detach --build
