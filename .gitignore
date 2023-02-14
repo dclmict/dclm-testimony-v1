@@ -2,3 +2,4 @@
 setup
 ops/.env.dev
 ops/.env.prod
+ops/docker/nginx/testify.app.conf

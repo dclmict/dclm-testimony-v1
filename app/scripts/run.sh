@@ -17,4 +17,7 @@
 
 # make app run on /testimony/ location
 rm testimony
-ln -s /var/www/html/public testimony
+ln -s /www/html/public testimony
+
+# install dependencies
+# composer install
