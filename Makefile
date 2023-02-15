@@ -46,6 +46,9 @@ fresh:
 seed:
 	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec testimony-app php artisan db:seed
 
+storage:
+	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec events-app php artisan storage:link
+
 db:
 	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec events-app php artisan tinker
 
