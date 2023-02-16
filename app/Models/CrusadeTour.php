@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Exception;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +20,7 @@ class CrusadeTour extends Model
 
 
         if ($file) {
-            $crusadeTour->banner_path=  $crusadeTour->storeFile($file);
+            $crusadeTour->banner_path =  $crusadeTour->storeFile($file);
         }
 
         $crusadeTour->save();
@@ -33,7 +34,10 @@ class CrusadeTour extends Model
         $fileName = $this->slug . '-' . time() . '.' . $extension;
 
         try {
-            $file->store("dclm-testimony/" . "crusade-tours/banners/" . $fileName, "s3");
+            // $file->store("dclm-testimony/" . "crusade-tours/banners/", "s3");
+
+          $fileName = Storage::disk("s3")->put("/dclm-testimony/crusade-tours/banners/".Str::slug($this->slug), $file);
+
         } catch (Exception $e) {
         }
 
@@ -51,13 +55,13 @@ class CrusadeTour extends Model
     public function getBannerAttribute()
     {
         return Storage::disk('s3')
-            ->temporaryUrl("dclm-testimony/crusade-tours/banners" . $this->slug . "/" . $this->banner_path, now()->addDays(6));
+            ->temporaryUrl($this->banner_path, now()->addDays(6));
     }
 
     public function deleteBanner()
     {
         try {
-            Storage::disk('s3')->delete("dclm-testimony/crusade-tours/banners" . $this->crusadeTour->slug . "/" . $this->banner_path);
+            Storage::disk('s3')->delete($this->banner_path);
         } catch (\Throwable $th) {
             //throw $th;
         }
