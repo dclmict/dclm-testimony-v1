@@ -4,6 +4,8 @@
 /storage/*.key
 /vendor
 .env
+.env.dev
+.env.prod
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml
@@ -14,10 +16,5 @@ yarn-error.log
 /.idea
 /.vscode
 draft.txt
-.setup.txt
-/app/vendor
-#files
-setup
-ops/.env.dev
-ops/.env.prod
-ops/docker/nginx/testify.app.conf
+docker-compose.yml
+testimony

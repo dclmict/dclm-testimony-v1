@@ -1,0 +1,47 @@
+# Services
+services:
+
+  # Testimony Service
+  testimony-app:
+    container_name: testimony-app
+    # image: tiredofit/nginx-php-fpm:8.2-debian_bullseye-7.4.1 #a month ago
+    # image tiredofit/nginx-php-fpm:8.2-debian-bullseye #3 days ago
+    image: tiredofit/nginx-php-fpm:8.2-debian #17 days ago
+    environment:
+      DEBUG_MODE: ${DEBUG_MODE}
+      TIMEZONE: ${TIMEZONE}
+      CONTAINER_NAME: ${CONTAINER_NAME}
+      NGINX_WEBROOT: ${NGINX_WEBROOT}
+      # NGINX_SITE_ENABLED: ${NGINX_SITE_ENABLED}
+      NGINX_LOG_ACCESS_FILE: ${NGINX_LOG_ACCESS_FILE}
+      NGINX_LOG_ERROR_FILE: ${NGINX_LOG_ERROR_FILE}
+      NGINX_LOG_LEVEL_ERROR: ${NGINX_LOG_LEVEL_ERROR}
+      PHP_KITCHENSINK: ${PHP_KITCHENSINK}
+    ports:
+      - 1001:80
+      - 4001:443
+    networks:
+      - bams
+    volumes:
+      - .:/www/html
+      #- ../ops/docker/nginx/testify.app.conf:/etc/nginx/sites.enabled/testify.conf
+      # - ../ops/docker/nginx/testify.dev.conf:/etc/nginx/conf.d/server.conf
+      # - ../ops/docker/nginx/proxy:/etc/nginx/proxy_params
+      # - ../ops/docker/nginx/ssl.conf:/etc/nginx/ssl.conf
+      # - ~/dev/keys/mac:/var/keys/mac
+      # - ~/dev/keys/mac/bams.pem:/opt/docker/etc/nginx/ssl/server.crt
+      # - ~/dev/keys/mac/bams-key.pem:/opt/docker/etc/nginx/ssl/server.key
+    restart: always
+    working_dir: /www/html
+    # command: ./scripts/run.sh
+    # entrypoint: ["/bin/sh","-c"]
+    # command:
+    # - |
+    #    echo a
+    #    echo b
+    #    echo c
+
+networks:
+  bams:
+    name: bams
+    external: true 
