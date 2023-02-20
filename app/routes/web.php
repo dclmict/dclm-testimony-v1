@@ -18,10 +18,11 @@ use App\Http\Controllers\TestimonyFormController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/register', function () {
+/* Route::get('/register', function () {
     return view('auth.register');
-});
-Auth::routes(); // laravel auth routes
+}); */
+
+Auth::routes(['except' => ['register']]); // laravel auth routes
 
 // Route::get('/h', function () {
 //     return view('welcome', []);
