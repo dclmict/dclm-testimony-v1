@@ -36,8 +36,7 @@ class CrusadeTour extends Model
         try {
             // $file->store("dclm-testimony/" . "crusade-tours/banners/", "s3");
 
-          $fileName = Storage::disk("s3")->put("/dclm-testimony/crusade-tours/banners/".Str::slug($this->slug), $file);
-
+            $fileName = Storage::disk("s3")->put("/dclm-testimony/crusade-tours/banners/" . Str::slug($this->slug), $file);
         } catch (Exception $e) {
         }
 
@@ -54,8 +53,17 @@ class CrusadeTour extends Model
 
     public function getBannerAttribute()
     {
-        return Storage::disk('s3')
-            ->temporaryUrl($this->banner_path, now()->addDays(6));
+        try {
+            //code...
+            $banner = Storage::disk('s3')
+                ->temporaryUrl($this->banner_path, now()->addDays(6));
+            return $banner;
+        } catch (\Throwable $th) {
+
+            return "https://";
+
+            //throw $th;
+        }
     }
 
     public function deleteBanner()
