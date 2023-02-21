@@ -21,7 +21,7 @@
                             @foreach ($crusadeTours as $crusadeTour)
                                 <tr>
                                     <td>{{ $crusadeTour->id }}</td>
-                                    <td><img src="{{$crusadeTour->banner}}" alt="Banner"></td>
+                                    <td><img width="100" src="{{$crusadeTour->banner}}" alt="Banner"></td>
                                     <td>{{ $crusadeTour->slug }}</td>
                                     <td>{{$crusadeTour->name}}</td>
                                     <td class="d-flex flex-wrap justify-content-between ">
