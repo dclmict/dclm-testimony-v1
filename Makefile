@@ -29,31 +29,31 @@ destroy:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env down --volumes
 
 shell:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src bash
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app bash
 
 composer:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src composer install
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app composer install
 
 key:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan key:generate
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app php artisan key:generate
 
 migrate:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan migrate
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app php artisan migrate
 
 fresh:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan migrate:fresh
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app php artisan migrate:fresh
 
 seed:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan db:seed
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app php artisan db:seed
 
 storage:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec events-src php artisan storage:link
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec events-app php artisan storage:link
 
 db:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec events-src php artisan tinker
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec events-app php artisan tinker
 
 version:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan --version
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app php artisan --version
 
 log:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env logs -f testimony-src
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env logs -f testimony-app
