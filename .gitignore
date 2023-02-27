@@ -1,4 +1,4 @@
-#folders
+# folders
 /node_modules
 /public/hot
 /public/storage
@@ -6,7 +6,7 @@
 /vendor
 /storage
 
-#files
+# files
 setup
 docker-laravel.yml
 ops/.env.dev

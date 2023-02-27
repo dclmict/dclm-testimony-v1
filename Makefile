@@ -1,59 +1,59 @@
 up:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up -d
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
 
 dev:
-	cp ./ops/.env.dev ./app/.env
-	cp ./docker-compose-dev.yml ./app/docker-compose.yml
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up -d
+	cp ./ops/.env.dev ./src/.env
+	cp ./docker-compose-dev.yml ./src/docker-compose.yml
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
 
 prod:
-	cp ./docker-compose-prod.yml ./app/docker-compose.yml
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up -d
+	cp ./docker-compose-prod.yml ./src/docker-compose.yml
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
 
 build:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env up --detach --build
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up --detach --build
 
 down:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env down
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env down
 
 start:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env start
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env start
 
 stop:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env stop
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env stop
 
 restart:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env.dev restart
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env.dev restart
 
 destroy:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env down --volumes
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env down --volumes
 
 shell:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec testimony-app bash
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src bash
 
 composer:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec testimony-app composer install
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src composer install
 
 key:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec testimony-app php artisan key:generate
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan key:generate
 
 migrate:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec testimony-app php artisan migrate
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan migrate
 
 fresh:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec testimony-app php artisan migrate:fresh
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan migrate:fresh
 
 seed:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec testimony-app php artisan db:seed
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan db:seed
 
 storage:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec events-app php artisan storage:link
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec events-src php artisan storage:link
 
 db:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec events-app php artisan tinker
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec events-src php artisan tinker
 
 version:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env exec testimony-app php artisan --version
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-src php artisan --version
 
 log:
-	docker compose -f ./app/docker-compose.yml --env-file ./app/.env logs -f testimony-app
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env logs -f testimony-src

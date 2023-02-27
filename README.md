@@ -12,7 +12,7 @@ App url: [DCLM Testimony](https://testimony.dclm.org)
 - make sure you have [composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos) installed
 - create a directory: `mkdir -p <directory-name>`
 - run `git clone https://github.com/dclmict/dclm-events.git .`
-- enter app directory `cd app`
+- enter src directory `cd src`
 - create .env file `cp .env.example .env`
 - add aws credentials to .env file
 - add database credentials to .env file
