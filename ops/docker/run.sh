@@ -17,7 +17,7 @@ cd /var/www
 # make app run on /testimony/ location
 if [ -e "/var/www/testimony" ]; then
   rm /var/www/testimony
-  ln -s /var/www/public /var/www/testimony
+  ln -s /var/www/public testimony
 else
   echo "creating symbolic link for testimony..."
   ln -s /var/www/public testimony
