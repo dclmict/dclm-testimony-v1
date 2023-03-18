@@ -1,0 +1,30 @@
+# Services
+services:
+
+  testimony-app:
+    container_name: testimony-app
+    image: opeoniye/dclm-testimony:latest
+    env_file: .env
+    ports:
+      - 1001:80
+      - 4001:443
+    networks:
+      - bams
+    volumes:
+      - .:/var/www
+      - ~/dev/keys/mac/bams.pem:/var/ssl/cert.pem
+      - ~/dev/keys/mac/bams-key.pem:/var/ssl/key.pem
+    restart: always
+    working_dir: /var/www
+    # command: ./scripts/run.sh
+    # entrypoint: ["/bin/sh","-c"]
+    # command:
+    # - |
+    #    echo a
+    #    echo b
+    #    echo c
+
+networks:
+  bams:
+    name: bams
+    external: true

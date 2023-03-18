@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #
 # ____          __  __  _____ 
@@ -11,13 +11,25 @@
 #
 # Based on https://gist.github.com/2206527
 
-
-# create dhparam for ssl
-#openssl dhparam -out /etc/ssl/certs/dhparams.pem 4096
+## main code
+cd /var/www
 
 # make app run on /testimony/ location
-rm testimony
-ln -s /www/html/public testimony
+file='testimony'
+if [ -e $file ]; then
+  rm testimony
+  ln -s /www/html/public testimony
+else
+  echo "creating symbolic link for testimony..."
+  ln -s /www/html/public testimony
 
-# install dependencies
-# composer install
+fi
+
+# laravel something
+# php artisan migrate:fresh --seed
+php artisan cache:clear
+php artisan route:cache
+php artisan optimize
+
+# start supervisord
+/usr/bin/supervisord -c /etc/supervisord.conf

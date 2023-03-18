@@ -1,0 +1,23 @@
+# Services
+services:
+
+  # Testimony Service
+  testimony-app:
+    container_name: testimony-app
+    image: opeoniye/dclm-testimony:latest
+    env_file: .env
+    ports:
+      - 1001:80
+      - 4001:443
+    networks:
+      - dclm
+    volumes:
+      - /etc/letsencrypt/live/dclm.org/fullchain.pem:/var/ssl/cert.pem
+      - /etc/letsencrypt/live/dclm.org/privkey.pem:/var/ssl/key.pem
+    restart: always
+    working_dir: /var/www
+
+networks:
+  dclm:
+    name: dclm
+    external: true

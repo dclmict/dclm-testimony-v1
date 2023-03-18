@@ -1,0 +1,26 @@
+# ref: https://docs.docker.com/engine/reference/builder/#dockerignore-file
+# ref: https://www.golinuxcloud.com/dockerignore-file/
+setup
+README.md
+Makefile
+Dockerfile
+ops/docker/pin
+.git
+*/k8s*
+*/docker-*
+*/.tool-versions
+*/.editorconfig
+*/.env*
+*/.idea*
+**/*.DS_Store
+**/*.gitignore
+src/.env
+src/docker-compose.yml
+src/vendor
+src/personalizedflyer/vendor
+src/node_modules
+src/storage/app/public/**
+src/storage/logs/**
+src/storage/framework/cache/**
+src/storage/framework/sessions/**
+src/storage/framework/views/**

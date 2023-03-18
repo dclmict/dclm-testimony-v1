@@ -1,3 +1,10 @@
+build:
+	docker build -t opeoniye/dclm-testimony:latest .
+
+push:
+	cat ops/docker/pin | docker login -u opeoniye --password-stdin
+	docker push opeoniye/dclm-testimony:latest
+
 up:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
 
@@ -9,9 +16,6 @@ dev:
 prod:
 	cp ./docker-compose-prod.yml ./src/docker-compose.yml
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
-
-build:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up --detach --build
 
 down:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env down

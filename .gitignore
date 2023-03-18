@@ -8,7 +8,6 @@
 
 # files
 setup
-docker-laravel.yml
+ops/docker/pin
 ops/.env.dev
 ops/.env.prod
-ops/docker/nginx/testify.app.conf
