@@ -21,8 +21,9 @@ COPY ./ops/docker/ngx/nginx.conf /etc/nginx/nginx.conf
 COPY ./ops/docker/ngx/testify.conf /etc/nginx/sites-enabled/default
 COPY ./ops/docker/ngx/ssl.conf /etc/nginx/ssl.conf
 COPY ./ops/docker/ngx/proxy /etc/nginx/proxy_params
-COPY ./ops/docker/ngx/exploit.conf /etc/nginx/snippets/site_optimization.conf
-COPY ./ops/docker/ngx/optimize.conf /etc/nginx/snippets/exploit_protection.conf
+COPY ./ops/docker/ngx/exploit.conf /etc/nginx/snippets/exploit_protection.conf
+COPY ./ops/docker/ngx/optimize.conf /etc/nginx/snippets/site_optimization.conf
+COPY ./ops/docker/ngx/log.conf /etc/nginx/snippets/logging.conf
 
 # php log files
 RUN mkdir /var/log/php && \
@@ -30,6 +31,7 @@ RUN mkdir /var/log/php && \
 
 ## deployment
 RUN composer install --optimize-autoloader --no-dev && \
+  chown -R www:www-data /var/www && \
   rm -rf /var/www/html && \
   # give scripts execute permissions
   chmod +x /var/docker/run.sh

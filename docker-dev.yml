@@ -11,7 +11,7 @@ services:
     networks:
       - bams
     volumes:
-      - .:/var/www
+      # - .:/var/www
       - ~/dev/keys/mac/bams.pem:/var/ssl/cert.pem
       - ~/dev/keys/mac/bams-key.pem:/var/ssl/key.pem
     restart: always

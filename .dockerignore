@@ -16,6 +16,7 @@ ops/docker/pin
 **/*.gitignore
 src/.env
 src/docker-compose.yml
+src/testimony
 src/vendor
 src/personalizedflyer/vendor
 src/node_modules

@@ -2,9 +2,9 @@
 
 #
 # ____          __  __  _____ 
-# |  _ \   /\   |  \/  |/ ____|     https://github.com/opeoniye
-# | |_) | /  \  | \  / | (___       https://opeoniye.vercel.app/
-# |  _ < / /\ \ | |\/| |\___ \      credit: http://patorjk.com/software/taag/
+# |  _ \   /\   |  \/  |/ ____|     repo:     https://github.com/opeoniye
+# | |_) | /  \  | \  / | (___       porfolio: https://opeoniye.vercel.app/
+# |  _ < / /\ \ | |\/| |\___ \      credit:   http://patorjk.com/software/taag/
 # | |_) / ____ \| |  | |____) |
 # |____/_/    \_\_|  |_|_____/ 
 #                             
@@ -15,14 +15,12 @@
 cd /var/www
 
 # make app run on /testimony/ location
-file='testimony'
-if [ -e $file ]; then
-  rm testimony
-  ln -s /www/html/public testimony
+if [ -e "/var/www/testimony" ]; then
+  rm /var/www/testimony
+  ln -s /var/www/public /var/www/testimony
 else
   echo "creating symbolic link for testimony..."
-  ln -s /www/html/public testimony
-
+  ln -s /var/www/public testimony
 fi
 
 # laravel something

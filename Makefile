@@ -1,5 +1,7 @@
 build:
-	docker build -t opeoniye/dclm-testimony:latest .
+	y | docker image prune --filter="dangling=true"
+	docker image rm opeoniye/dclm-testimony:latest
+	docker build -t opeoniye/dclm-testimony:latest . && docker images | grep opeoniye/dclm-testimony
 
 push:
 	cat ops/docker/pin | docker login -u opeoniye --password-stdin
@@ -10,11 +12,12 @@ up:
 
 dev:
 	cp ./ops/.env.dev ./src/.env
-	cp ./docker-compose-dev.yml ./src/docker-compose.yml
+	cp ./docker-dev.yml ./src/docker-compose.yml
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
 
 prod:
-	cp ./docker-compose-prod.yml ./src/docker-compose.yml
+	cp ./ops/.env.prod ./src/.env
+	cp ./docker-prod.yml ./src/docker-compose.yml
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
 
 down:
