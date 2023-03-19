@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     @if ($ct == null)
-                        {{-- <h3>Add New</h3> --}}
+                        <h3>Add </h3>
                         <form action="{{ route('admin.crusade.tour.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
@@ -27,7 +27,7 @@
 
                         </form>
                     @else
-                        <h3>Modify Crusade Tour</h3>
+                        <h3>Edit</h3>
 
                         <form action="{{ route('admin.crusade.tour.update', $ct->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf

@@ -28,7 +28,7 @@
                                         <a href="{{ route('admin.crusade.tour.active', $crusadeTour->id) }}"
                                             class="btn btn-{{ $crusadeTour->is_active ? 'success' : 'primary' }} btn-sm">
                                             {{ $crusadeTour->is_active ? 'Ongoing' : 'Activate' }}</a>
-                                        <a href="{{ route('admin.crusade.tour.edit', $crusadeTour->id) }}"
+                                        <a href="{{ route('admin.crusade.add.edit', $crusadeTour->id) }}"
                                             class="btn btn-primary btn-sm">Edit</a>
 
                                         <a target="_blank" class="btn btn-secondary btn-sm"

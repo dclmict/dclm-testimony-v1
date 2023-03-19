@@ -80,22 +80,23 @@ class CrusadeTourController extends Controller
             }
         } catch (Exception $e) {
         }
-
         return redirect()->route("admin.crusade.tour.index");
     }
 
     public function edit($id)
     {
         $ct = CrusadeTour::findOrFail($id);
-        return view("Admin.crusade.tour", ["ct" => $ct, "crusadeTours" => CrusadeTour::all()]);
+        $active = CrusadeTour::whereIsActive(true)->first();
+        return view("Admin.crusade.add", compact('ct', 'active'));
     }
 
     public function exportPdf($id)
     {
+        $active = CrusadeTour::whereIsActive(true)->first();
         $crusadeTour = CrusadeTour::findOrFail($id);
         $pdf = app("dompdf.wrapper");
         $pdf->setOptions(['dpi' => 150, 'default_font' => 'helvetica', 'enable_php' => true, 'chroot' => public_path()]);
-        $pdf->loadView("pdf.export", ["crusadeTour" => $crusadeTour]);
+        $pdf->loadView("pdf.export", compact('crusadeTour', 'active'));
         return $pdf->stream('crusade-tour.pdf');
     }
 }

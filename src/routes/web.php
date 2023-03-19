@@ -42,7 +42,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::get("/crusade/add", [CrusadeTourController::class, 'create'])->name("admin.crusade.add.create");
     Route::get("/crusade/tour", [CrusadeTourController::class, 'index'])->name("admin.crusade.tour.index");
     Route::get('/crusade/tour/{id}', [CrusadeTourController::class, 'delete'])->name("admin.crusade.tour.delete");
-    Route::get('/crusade/tour/{id}/edit', [CrusadeTourController::class, 'edit'])->name("admin.crusade.tour.edit");
+    Route::get('/crusade/tour/{id}/edit', [CrusadeTourController::class, 'edit'])->name("admin.crusade.add.edit");
     Route::get('/crusade/tour/{id}/active', [CrusadeTourController::class, 'active'])->name("admin.crusade.tour.active");
     Route::get('/crusade/tour/{id}/exportPdf', [CrusadeTourController::class, 'exportPdf'])->name("admin.crusade.tour.exportPdf");
     Route::post('/crusade/tour', [CrusadeTourController::class, 'store'])->name("admin.crusade.tour.store");

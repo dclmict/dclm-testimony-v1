@@ -1,13 +1,13 @@
 build:
 	@if docker images | grep -q opeoniye/dclm-testimony; then \
-		echo -e "Removing \033[31mopeoniye/dclm-testimony\033[0m image"; \
-		y | docker image prune --filter="dangling=true"; \
+		echo "Removing \033[31mopeoniye/dclm-testimony\033[0m image"; \
+		echo y | docker image prune --filter="dangling=true"; \
 		docker image rm opeoniye/dclm-testimony; \
-		echo -e "Building \033[31mopeoniye/dclm-testimony\033[0m image"; \
+		echo "Building \033[31mopeoniye/dclm-testimony\033[0m image"; \
 		docker build -t opeoniye/dclm-testimony:latest .; \
 		docker images | grep opeoniye/dclm-testimony; \
 	else \
-		echo -e "Building \033[31mopeoniye/dclm-testimony\033[0m image"; \
+		echo "Building \033[31mopeoniye/dclm-testimony\033[0m image"; \
 		docker build -t opeoniye/dclm-testimony:latest .; \
 		docker images | grep opeoniye/dclm-testimony; \
 	fi
@@ -27,6 +27,7 @@ dev:
 prod:
 	cp ./ops/.env.prod ./src/.env
 	cp ./docker-prod.yml ./src/docker-compose.yml
+	docker pull opeoniye/dclm-testimony:latest
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
 
 down:
