@@ -6,8 +6,7 @@ services:
     image: opeoniye/dclm-testimony:latest
     env_file: .env
     ports:
-      - 1001:80
-      - 4001:443
+      - 1001:443
     networks:
       - bams
     volumes:

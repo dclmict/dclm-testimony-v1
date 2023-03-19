@@ -1,7 +1,16 @@
 build:
-	y | docker image prune --filter="dangling=true"
-	docker image rm opeoniye/dclm-testimony:latest
-	docker build -t opeoniye/dclm-testimony:latest . && docker images | grep opeoniye/dclm-testimony
+	@if docker images | grep -q opeoniye/dclm-testimony; then \
+		echo -e "Removing \033[31mopeoniye/dclm-testimony\033[0m image"; \
+		y | docker image prune --filter="dangling=true"; \
+		docker image rm opeoniye/dclm-testimony; \
+		echo -e "Building \033[31mopeoniye/dclm-testimony\033[0m image"; \
+		docker build -t opeoniye/dclm-testimony:latest .; \
+		docker images | grep opeoniye/dclm-testimony; \
+	else \
+		echo -e "Building \033[31mopeoniye/dclm-testimony\033[0m image"; \
+		docker build -t opeoniye/dclm-testimony:latest .; \
+		docker images | grep opeoniye/dclm-testimony; \
+	fi
 
 push:
 	cat ops/docker/pin | docker login -u opeoniye --password-stdin

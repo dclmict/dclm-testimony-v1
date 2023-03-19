@@ -11,23 +11,28 @@
 #
 # Based on https://gist.github.com/2206527
 
-## main code
-cd /var/www
-
-# make app run on /testimony/ location
-if [ -e "/var/www/testimony" ]; then
-  rm /var/www/testimony
-  ln -s /var/www/public testimony
-else
-  echo "creating symbolic link for testimony..."
-  ln -s /var/www/public testimony
-fi
-
 # laravel something
-# php artisan migrate:fresh --seed
+cd /var/www
 php artisan cache:clear
 php artisan route:cache
 php artisan optimize
+# php artisan migrate:fresh --seed
 
 # start supervisord
 /usr/bin/supervisord -c /etc/supervisord.conf
+
+# make app run on /testimony/ location
+if [ -e "/var/www/testimony" ]; then
+  echo "recreating /testimony symbolic link..."
+  cd /var/www/public
+  rm /var/www/testimony
+  ln -s /var/www/public testimony
+  chown -R www:www-data /var/www/public/testimony
+  cd /var/www
+else
+  echo "creating symbolic link for testimony..."
+  cd /var/www/public
+  ln -s /var/www/public testimony
+  chown -R www:www-data /var/www/public/testimony
+  cd /var/www
+fi
