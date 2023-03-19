@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GCK || {{$active_crusade->name ?? ''}} </title>
     <style>
         .container {
             width: 100%;
@@ -64,9 +64,9 @@
 
     <div class="container">
         <div class="header">
-            <h1 class="title">GLOBAL CRUSADE</h1>
+            <h1 class="title">GCK || Global Crusade with Kumuyi</h1>
             <h2 class="subtitle">{{ $crusadeTour->slug }}</h2>
-            <h3 class="caption">TESTIMONIES</h3>
+            <h3 class="caption">Testimonies</h3>
         </div>
 
         <div class="list">

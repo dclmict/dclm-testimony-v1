@@ -12,27 +12,28 @@
 # Based on https://gist.github.com/2206527
 
 # laravel something
+echo -e "\033[31mRunning laravel commands\033[0m image"
 cd /var/www
 php artisan cache:clear
-php artisan route:cache
 php artisan optimize
 # php artisan migrate:fresh --seed
 
 # start supervisord
+echo -e "\033[31mStarting all services with supervisord\033[0m image"
 /usr/bin/supervisord -c /etc/supervisord.conf
 
 # make app run on /testimony/ location
-if [ -e "/var/www/testimony" ]; then
-  echo "recreating /testimony symbolic link..."
+if [ -e "/var/www/public/testimony" ]; then
+  echo "\033[31mrecreating /testimony symbolic link...\033[0m"
   cd /var/www/public
-  rm /var/www/testimony
+  rm testimony
   ln -s /var/www/public testimony
-  chown -R www:www-data /var/www/public/testimony
+  chown -R www:www-data testimony
   cd /var/www
 else
-  echo "creating symbolic link for testimony..."
+  echo "\033[31mcreating symbolic link for testimony...\033[0m"
   cd /var/www/public
   ln -s /var/www/public testimony
-  chown -R www:www-data /var/www/public/testimony
+  chown -R www:www-data testimony
   cd /var/www
 fi

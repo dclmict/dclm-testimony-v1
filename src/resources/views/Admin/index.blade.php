@@ -6,8 +6,8 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h1 class="font-weight-bold text-dark">WELCOME {{ Auth::user()->name ?? '' }} </h1>
-                    <h2 class="text-dark font-weigth-thin">DCLM Testimony Portal</h2>
+                    <h1 class="font-weight-bold text-dark">Welcome {{ Auth::user()->name ?? '' }} </h1>
+                    <h2 class="text-dark font-weigth-thin">GCK Testimonies Portal</h2>
 
                     <div class="mt-3">
                         <h2 class="text-xs">Ongoing Crusade</h2>

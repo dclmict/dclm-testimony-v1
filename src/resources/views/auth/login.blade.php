@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>DCLM Testimony Login </title>
+    <title>Login || {{$active_crusade->name ?? ''}} </title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -36,7 +36,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">DCLM Testimony Portal
+                                        <h1 class="h4 text-gray-900 mb-4">GCK Testimonies Portal
                                         </h1>
                                     </div>
 

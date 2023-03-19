@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>GCK Testimony Admin</title>
+    <title>Admin || {{$active->name ?? ''}} </title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -35,7 +35,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">GCK TESTIMONY
+                <div class="sidebar-brand-text mx-3">GCK Testimonies
 
                 </div>
             </a>
@@ -48,8 +48,6 @@
                 <a class="nav-link" href="/admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
-
-
             </li>
 
             <li class="nav-item">
@@ -59,9 +57,19 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/admin/crusade-tour">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Crusade Tour</span></a>
+                    <span>Crusade Tours</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a class="collapse-item" href="/admin/crusade/add">Add</a>
+                        <a class="collapse-item" href="/admin/crusade/tour">Tours</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -74,15 +82,15 @@
             {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Menus</span>
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Crusade Tours</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="/admin/crusade-tour">Crusade Tours</a>
-                        <a class="collapse-item" href="/admin/testimonies">Testimonies</a>
+                        <a class="collapse-item" href="/admin/crusade/add">Add</a>
+                        <a class="collapse-item" href="/admin/crusade/tour">Tours</a>
                     </div>
                 </div>
             </li> --}}
@@ -288,6 +296,10 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="/">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    App
+                                </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -296,14 +308,14 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
-                                </a>
+                                </a> --}}
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                              document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"

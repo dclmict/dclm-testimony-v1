@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-
 class AdminController extends Controller
 {
     public function index()
@@ -16,23 +15,25 @@ class AdminController extends Controller
         $active = CrusadeTour::whereIsActive(true)->first();
         $user = 'Admin';
 
-        return view('Admin.index', compact('active',))->with('user', $user);
+        return view('Admin.index', compact('active'))->with('user', $user);
     }
 
     public function testimoniesList()
     {
+        $active = CrusadeTour::whereIsActive(true)->first();
         $active_crusade = CrusadeTour::where('is_active', 1)->first();
         $active_crusade_id =$active_crusade->id; 
-        //list the crusade testimonies according to the latest crudade going on  
+        //list the crusade testimonies according to the latest crusade going on  
         $testimonies = Testimony::with('crusadeTour')->where('crusade_tour_id',  $active_crusade_id)->with('testifier')->with('country')->latest()->get();
 
-        return view('Admin.testimonies.list', compact('testimonies', 'active_crusade'));
+        return view('Admin.testimonies.list', compact('testimonies', 'active_crusade', 'active'));
     }
 
     public function show(Testimony $testimony)
     {
+        $active = CrusadeTour::whereIsActive(true)->first();
         $testimony = Testimony::with('testifier')->with('country')->findOrFail($testimony->id);
-        return view('Admin.testimonies.show', compact('testimony'));
+        return view('Admin.testimonies.show', compact('testimony', 'active'));
     }
 
     public function delete(Testimony $testimony)
