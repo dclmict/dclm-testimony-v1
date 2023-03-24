@@ -1,6 +1,6 @@
-FROM opeoniye/dclm-php82-base:latest
+FROM opeoniye/php82-base:latest
 
-# set working director
+# set working directory
 WORKDIR /var/www
 
 # add user for laravel application

@@ -1,5 +1,4 @@
 #!/bin/sh
-
 #
 # ____          __  __  _____ 
 # |  _ \   /\   |  \/  |/ ____|     repo:     https://github.com/opeoniye

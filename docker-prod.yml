@@ -1,7 +1,6 @@
 # Services
 services:
 
-  # Testimony Service
   testimony-app:
     container_name: testimony-app
     image: opeoniye/dclm-testimony:latest

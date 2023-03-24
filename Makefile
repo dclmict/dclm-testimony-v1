@@ -64,12 +64,12 @@ seed:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app php artisan db:seed
 
 storage:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec events-app php artisan storage:link
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app php artisan storage:link
 
 db:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec events-app php artisan tinker
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app php artisan tinker
 
-version:
+info:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env exec testimony-app php artisan --version
 
 log:

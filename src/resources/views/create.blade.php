@@ -247,8 +247,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="{{ route('testimony.show') }}"><button type="button" class="btn btn-primary">Share another
-                            testimony?</button>
+                    <a href="{{ route('testimony.show') }}"><button type="button" class="btn btn-primary">Share another testimony?</button>
                     </a>
                 </div>
             </div>
@@ -332,9 +331,7 @@
                 progressValue: 0,
                 progress: 00,
                 //not in use
-                button_texts: ['Uploading file...', 'Sending your testimony...', 'Submitting your testimony...',
-                    'Wait a while...', 'Almost Done ...'
-                ],
+                button_texts: ['Uploading file...', 'Sending your testimony...', 'Submitting your testimony...', 'Wait a while...', 'Almost Done ...'],
                 file_upload_label: 'Upload your picture or video',
                 submit() {
                     const bar = document.getElementById('progress-bar');
