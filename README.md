@@ -14,8 +14,7 @@ App url: [DCLM Testimony](https://testimony.dclm.org)
 - make sure you have `docker` installed. Learn how [here](https://docs.docker.com/desktop/install/mac-install/)
 - make sure you have `docker compose` installed. Learn how [here](https://docs.docker.com/compose/install/)
 - create a directory: `mkdir -p <directory-name>`
-- run `git config --global core.autocrlf input`
-- run `git clone https://github.com/dclmict/dclm-events.git .`
+- run `git clone https://github.com/dclmict/dclm-testimony.git .`
 - run `make dev`
 - run `make key`
 - run `make migrate`
@@ -28,7 +27,8 @@ App url: [DCLM Testimony](https://testimony.dclm.org)
 - make sure you have `docker` installed. Learn how [here](https://docs.docker.com/desktop/install/windows-install/)
 - make sure you have `docker compose` installed. Learn how [here](https://docs.docker.com/compose/install/)
 - create a directory: `mkdir -p <directory-name>`
-- run `git clone https://github.com/dclmict/dclm-events.git .`
+- run `git config --global core.autocrlf input`
+- run `git clone https://github.com/dclmict/dclm-testimony.git .`
 - run `make dev`
 - run `make key`
 - run `make migrate`
