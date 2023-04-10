@@ -36,5 +36,5 @@ RUN composer install --optimize-autoloader --no-dev && \
   # give scripts execute permissions
   chmod +x /var/docker/run.sh
 
-EXPOSE 80
+EXPOSE 89
 ENTRYPOINT ["/var/docker/run.sh"]
