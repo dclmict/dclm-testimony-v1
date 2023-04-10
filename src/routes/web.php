@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CrusadeTourController;
 use App\Http\Controllers\TestimonyFormController;
+use App\Http\Controllers\VettedTestimoniesControler;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +48,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::get('/crusade/tour/{id}/exportPdf', [CrusadeTourController::class, 'exportPdf'])->name("admin.crusade.tour.exportPdf");
     Route::post('/crusade/tour', [CrusadeTourController::class, 'store'])->name("admin.crusade.tour.store");
     Route::put("/crusade/tour/{id}", [CrusadeTourController::class, 'update'])->name("admin.crusade.tour.update");
+
+
+    //vetted testimonies 
+
+
+    Route::post('/crusade/tour', [CrusadeTourController::class, 'store'])->name("admin.crusade.tour.store");
+    
+    Route::get('/testimonies/vetted/add', [VettedTestimoniesControler::class, 'create'])->name("admin.testimony.vetted");
+
+
 });
