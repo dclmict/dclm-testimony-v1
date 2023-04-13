@@ -21,6 +21,8 @@ class VettedTestimony extends Model
     {
         // alternative to new Testimony()   plus second work around for say, $st = new Stuff();
         //$st->name = $req->name ---- etc instead of doing it one by one, just inject it all at once
+        //also for accessing other methods and property the stuff has
+        
         $testimony = self::make(collect($data)->only(["content"])->toArray());
 
         $testimony->save();

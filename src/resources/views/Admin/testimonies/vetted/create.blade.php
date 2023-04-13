@@ -4,6 +4,18 @@
 
 
     <div class="row">
+
+
+        @if ($errors->any())
+            {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+        @endif
+        @if (session('msg'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text">{{ session('msg') }}</span>
+
+            </div>
+        @endif
         <div class="col-md-8 mx-auto">
             <div class="card">
                 <div class="card-body">
@@ -37,14 +49,21 @@
                                 <label for="">Country</label>
                                 <select class="custom-select" name="country">
                                     @foreach ($countries as $country)
-                                        <option value="{{$country->id}}">{{$country->libelle}}</option>
+                                        <option value="{{ $country->id }}">{{ $country->libelle }}</option>
                                     @endforeach
 
                                 </select>
                             </div>
+
                             <div class="form-group col-6">
+                                <div class="">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type your testimony below"
+                                        name="content">{{ old('content') }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group col">
                                 <label for="">Media </label>
-                                <input type="file" name="banner_path" class="form-control">
+                                <input type="file" name="file_dir" class="form-control">
                             </div>
 
                         </div>
