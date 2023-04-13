@@ -24,7 +24,9 @@ class Testifier extends Model
         }
         $data = collect($data)->only(['full_name', 'email', 'phone', 'city', 'country_id'])->toArray();
         $country = Country::find($data['country_id']);
+        dd($data);
         $testifier = Testifier::make($data);
+        
         $testifier->country()->associate($country);
         $testifier->save();
 

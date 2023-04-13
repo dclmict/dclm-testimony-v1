@@ -26,9 +26,9 @@ class VettedTestimonyRequest extends FormRequest
     {
         $input = $this->request->all();
         $rules = [
-            'full_name' => 'required|string',
+            'name' => 'required|string',
 
-            'country_id' => 'required|integer',
+            'country' => 'required|string',
             'city' => 'required|string',
             'content' => 'required|string',
             'file_dir' => 'required',

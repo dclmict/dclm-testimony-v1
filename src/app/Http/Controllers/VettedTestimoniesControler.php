@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VettedTestimonyRequest;
 use App\Models\Country;
+use App\Models\VettedTestimony;
 use Illuminate\Http\Request;
 
 class VettedTestimoniesControler extends Controller
@@ -13,10 +15,10 @@ class VettedTestimoniesControler extends Controller
         return view('Admin.testimonies.vetted.create', compact('countries'));
     }
 
-
-    public function store()
+    public function store(VettedTestimonyRequest $request)
     {
-
+        $vt = new VettedTestimony();
+        
         
     }
 }
