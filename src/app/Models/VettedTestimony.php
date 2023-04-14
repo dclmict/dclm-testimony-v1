@@ -13,17 +13,17 @@ class VettedTestimony extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name", "email", "country_id", "city", "phone", "msg"];
+    protected $fillable = ["name", "email", "country", "city", "phone", "content"];
 
 
 
     public static function store(array $data, $file, $extension)
     {
         // alternative to new Testimony()   plus second work around for say, $st = new Stuff();
-        //$st->name = $req->name ---- etc instead of doing it one by one, just inject it all at once
+        //$st->name = $req->name ---- etc instead of doing it one by one, just inject it all at once in the object instnce so to say 
         //also for accessing other methods and property the stuff has
-        
-        $testimony = self::make(collect($data)->only(["content"])->toArray());
+
+        $testimony = self::make(collect($data)->toArray());
 
         $testimony->save();
 

@@ -22,7 +22,7 @@
 
                     <h3>Add </h3>
                     <form action="{{ route('admin.testimony.vetted.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
+                        @csrf()
                         <div class="row">
 
                             <div class="form-group col-6">

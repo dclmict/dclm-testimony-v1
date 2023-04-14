@@ -15,6 +15,13 @@ class CreateVettedTestimoniesTable extends Migration
     {
         Schema::create('vetted_testimonies', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->string('country');
+            $table->string('city');
+            $table->unsignedBigInteger('phone')->nullable();
+            $table->text('content')->nullable();
+            $table->string('file_dir')->nullable();
             $table->timestamps();
         });
     }

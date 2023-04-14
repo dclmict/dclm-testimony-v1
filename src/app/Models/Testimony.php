@@ -22,7 +22,7 @@ class Testimony extends Model
         $active = CrusadeTour::whereIsActive(true)->first();
 
 
-        //make sure tht
+        //make sure th
         $testifier = Testifier::existOrCreate($data);
 
         $testimony->testifier()->associate($testifier);
