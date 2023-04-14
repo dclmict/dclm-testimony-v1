@@ -62,17 +62,15 @@
                                 </div>
                             </div>
 
+
+
                             <div class="form-group col-6">
-
-
-                                @foreach ($crusadeTours as $ct)
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                                        name="crusade_tour_id">
-                                        <option value="{{ $ct->id }}">{{ $ct->name }}</option>
-
-                                    </select>
-                                @endforeach
-
+                                <label for="">Select Crusade Tours </label>
+                                <select class="form-control " aria-label=".form-select-lg example" name="crusade_tour">
+                                    @foreach ($crusadeTours as $ct)
+                                        <option value="{{ $ct->name }}">{{ $ct->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group col-6">
                                 <label for="">Media </label>

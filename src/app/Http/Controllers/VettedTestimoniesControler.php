@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\VettedTestimony;
 use Illuminate\Http\Request;
 use App\Models\CrusadeTour;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,13 +39,21 @@ class VettedTestimoniesControler extends Controller
 
     public function list(Request $r)
     {
-        if ($r) {
-            //category
+
+        $vts = new VettedTestimony();
+
+        $crusadeTours = CrusadeTour::all();
+
+        if ($r->has('crusadeTour')) {
+            //fetch category
             $vts = VettedTestimony::where('crusade_tour', $r->crusadeTour)->get();
-            return view('Admin.testimonies.vetted.list', compact('vts'));
+
+            return view('Admin.testimonies.vetted.list', compact('vts', 'crusadeTours'));
         }
-        $vts = VettedTestimony::all();
-        return view('Admin.testimonies.vetted.list', compact('vts'));
+
+        $vts = $vts->get();
+
+        return view('Admin.testimonies.vetted.list', compact('vts', 'crusadeTours'));
     }
 
 
@@ -69,9 +78,4 @@ class VettedTestimoniesControler extends Controller
         // $testimony = Testimony::findOrFail($testimony->id);
         // $testimony->delete();
     }
-
-
-    //fetch by category 
-
-
 }

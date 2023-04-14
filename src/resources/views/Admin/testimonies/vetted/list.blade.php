@@ -5,21 +5,21 @@
 
 @section('Admincontent')
     <!-- DataTales Example -->
+
+    <form method="get">
+        <div class="col">
+            <label for=""> <b> Select Crusade Tour Category </b></label>
+            <select class="form-control col  " name="crusadeTour" aria-label=".form-select-lg example">
+                @foreach ($crusadeTours as $ct)
+                    <option value="{{ $ct->name }}"> {{ $ct->name }}</option>
+                @endforeach
+            </select>
+            <button class="btn btn-primary my-2 d-inline" type="submit"> Submit </button>
+        </div>
+
+    </form>
     <div class="card shadow mb-4">
 
-        <select class="form-select form-select-lg mb-3" name="crusadeTour" aria-label=".form-select-lg example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Vetted Testimonies Table</h6>
         </div>
@@ -55,30 +55,30 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($vts as $testimony)
+                        @foreach ($vts as $vettedTestimony)
                             <tr>
 
-                                <td>{{ $testimony->name }}</td>
-                                <td>{{ $testimony->email }}</td>
-                                <td>{{ $testimony->phone }}</td>
-                                <td>{{ $testimony->city }}</td>
+                                <td>{{ $vettedTestimony->name }}</td>
+                                <td>{{ $vettedTestimony->email }}</td>
+                                <td>{{ $vettedTestimony->phone }}</td>
+                                <td>{{ $vettedTestimony->city }}</td>
                                 {{-- <td>{{ $testimony->country->code }}</td> --}}
                                 {{-- <td>{{ $testimony->country->libelle }}</td> --}}
-                                <td>{{ substr($testimony->content, 0, 20) }}...</td>
-                                <td><a href="{{ $testimony->path }}"
-                                        target="_blank">{{ $testimony->path ? 'Media file' : 'No Media file' }}</a>
+                                <td>{{ substr($vettedTestimony->content, 0, 20) }}...</td>
+                                <td><a href="{{ $vettedTestimony->path }}"
+                                        target="_blank">{{ $vettedTestimony->path ? 'Media file' : 'No Media file' }}</a>
                                 </td>
 
-                                <td>{{ $testimony->created_at->format('d/m/Y') }} <br>
-                                    {{ $testimony->created_at->addMinute()->addSecond()->diffForHumans(null, true, false, 2) }}
+                                <td>{{ $vettedTestimony->created_at->format('d/m/Y') }} <br>
+                                    {{ $vettedTestimony->created_at->addMinute()->addSecond()->diffForHumans(null, true, false, 2) }}
                                 </td>
                                 <td>
 
 
-                                    <a href="{{ route('admin.testimonies.show', $testimony->id) }}"
+                                    <a href="{{ route('admin.testimonies.show', $vettedTestimony->id) }}"
                                         class="btn btn-sm btn-white text-primary mr-2"><i class="far fa-eye mr-1"></i>
                                         View</a>
-                                    <a href="{{ route('admin.testimonies.delete', $testimony->id) }}"
+                                    <a href="{{ route('admin.testimonies.delete', $vettedTestimony->id) }}"
                                         class="btn btn-sm btn-white text-danger mr-2"
                                         onclick="return confirm('Warning! This is a dangerous action. Are you sure about this ? ');"><i
                                             class="far fa-trash-alt mr-1"></i>Delete</a>
