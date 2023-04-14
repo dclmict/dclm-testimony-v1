@@ -15,6 +15,7 @@
                 @endforeach
             </select>
             <button class="btn btn-primary my-2 d-inline" type="submit"> Submit </button>
+           <a class="btn btn-secondary my-2 d-inline" href="{{route('admin.testimony.vetted.list')}}"> Reset </a>
         </div>
 
     </form>
