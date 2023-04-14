@@ -69,10 +69,17 @@
                                         <a href="{{ route('admin.testimonies.show', $testimony->id) }}"
                                             class="btn btn-sm btn-white text-primary mr-2"><i class="far fa-eye mr-1"></i>
                                             View</a>
-                                        <a href="{{ route('admin.testimonies.delete', $testimony->id) }}"
-                                            class="btn btn-sm btn-white text-danger mr-2"
-                                            onclick="return confirm('Warning! This is a dangerous action. Are you sure about this ? ');"><i
-                                                class="far fa-trash-alt mr-1"></i>Delete</a>
+
+                                        <form method="post"
+                                            action="{{ route('admin.testimonies.delete', $testimony->id) }}">
+
+                                            @method('DELETE')
+                                            @csrf()
+                                            <button class="btn btn-sm btn-white text-danger mr-2"
+                                                onclick="return confirm('Warning! This is a dangerous action. Are you sure about this ? ');"><i
+                                                    class="far fa-trash-alt mr-1"></i>Delete</button>
+                                        </form>
+
 
                                     </td>
                                 </tr>
@@ -82,7 +89,8 @@
                 </div>
             </div>
         @else
-            <h4> There are no testimonies available at the moment please <a href="{{route('admin.testimony.vetted.create')}}"> add here</a></h4>
+            <h4> There are no testimonies available at the moment please <a
+                    href="{{ route('admin.testimony.vetted.create') }}"> add here</a></h4>
         @endif
     </div>
 @endsection

@@ -34,6 +34,7 @@
                                         <a target="_blank" class="btn btn-secondary btn-sm"
                                             href="{{ route('admin.crusade.tour.exportPdf', $crusadeTour->id) }}"> Export
                                             Testimonies</a>
+                                            
                                         <a href="{{ route('admin.crusade.tour.delete', $crusadeTour->id) }}"
                                             class="btn btn-danger btn-sm mt-1">Delete
                                         </a>

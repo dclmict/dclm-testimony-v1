@@ -39,10 +39,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     Route::get('/', [AdminController::class, 'index'])->name("admin.show");
     Route::get('/testimonies', [AdminController::class, 'testimoniesList'])->name("admin.testimonies.list");
     Route::get('/testimonies/{testimony}', [AdminController::class, 'show'])->name("admin.testimonies.show");
-    Route::get('/testimonies/delete/{testimony}', [AdminController::class, 'delete'])->name("admin.testimonies.delete");
+
+    Route::delete('/testimonies/delete/{testimony}', [AdminController::class, 'delete'])->name("admin.testimonies.delete");
+
     Route::get("/crusade/add", [CrusadeTourController::class, 'create'])->name("admin.crusade.add.create");
     Route::get("/crusade/tour", [CrusadeTourController::class, 'index'])->name("admin.crusade.tour.index");
+
     Route::get('/crusade/tour/{id}', [CrusadeTourController::class, 'delete'])->name("admin.crusade.tour.delete");
+
     Route::get('/crusade/tour/{id}/edit', [CrusadeTourController::class, 'edit'])->name("admin.crusade.add.edit");
     Route::get('/crusade/tour/{id}/active', [CrusadeTourController::class, 'active'])->name("admin.crusade.tour.active");
     Route::get('/crusade/tour/{id}/exportPdf', [CrusadeTourController::class, 'exportPdf'])->name("admin.crusade.tour.exportPdf");
