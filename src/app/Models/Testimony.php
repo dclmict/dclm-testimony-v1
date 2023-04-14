@@ -12,19 +12,15 @@ class Testimony extends Model
 {
     use HasFactory;
 
-   
-
     protected $guarded = [];
 
     public static function store(array $data, $file, $extension)
     {
         $testimony = self::make(collect($data)->only(["content"])->toArray());
-
-        
         $active = CrusadeTour::whereIsActive(true)->first();
 
 
-        //make sure th
+        //make sure tht
         $testifier = Testifier::existOrCreate($data);
 
         $testimony->testifier()->associate($testifier);
