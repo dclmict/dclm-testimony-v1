@@ -67,7 +67,7 @@
                 <div id="vt" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="/admin/testimonies/vetted/add">all Vetted</a>
+                        <a class="collapse-item" href="/admin/testimonies/vetted/list">all Vetted</a>
                         <a class="collapse-item" href="/admin/testimonies/vetted/add">add</a>
                     </div>
                 </div>

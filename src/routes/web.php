@@ -52,13 +52,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
 
     //vetted testimonies 
 
-
-    Route::post('/crusade/tour', [CrusadeTourController::class, 'store'])->name("admin.crusade.tour.store");
-
     Route::get('/testimonies/vetted/add', [VettedTestimoniesControler::class, 'create'])->name("admin.testimony.vetted.create");
-
-       
+  
     Route::post('/testimonies/vetted/store', [VettedTestimoniesControler::class, 'store'])->name("admin.testimony.vetted.store");
+
+
+    Route::get('/testimonies/vetted/list', [VettedTestimoniesControler::class, 'list'])->name("admin.testimony.vetted.list");
 
 
 });

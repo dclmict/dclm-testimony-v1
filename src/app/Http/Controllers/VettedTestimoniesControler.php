@@ -19,8 +19,6 @@ class VettedTestimoniesControler extends Controller
     public function store(VettedTestimonyRequest $request)
     {
 
-
-
         $testimony = VettedTestimony::store(
             $request->except("file_dir"),
 
@@ -30,19 +28,12 @@ class VettedTestimoniesControler extends Controller
         );
 
 
-        /*   $testimony = Testimony::store(
-                $request->except("file_dir"),
-                $request->has("file_dir") ? file_get_contents($request->file('file_dir')->getRealPath()) : null,modal-dialog-scrollable
-                $request->has("file_dir") ? $request->file('file_dir')->extension() : null
-            ); */
-
-
-        //dd($testimony);
-        return response(['msg' => 'Succesful']);
+        return redirect()->route('admin.testimony.vetted.list')->with('msg', 'Successfully');
     }
 
-    public function thanks()
+    public function list()
     {
-        return view('thanks', ["active_crusade" => CrusadeTour::whereIsActive(true)->first()]);
+        $vts = VettedTestimony::all();
+        return view('Admin.testimonies.vetted.list', compact('vts'));
     }
 }

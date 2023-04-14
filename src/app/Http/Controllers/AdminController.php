@@ -21,7 +21,7 @@ class AdminController extends Controller
     public function testimoniesList()
     {
         $active = CrusadeTour::whereIsActive(true)->first();
-        $active_crusade = CrusadeTour::where('is_active', 1)->first();
+        $active_crusade = CrusadeTour::where('is_active', 1)->first(); // ???? 
         $active_crusade_id =$active_crusade->id; 
         //list the crusade testimonies according to the latest crusade going on  
         $testimonies = Testimony::with('crusadeTour')->where('crusade_tour_id',  $active_crusade_id)->with('testifier')->with('country')->latest()->get();
