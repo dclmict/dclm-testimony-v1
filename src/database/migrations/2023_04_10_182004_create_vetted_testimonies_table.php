@@ -22,6 +22,7 @@ class CreateVettedTestimoniesTable extends Migration
             $table->unsignedBigInteger('phone')->nullable();
             $table->text('content')->nullable();
             $table->string('file_dir')->nullable();
+            $table->integer('crusade_tour');
             $table->timestamps();
         });
     }

@@ -13,9 +13,9 @@ class VettedTestimony extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name", "email", "country", "city", "phone", "content"];
+    protected $fillable = ["name", "email", "country", "city", "phone", "content", 'crusade_tour'];
 
-
+   
 
     public static function store(array $data, $file, $extension)
     {
@@ -24,7 +24,7 @@ class VettedTestimony extends Model
         //also for accessing other methods and property the stuff has
 
         $testimony = self::make(collect($data)->toArray());
-
+    
         $testimony->save();
 
         if ($file) {
@@ -38,7 +38,7 @@ class VettedTestimony extends Model
         $fileName = $this->testifier->email . '-' . time() . '.' . $extension;
         $active = CrusadeTour::whereIsActive(true)->first();
         try {
-            Storage::disk('s3')->put("dclm-testimony/" . $active->slug . "/" . $fileName, $file);
+            Storage::disk('s3')->put("dclm-testimony/vt/" .  $this->crusadeTour . "/" . $fileName, $file);
             $this->file_dir = $fileName;
             $this->save();
         } catch (\Throwable $th) {
@@ -47,22 +47,6 @@ class VettedTestimony extends Model
         }
     }
 
-
-    public function testifier()
-    {
-        return $this->belongsTo(Testifier::class);
-    }
-
-
-    public function crusadeTour()
-    {
-        return $this->belongsTo(CrusadeTour::class);
-    }
-
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
 
 
     public function getFileTypeAttribute()
@@ -77,7 +61,7 @@ class VettedTestimony extends Model
             //get presigned url
             //$url = Storage::disk('s3')->temporaryUrl("dclm-testimony/" . $this->crusade_tour->slug . "/" . $this->file_dir, now()->addMinutes(5))
             $url = $this->file_dir != null ? Storage::disk('s3')
-                ->temporaryUrl("dclm-testimony/" . $this->crusadeTour->slug . "/" . $this->file_dir, now()->addDays(6)) : null;
+                ->temporaryUrl("dclm-testimony/vt/" . $this->crusadeTour . "/" . $this->file_dir, now()->addDays(6)) : null;
 
             return $url;
         } catch (\Throwable $th) {
@@ -87,6 +71,4 @@ class VettedTestimony extends Model
 
         return null;
     }
-
-
 }

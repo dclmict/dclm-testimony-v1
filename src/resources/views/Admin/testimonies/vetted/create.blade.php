@@ -61,7 +61,20 @@
                                         name="content">{{ old('content') }}</textarea>
                                 </div>
                             </div>
-                            <div class="form-group col">
+
+                            <div class="form-group col-6">
+
+
+                                @foreach ($crusadeTours as $ct)
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                        name="crusade_tour_id">
+                                        <option value="{{ $ct->id }}">{{ $ct->name }}</option>
+
+                                    </select>
+                                @endforeach
+
+                            </div>
+                            <div class="form-group col-6">
                                 <label for="">Media </label>
                                 <input type="file" name="file_dir" class="form-control">
                             </div>

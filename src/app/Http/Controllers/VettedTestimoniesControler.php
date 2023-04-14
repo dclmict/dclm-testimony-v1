@@ -7,13 +7,18 @@ use App\Models\Country;
 use App\Models\VettedTestimony;
 use Illuminate\Http\Request;
 use App\Models\CrusadeTour;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class VettedTestimoniesControler extends Controller
 {
+
+
     public function create()
     {
         $countries = Country::orderBy('libelle')->get();
-        return view('Admin.testimonies.vetted.create', compact('countries'));
+        $crusadeTours = CrusadeTour::get(['id', 'name']);
+        return view('Admin.testimonies.vetted.create', compact('countries', 'crusadeTours'));
     }
 
     public function store(VettedTestimonyRequest $request)
@@ -31,9 +36,42 @@ class VettedTestimoniesControler extends Controller
         return redirect()->route('admin.testimony.vetted.list')->with('msg', 'Successfully');
     }
 
-    public function list()
+    public function list(Request $r)
     {
+        if ($r) {
+            //category
+            $vts = VettedTestimony::where('crusade_tour', $r->crusadeTour)->get();
+            return view('Admin.testimonies.vetted.list', compact('vts'));
+        }
         $vts = VettedTestimony::all();
         return view('Admin.testimonies.vetted.list', compact('vts'));
     }
+
+
+
+    public function delete(VettedTestimony $vt)
+    {
+        $vt = VettedTestimony::with('crusadeTour')->findOrFail($vt->id);
+        //$testimony->testifier->delete(); dangerous line never delete the testifier
+        //delete testimony file from s3
+
+
+        $file = $vt->file_dir;
+        try {
+            Storage::disk('s3')->delete("dclm-testimony/vt/" . $vt->crusadeTour->slug . "/" . $file);
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+        }
+
+        $vt->delete();
+        return redirect()->route('admin.testimony.vetted.list');
+        //or
+        // $testimony = Testimony::findOrFail($testimony->id);
+        // $testimony->delete();
+    }
+
+
+    //fetch by category 
+
+
 }

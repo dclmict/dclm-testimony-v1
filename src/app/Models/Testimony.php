@@ -12,6 +12,8 @@ class Testimony extends Model
 {
     use HasFactory;
 
+   
+
     protected $guarded = [];
 
     public static function store(array $data, $file, $extension)

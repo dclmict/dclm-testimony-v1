@@ -6,11 +6,25 @@
 @section('Admincontent')
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        
+
+        <select class="form-select form-select-lg mb-3" name="crusadeTour" aria-label=".form-select-lg example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Vetted Testimonies Table</h6> 
-        
+            <h6 class="m-0 font-weight-bold text-primary">Vetted Testimonies Table</h6>
         </div>
+
+
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -55,9 +69,11 @@
                                         target="_blank">{{ $testimony->path ? 'Media file' : 'No Media file' }}</a>
                                 </td>
 
-                                <td>{{ $testimony->created_at->format('d/m/Y') }} <br> {{$testimony->created_at->addMinute()->addSecond()->diffForHumans(null, true, false, 2);}}</td>
+                                <td>{{ $testimony->created_at->format('d/m/Y') }} <br>
+                                    {{ $testimony->created_at->addMinute()->addSecond()->diffForHumans(null, true, false, 2) }}
+                                </td>
                                 <td>
-                
+
 
                                     <a href="{{ route('admin.testimonies.show', $testimony->id) }}"
                                         class="btn btn-sm btn-white text-primary mr-2"><i class="far fa-eye mr-1"></i>
