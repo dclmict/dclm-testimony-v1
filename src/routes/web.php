@@ -53,11 +53,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
     //vetted testimonies 
 
     Route::get('/testimonies/vetted/add', [VettedTestimoniesControler::class, 'create'])->name("admin.testimony.vetted.create");
-  
-    Route::post('/testimonies/vetted/store', [VettedTestimoniesControler::class, 'store'])->name("admin.testimony.vetted.store");
 
+    Route::post('/testimonies/vetted/store', [VettedTestimoniesControler::class, 'store'])->name("admin.testimony.vetted.store");
 
     Route::get('/testimonies/vetted/list', [VettedTestimoniesControler::class, 'list'])->name("admin.testimony.vetted.list");
 
+    Route::get('/testimonies/vetted/show/{id}', [VettedTestimoniesControler::class, 'show'])->name("admin.testimony.vetted.show");
 
+    Route::delete('/testimonies/vetted/delete/{id}', [VettedTestimoniesControler::class, 'delete'])->name("admin.testimony.vetted.delete");
 });

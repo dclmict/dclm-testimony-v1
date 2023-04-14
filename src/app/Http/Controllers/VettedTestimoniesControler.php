@@ -57,10 +57,17 @@ class VettedTestimoniesControler extends Controller
     }
 
 
+    public function show($id)
+    {
+
+        $testimony = VettedTestimony::findOrFail($id);
+        return view('Admin.testimonies.vetted.show', compact('testimony'));
+    }
+
 
     public function delete(VettedTestimony $vt)
     {
-        $vt = VettedTestimony::with('crusadeTour')->findOrFail($vt->id);
+        $vt = VettedTestimony::findOrFail($vt->id);
         //$testimony->testifier->delete(); dangerous line never delete the testifier
         //delete testimony file from s3
 

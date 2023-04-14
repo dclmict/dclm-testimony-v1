@@ -15,7 +15,7 @@
                 @endforeach
             </select>
             <button class="btn btn-primary my-2 d-inline" type="submit"> Submit </button>
-           <a class="btn btn-secondary my-2 d-inline" href="{{route('admin.testimony.vetted.list')}}"> Reset </a>
+            <a class="btn btn-secondary my-2 d-inline" href="{{ route('admin.testimony.vetted.list') }}"> Reset </a>
         </div>
 
     </form>
@@ -76,13 +76,18 @@
                                 <td>
 
 
-                                    <a href="{{ route('admin.testimonies.show', $vettedTestimony->id) }}"
+                                    <a href="{{ route('admin.testimony.vetted.show', $vettedTestimony->id) }}"
                                         class="btn btn-sm btn-white text-primary mr-2"><i class="far fa-eye mr-1"></i>
                                         View</a>
-                                    <a href="{{ route('admin.testimonies.delete', $vettedTestimony->id) }}"
-                                        class="btn btn-sm btn-white text-danger mr-2"
-                                        onclick="return confirm('Warning! This is a dangerous action. Are you sure about this ? ');"><i
-                                            class="far fa-trash-alt mr-1"></i>Delete</a>
+                                    <form method="post"
+                                        action="{{ route('admin.testimony.vetted.delete', $vettedTestimony->id) }}">
+
+                                        @method('DELETE')
+                                        @csrf()
+                                        <button class="btn btn-sm btn-white text-danger mr-2"
+                                            onclick="return confirm('Warning! This is a dangerous action. Are you sure about this ? ');"><i
+                                                class="far fa-trash-alt mr-1"></i>Delete</button>
+                                    </form>
 
                                 </td>
                             </tr>
