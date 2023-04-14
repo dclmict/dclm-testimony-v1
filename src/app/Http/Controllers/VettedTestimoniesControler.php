@@ -67,9 +67,9 @@ class VettedTestimoniesControler extends Controller
 
     public function delete(VettedTestimony $vt)
     {
+
+
         $vt = VettedTestimony::findOrFail($vt->id);
-        //$testimony->testifier->delete(); dangerous line never delete the testifier
-        //delete testimony file from s3
 
 
         $file = $vt->file_dir;
@@ -81,8 +81,6 @@ class VettedTestimoniesControler extends Controller
 
         $vt->delete();
         return redirect()->route('admin.testimony.vetted.list');
-        //or
-        // $testimony = Testimony::findOrFail($testimony->id);
-        // $testimony->delete();
+      
     }
 }

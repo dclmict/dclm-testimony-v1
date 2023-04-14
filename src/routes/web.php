@@ -60,5 +60,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:Admin']], func
 
     Route::get('/testimonies/vetted/show/{id}', [VettedTestimoniesControler::class, 'show'])->name("admin.testimony.vetted.show");
 
-    Route::delete('/testimonies/vetted/delete/{id}', [VettedTestimoniesControler::class, 'delete'])->name("admin.testimony.vetted.delete");
+    Route::delete('/testimonies/vetted/delete/{vt}', [VettedTestimoniesControler::class, 'delete'])->name("admin.testimony.vetted.delete");
 });
