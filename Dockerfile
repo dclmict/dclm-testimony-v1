@@ -30,11 +30,7 @@ RUN mkdir /var/log/php && \
   touch /var/log/php/errors.log && chmod 777 /var/log/php/errors.log
 
 ## deployment
-RUN composer install --optimize-autoloader --no-dev && \
-  chown -R www:www-data /var/www && \
-  rm -rf /var/www/html && \
-  # give scripts execute permissions
-  chmod +x /var/docker/run.sh
+RUN chmod +x /var/docker/run.sh
 
 EXPOSE 89
 ENTRYPOINT ["/var/docker/run.sh"]

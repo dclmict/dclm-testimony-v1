@@ -10,6 +10,15 @@
 #
 # Based on https://gist.github.com/2206527
 
+# deploy
+echo "\033[31mRunning composer install\033[0m"
+composer update
+composer install --optimize-autoloader --no-dev
+chown -R www-data:www-data .
+find . -type d -exec chmod 2775 {} \;
+find . -type f -exec chmod 0664 {} \;
+rm -rf /var/www/html
+
 # laravel something
 echo -e "\033[31mRunning laravel commands\033[0m"
 cd /var/www
@@ -20,19 +29,3 @@ php artisan optimize
 # start supervisord
 echo -e "\033[31mStarting all services with supervisord\033[0m"
 /usr/bin/supervisord -c /etc/supervisord.conf
-
-# make app run on /testimony/ location
-if [ -e "/var/www/public/testimony" ]; then
-  echo "\033[31mrecreating /testimony symbolic link...\033[0m"
-  cd /var/www/public
-  rm testimony
-  ln -s /var/www/public testimony
-  chown -R www:www-data testimony
-  cd /var/www
-else
-  echo "\033[31mcreating symbolic link for testimony...\033[0m"
-  cd /var/www/public
-  ln -s /var/www/public testimony
-  chown -R www:www-data testimony
-  cd /var/www
-fi

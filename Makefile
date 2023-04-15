@@ -1,3 +1,5 @@
+include ./src/.env
+
 repo:
 	echo "\033[31mEnter app code folder name:\033[0m ";
 	read -r code; \
@@ -51,22 +53,22 @@ git:
 	fi
 
 build:
-	@if docker images | grep -q opeoniye/dclm-testimony; then \
-		echo "Removing \033[31mopeoniye/dclm-testimony\033[0m image"; \
+	@if docker images | grep -q $(DIN):$(DIV); then \
+		echo "Removing \033[31m$(DIN):$(DIV)\033[0m image"; \
 		echo y | docker image prune --filter="dangling=true"; \
-		docker image rm opeoniye/dclm-testimony; \
-		echo "Building \033[31mopeoniye/dclm-testimony\033[0m image"; \
-		docker build -t opeoniye/dclm-testimony:latest .; \
-		docker images | grep opeoniye/dclm-testimony; \
+		docker image rm $(DIN):$(DIV); \
+		echo "Building \033[31m$(DIN):$(DIV)\033[0m image"; \
+		docker build -t $(DIN):$(DIV) .; \
+		docker images | grep $(DIN):$(DIV); \
 	else \
-		echo "Building \033[31mopeoniye/dclm-testimony\033[0m image"; \
-		docker build -t opeoniye/dclm-testimony:latest .; \
-		docker images | grep opeoniye/dclm-testimony; \
+		echo "Building \033[31m$(DIN):$(DIV)\033[0m image"; \
+		docker build -t $(DIN):$(DIV) .; \
+		docker images | grep $(DIN):$(DIV); \
 	fi
 
 push:
 	cat ops/docker/pin | docker login -u opeoniye --password-stdin
-	docker push opeoniye/dclm-testimony:latest
+	docker push $(DIN):$(DIV)
 
 up:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
@@ -77,10 +79,29 @@ dev:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
 
 prod:
-	cp ./ops/.env.prod ./src/.env
-	cp ./docker-prod.yml ./src/docker-compose.yml
-	docker pull opeoniye/dclm-testimony:latest
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d
+	@if ls /var/docker | grep -q $(DIN):$(DIV); then \
+		echo "\033[31mDirectory exists, starting container...\033[0m"; \
+		touch ops/.env.prod; \
+		echo "\033[32mPaste .env content and save with :wq\033[0m"; \
+		vim ops/.env.prod; \
+		cp ./ops/.env.prod ./src/.env; \
+		cp ./docker-prod.yml ./src/docker-compose.yml; \
+		docker pull $(DIN):$(DIV); \
+		docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d; \
+	else \
+		"\033[31mDirectory not found, setting up project...\033[0m"; \
+		mkdir -p /var/docker/dclm-events; \
+		cd /var/docker/dclm-events; \
+		git clone https://github.com/dclmict/dclm-events.git .; \
+		sudo chown -R ubuntu:ubuntu .; \
+		touch ops/.env.prod; \
+		echo "\033[32mPaste .env content and save with :wq\033[0m"; \
+		vim ops/.env.prod; \
+		cp ./ops/.env.prod ./src/.env; \
+		cp ./docker-prod.yml ./src/docker-compose.yml; \
+		docker pull $(DIN):$(DIV); \
+		docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d; \
+	fi
 
 down:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env down
