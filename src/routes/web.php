@@ -28,6 +28,11 @@ Route::get('thanks', function () {
     return view('thanks');
 })->name('thanks');
 
+
+Route::get('/token', function () {
+    return csrf_token(); 
+});
+
 // App routes
 Route::get('/', [TestimonyFormController::class, 'show'])->name("testimony.show");
 Route::post('/testimony/store', [TestimonyFormController::class, 'store'])->name("testimony.store");
