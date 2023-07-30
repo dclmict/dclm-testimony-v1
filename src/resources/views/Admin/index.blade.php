@@ -1,5 +1,11 @@
 @extends('Admin.layout.main')
 @section('content')
+    @if (session('msg'))
+    
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Hi 👋 {{ Auth::user()->name }}, </strong> {{ session('msg') }}
+        </div>
+    @endif
     <h1 class="h3 mb-4 text-gray-800">Dashbord</h1>
 
     <div class="row">
@@ -53,7 +59,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h3 class="font-weight-bold text-dark text-center text-xs">Ongoing Crusade Testimonies</h3>
-                            <h2 class="text-dark font-weigth-thin text-center">{{ $active? $active->testimonies->count() :0 }}</h2>
+                            <h2 class="text-dark font-weigth-thin text-center">
+                                {{ $active ? $active->testimonies->count() : 0 }}</h2>
                         </div>
                     </div>
                 </div>

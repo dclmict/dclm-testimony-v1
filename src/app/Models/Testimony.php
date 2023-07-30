@@ -32,6 +32,7 @@ class Testimony extends Model
 
         if ($file) {
 
+
             $testimony->saveFile($file, $extension);
         }
     }
@@ -39,9 +40,13 @@ class Testimony extends Model
     public function saveFile($file, $extension)
     {
         $fileName = $this->testifier->email . '-' . time() . '.' . $extension;
+
         $active = CrusadeTour::whereIsActive(true)->first();
+
         try {
+
             Storage::disk('s3')->put("dclm-testimony/" . $active->slug . "/" . $fileName, $file);
+
             $this->file_dir = $fileName;
             $this->save();
         } catch (\Throwable $th) {
