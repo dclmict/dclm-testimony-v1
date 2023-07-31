@@ -78,5 +78,5 @@ jobs:
         run: |
           ssh -o "StrictHostKeyChecking=no" ubuntu@dclm.org \
             "cd /var/docker/dclm-testimony && make down && make up"
-          ssh user@your_server_ip_or_hostname \
-            "docker stop your-container-name || true"
+          # ssh user@your_server_ip_or_hostname \
+          #   "docker stop your-container-name || true"
