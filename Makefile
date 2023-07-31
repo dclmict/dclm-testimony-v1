@@ -4,10 +4,10 @@ SHELL := /bin/bash
 
 # copy .env file based on environment
 SRC := $(shell os=$$(uname -s); \
-	if [[ "$$os" == "Linux" ]]; then \
+	if [ "$$os" = "Linux" ]; then \
 		cp ./ops/.env.prod ./src/.env; \
 		cp ./docker-prod.yml ./src/docker-compose.yml; \
-	elif [[ "$$os" == "Darwin" ]]; then \
+	elif [ "$$os" = "Darwin" ]; then \
 		cp ./ops/.env.dev ./src/.env; \
 		cp ./docker-dev.yml ./src/docker-compose.yml; \
 	else \
