@@ -9,7 +9,6 @@ RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # copy code
 COPY --chown=www:www-data ./src /var/www
-COPY ./ops/docker /var/docker
 
 # set permissions for laravel app
 RUN chmod -R ug+w /var/www/storage
@@ -30,5 +29,4 @@ COPY ./ops/docker/ngx/log.conf /etc/nginx/snippets/logging.conf
 ## deployment
 RUN chmod +x /var/docker/run.sh
 
-EXPOSE 89
 ENTRYPOINT ["/var/docker/run.sh"]
