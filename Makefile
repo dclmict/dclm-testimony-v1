@@ -124,8 +124,8 @@ push:
 
 up:
 	@echo -e "\033[31mStarting container in prod environment...\033[0m"; \
-	if [[ "$$(uname -s)" = "Linux" ]]; then \
-		if [ -f ops/.env.prod]; then \
+	if [ "$$(uname -s)" = "Linux" ]; then \
+		if [ -f ops/.env.prod ]; then \
 			cp ./ops/.env.prod ./src/.env; \
 			docker pull $(DIN):$(DIV); \
 			docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d; \
@@ -133,7 +133,7 @@ up:
 			echo -e "ops/.env.prod not found."; \
 			exit 1; \
 		fi; \
-	elif [[ "$$(uname -s)" = "Darwin" ]]; then \
+	elif [ "$$(uname -s)" = "Darwin" ]; then \
 		echo -e "\033[31mStarting container in dev environment...\033[0m"; \
 		docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d; \
 	else \
