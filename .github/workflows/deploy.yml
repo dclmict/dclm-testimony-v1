@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Make envfile
+        id: envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_COMPOSE_PROJECT_NAME: ${{ secrets.COMPOSE_PROJECT_NAME }}
@@ -76,7 +77,9 @@ jobs:
 
       - name: SSH into the server and run the app
         run: |
+          # copy .env.prod to deploy server
+          scp -o "StrictHostKeyChecking=no" -r ops/.env.prod ubuntu@dclm.org:/var/docker/dclm-testimony/ops
+
+          # Deploy new app    
           ssh -o "StrictHostKeyChecking=no" ubuntu@dclm.org \
             "cd /var/docker/dclm-testimony && make down && make up"
-          # ssh user@your_server_ip_or_hostname \
-          #   "docker stop your-container-name || true"
