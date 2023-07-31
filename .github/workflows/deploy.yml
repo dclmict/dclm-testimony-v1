@@ -21,6 +21,7 @@ jobs:
           envkey_COMPOSE_PROJECT_NAME: ${{ secrets.COMPOSE_PROJECT_NAME }}
           envkey_CN: ${{ secrets.CN }}
           envkey_DIN: ${{ secrets.DIN }}
+          envkey_DIV: ${{ secrets.DIV }}
           envkey_DLU: ${{ secrets.DLU }}
           envkey_DLP: ${{ secrets.DLP }}
           envkey_REPO: ${{ secrets.REPO }}
