@@ -1,0 +1,82 @@
+name: Deploy to Server
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_COMPOSE_PROJECT_NAME: ${{ secrets.COMPOSE_PROJECT_NAME }}
+          envkey_CN: ${{ secrets.CN }}
+          envkey_DIN: ${{ secrets.DIN }}
+          envkey_DLU: ${{ secrets.DLU }}
+          envkey_DLP: ${{ secrets.DLP }}
+          envkey_REPO: ${{ secrets.REPO }}
+          envkey_REPOS: ${{ secrets.REPOS }}
+          envkey_APP_NAME: ${{ secrets.APP_NAME }}
+          envkey_APP_ENV: ${{ secrets.APP_ENV }}
+          envkey_APP_KEY: ${{ secrets.APP_KEY }}
+          envkey_APP_DEBUG: ${{ secrets.APP_DEBUG }}
+          envkey_APP_URL: ${{ secrets.APP_URL }}
+          envkey_LOG_CHANNEL: ${{ secrets.LOG_CHANNEL }}
+          envkey_LOG_DEPRECATIONS_CHANNEL: ${{ secrets.LOG_DEPRECATIONS_CHANNEL }}
+          envkey_LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
+          envkey_DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+          envkey_DB_HOST: ${{ secrets.DB_HOST }}
+          envkey_DB_PORT: ${{ secrets.DB_PORT }}
+          envkey_DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          envkey_DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          envkey_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          envkey_BROADCAST_DRIVER: ${{ secrets.BROADCAST_DRIVER }}
+          envkey_CACHE_DRIVER: ${{ secrets.CACHE_DRIVER }}
+          envkey_FILESYSTEM_DRIVER: ${{ secrets.FILESYSTEM_DRIVER }}
+          envkey_QUEUE_CONNECTION: ${{ secrets.QUEUE_CONNECTION }}
+          envkey_SESSION_DRIVER: ${{ secrets.SESSION_DRIVER }}
+          envkey_SESSION_LIFETIME: ${{ secrets.SESSION_LIFETIME }}
+          envkey_MEMCACHED_HOST: ${{ secrets.MEMCACHED_HOST }}
+          envkey_REDIS_HOST: ${{ secrets.REDIS_HOST }}
+          envkey_REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
+          envkey_REDIS_PORT: ${{ secrets.REDIS_PORT }}
+          envkey_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          envkey_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          envkey_AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          envkey_AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
+          envkey_AWS_USE_PATH_STYLE_ENDPOINT: ${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }}
+          directory: ops
+          file_name: .env.prod
+          fail_on_empty: false
+          sort_keys: false
+
+      - name: Build and push Docker image
+        env:
+          DLU: ${{ secrets.DLU }}
+          DLP: ${{ secrets.DLP }}
+          DIN: ${{ secrets.DIN}}
+          DIV: ${{ secrets.DIV}}
+        run: |
+          docker build -t $DIN:$DIV .
+          echo $DLP | docker login -u $DLU --password-stdin
+          docker push $DIN:$DIV
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: SSH into the server and run the app
+        run: |
+          ssh -o "StrictHostKeyChecking=no" ubuntu@dclm.org \
+            "cd /var/docker/dclm-testimony && make down && make up"
+          ssh user@your_server_ip_or_hostname \
+            "docker stop your-container-name || true"

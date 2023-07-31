@@ -11,7 +11,7 @@ SRC := $(shell os=$$(uname -s); \
 		cp ./ops/.env.dev ./src/.env; \
 		cp ./docker-dev.yml ./src/docker-compose.yml; \
 	else \
-		exit 1; \
+		exit 0; \
 	fi)
 
 # load .env file
@@ -126,18 +126,11 @@ up:
 	@echo -e "\033[31mStarting container...\033[0m"; \
 	if [[ "$$(uname -s)" == "Linux" ]]; then \
 		if [ -f ops/.env.prod]; then \
-			echo -e "\033[32mPaste .env content and save with :wq\033[0m"; \
-			vim ops/.env.prod; \
 			cp ./ops/.env.prod ./src/.env; \
 			docker pull $(DIN):$(DIV); \
 			docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d; \
 		else \
-			touch ops/.env.prod; \
-			echo -e "\033[32mPaste .env content and save with :wq\033[0m"; \
-			vim ops/.env.prod; \
-			cp ./ops/.env.prod ./src/.env; \
-			docker pull $(DIN):$(DIV); \
-			docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d; \
+			exit 1; \
 		fi \
 	elif [[ "$$(uname -s)" == "Darwin" ]]; then \
 		docker compose -f ./src/docker-compose.yml --env-file ./src/.env up -d; \
@@ -155,7 +148,7 @@ stop:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env stop
 
 restart:
-	docker compose -f ./src/docker-compose.yml --env-file ./src/.env.dev restart
+	docker compose -f ./src/docker-compose.yml --env-file ./src/.env restart
 
 destroy:
 	docker compose -f ./src/docker-compose.yml --env-file ./src/.env down --volumes
