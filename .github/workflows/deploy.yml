@@ -83,4 +83,4 @@ jobs:
 
           # Deploy new app    
           ssh -o "StrictHostKeyChecking=no" ubuntu@dclm.org \
-            "cd /var/docker/dclm-testimony && make down && make up"
+            "cd /var/docker/dclm-testimony && make new && make down && make up"
