@@ -2,7 +2,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - main
+      - v1
   pull_request:
     types:
       - closed
