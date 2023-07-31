@@ -11,7 +11,7 @@ class Testifier extends Model
     use HasFactory;
 
 
-    protected $fillable = ["full_name", "country_id" , "city", "phone", "email"];
+    protected $fillable = ["full_name", "country_id", "city", "phone", "email"];
 
 
 
@@ -31,12 +31,14 @@ class Testifier extends Model
         return $testifier;
     }
 
-    public function country(){
+    public function country()
+    {
         return $this->belongsTo(Country::class);
     }
 
 
-    public function testimonies(){
+    public function testimonies()
+    {
         return $this->hasMany(Testimony::class);
     }
 }
