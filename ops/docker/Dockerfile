@@ -4,11 +4,12 @@ FROM opeoniye/php82:latest
 WORKDIR /var/www
 
 # add user for laravel application
-RUN groupadd -g 1000 www
-RUN useradd -u 1000 -ms /bin/bash -g www www
+# RUN groupadd -g 1000 www
+# RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # copy code
-COPY --chown=www:www-data ./src /var/www
+# COPY --chown=www:www-data ./src /var/www
+COPY ./src /var/www
 
 # set permissions for laravel app
 RUN chmod -R ug+w /var/www/storage

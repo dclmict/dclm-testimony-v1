@@ -1,13 +1,137 @@
-name: Deploy to Server
+name: Deploy App
+
 on:
   push:
     branches:
-      - v1
+      - main
   pull_request:
+    branches:    
+      - main
     types:
       - closed
 
+env:
+  APP_URL: ${{ secrets.APP_URL }}
+  APP_DIR: ${{ secrets.APP_DIR }}
+  SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+  SSH_HOST: ${{ secrets.SSH_HOST }}
+  WORK_DIR: ${{ secrets.WORK_DIR }}
+  SRC_APP_ENV_DIR: ${{ secrets.SRC_APP_ENV_DIR }}
+  DEST_APP_ENV_DIR: ${{ secrets.DEST_APP_ENV_DIR }}
+
 jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build and push Docker image
+        env:
+          DLU: ${{ secrets.DLU }}
+          DLP: ${{ secrets.DLP }}
+          DIN: ${{ secrets.DIN}}
+          DIV: ${{ secrets.DIV}}
+          DOCKERFILE: ${{ secrets.DOCKERFILE}}
+        run: |
+          docker build -t $DIN:$DIV -f $DOCKERFILE .
+          echo $DLP | docker login -u $DLU --password-stdin
+          docker push $DIN:$DIV
+
+  create-dns-record:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Create Route 53 DNS Record
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          HOSTED_ZONE_ID: ${{ secrets.HOSTED_ZONE_ID }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+          URL1: ${{ secrets.URL1 }}
+          URL2: ${{ secrets.URL2 }}
+          URL3: ${{ secrets.URL3 }}
+        run: |
+          chmod +x create-dns-record.sh
+          ./create-dns-record.sh
+        working-directory: ${{ env.WORK_DIR }}
+
+  create-nginx-vhost:
+    runs-on: ubuntu-latest
+    needs: create-dns-record
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Export vhost into file
+        env:
+          VHOST_CONFIG: ${{ vars.NGX }}
+        run: |
+          echo -e "$VHOST_CONFIG" > vhost.conf
+          tr -d '\r' < vhost.conf > vhost_fixed.conf
+          mv vhost_fixed.conf vhost.conf
+
+      - name: Copy file to SSH server
+        run: |
+          scp -o "StrictHostKeyChecking=no" -r vhost.conf "$SSH_USERNAME@$SSH_HOST:$DEST_APP_ENV_DIR"
+
+      - name: Create Nginx vhost
+        env:
+          CERT: ${{ secrets.CERT }}
+          CERT_KEY: ${{ secrets.CERT_KEY }}
+          APP_PROXY_URL: ${{ secrets.APP_PROXY_URL }}
+          NGINX_CONF_DIR: ${{ secrets.NGINX_CONF_DIR }}
+          NGINX_CONF_FILE: ${{ secrets.NGINX_CONF_FILE }}
+        run: |
+          ssh -T -o "StrictHostKeyChecking=no" "$SSH_USERNAME@$SSH_HOST" \
+          "CERT=$CERT" \
+          "CERT_KEY=$CERT_KEY" \
+          "APP_URL=$APP_URL" \
+          "APP_PROXY_URL=$APP_PROXY_URL" \
+          "NGINX_CONF_DIR=$NGINX_CONF_DIR" \
+          "NGINX_CONF_FILE=$NGINX_CONF_FILE" \
+          "DEST_APP_ENV_DIR=$DEST_APP_ENV_DIR" \
+          'bash -s' < ./create-nginx-vhost.sh
+        working-directory: ${{ env.WORK_DIR }}
+
+  clone-app:
+    runs-on: ubuntu-latest
+    needs: create-nginx-vhost
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+    
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Clone app
+        env:
+          REPO: ${{ secrets.REPO }}
+          GIT_BRANCH: ${{ secrets.GIT_BRANCH }}
+        run: |
+          ssh -T -o "StrictHostKeyChecking=no" "$SSH_USERNAME@$SSH_HOST" \
+          "APP_DIR=$APP_DIR" \
+          "REPO=$REPO" \
+          "GIT_BRANCH=$GIT_BRANCH" \
+          'bash -s' < ./clone-app.sh
+        working-directory: ${{ env.WORK_DIR }}
+
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -19,13 +143,20 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_COMPOSE_PROJECT_NAME: ${{ secrets.COMPOSE_PROJECT_NAME }}
+          envkey_COMPOSE_NETWORK: ${{ secrets.COMPOSE_NETWORK }}
+          envkey_COMPOSE_PORT: ${{ secrets.COMPOSE_PORT }}
+          envkey_CERT: ${{ secrets.CERT }}
+          envkey_CERT_KEY: ${{ secrets.CERT_KEY }}
           envkey_CN: ${{ secrets.CN }}
           envkey_DIN: ${{ secrets.DIN }}
           envkey_DIV: ${{ secrets.DIV }}
           envkey_DLU: ${{ secrets.DLU }}
           envkey_DLP: ${{ secrets.DLP }}
+          envkey_DCF: ${{ secrets.DCF }}
+          envkey_DOCKERFILE: ${{ secrets.DOCKERFILE }}
+          envkey_ENV: ${{ secrets.ENV }}
+          envkey_APP_ENV: ${{ secrets.APP_ENV }}
           envkey_REPO: ${{ secrets.REPO }}
-          envkey_REPOS: ${{ secrets.REPOS }}
           envkey_APP_NAME: ${{ secrets.APP_NAME }}
           envkey_APP_ENV: ${{ secrets.APP_ENV }}
           envkey_APP_KEY: ${{ secrets.APP_KEY }}
@@ -46,41 +177,30 @@ jobs:
           envkey_QUEUE_CONNECTION: ${{ secrets.QUEUE_CONNECTION }}
           envkey_SESSION_DRIVER: ${{ secrets.SESSION_DRIVER }}
           envkey_SESSION_LIFETIME: ${{ secrets.SESSION_LIFETIME }}
-          envkey_MEMCACHED_HOST: ${{ secrets.MEMCACHED_HOST }}
-          envkey_REDIS_HOST: ${{ secrets.REDIS_HOST }}
-          envkey_REDIS_PASSWORD: ${{ secrets.REDIS_PASSWORD }}
-          envkey_REDIS_PORT: ${{ secrets.REDIS_PORT }}
           envkey_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           envkey_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           envkey_AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           envkey_AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
           envkey_AWS_USE_PATH_STYLE_ENDPOINT: ${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }}
-          directory: ops
-          file_name: .env.prod
+          directory: ${{ env.WORK_DIR }}
+          file_name: ${{ env.ENV_FILE }}
           fail_on_empty: false
           sort_keys: false
 
-      - name: Build and push Docker image
-        env:
-          DLU: ${{ secrets.DLU }}
-          DLP: ${{ secrets.DLP }}
-          DIN: ${{ secrets.DIN}}
-          DIV: ${{ secrets.DIV}}
-        run: |
-          docker build -t $DIN:$DIV .
-          echo $DLP | docker login -u $DLU --password-stdin
-          docker push $DIN:$DIV
-
       - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.5.3
+        uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: SSH into the server and run the app
+      - name: Copy envfile
         run: |
-          # copy .env.prod to deploy server
-          scp -o "StrictHostKeyChecking=no" -r ops/.env.prod ubuntu@dclm.org:/var/docker/dclm-testimony/ops
+          # Copy .env file into deploy server
+          scp -o "StrictHostKeyChecking=no" -r "$SRC_APP_ENV_DIR" "$SSH_USERNAME@$SSH_HOST:$DEST_APP_ENV_DIR"
 
-          # Deploy new app    
-          ssh -o "StrictHostKeyChecking=no" ubuntu@dclm.org \
-            "cd /var/docker/dclm-testimony && make new && make down && make up"
+      - name: Deploy app   
+        run: |
+          # Deploy the app
+          ssh -T -o "StrictHostKeyChecking=no" "$SSH_USERNAME@$SSH_HOST" \
+          "APP_DIR=$APP_DIR" \
+          'bash -s' < ./deploy-app.sh
+        working-directory: ${{ env.WORK_DIR }}
