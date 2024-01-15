@@ -65,6 +65,8 @@ compose-bams:
 	@echo "    labels:" >> ./src/docker-compose.yml
 	@echo "      logging: '"promtail"'" >> ./src/docker-compose.yml
 	@echo "      logging_jobname: '"containerlogs"'" >> ./src/docker-compose.yml
+	@echo "    storage_opt:" >> ./src/docker-compose.yml
+	@echo "      size: 20G" >> ./src/docker-compose.yml
 	@echo "    volumes:" >> ./src/docker-compose.yml
 	@echo "      - .:/var/www" >> ./src/docker-compose.yml
 	@echo "      - $(DL_NGX_CERT):/var/ssl/cert.pem" >> ./src/docker-compose.yml
@@ -86,6 +88,8 @@ compose-dclm-dev:
 	@echo "      - $(COMPOSE_PORT)" >> ./src/docker-compose.yml
 	@echo "    networks:" >> ./src/docker-compose.yml
 	@echo "      - $(COMPOSE_NETWORK)" >> ./src/docker-compose.yml
+	@echo "    storage_opt:" >> ./src/docker-compose.yml
+	@echo "      size: 20G" >> ./src/docker-compose.yml
 	@echo "    volumes:" >> ./src/docker-compose.yml
 	@echo "      - $(DL_NGX_CERT):/var/ssl/cert.pem" >> ./src/docker-compose.yml
 	@echo "      - $(DL_NGX_KEY):/var/ssl/key.pem" >> ./src/docker-compose.yml
@@ -108,6 +112,8 @@ compose-dclm-prod:
 	@echo "      - $(COMPOSE_PORT)" >> ./src/docker-compose.yml
 	@echo "    networks:" >> ./src/docker-compose.yml
 	@echo "      - $(COMPOSE_NETWORK)" >> ./src/docker-compose.yml
+	@echo "    storage_opt:" >> ./src/docker-compose.yml
+	@echo "      size: 20G" >> ./src/docker-compose.yml
 	@echo "    volumes:" >> ./src/docker-compose.yml
 	@echo "      - $(DL_NGX_CERT):/var/ssl/cert.pem" >> ./src/docker-compose.yml
 	@echo "      - $(DL_NGX_KEY):/var/ssl/key.pem" >> ./src/docker-compose.yml
