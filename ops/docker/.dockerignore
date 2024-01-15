@@ -1,27 +1,37 @@
-# ref: https://docs.docker.com/engine/reference/builder/#dockerignore-file
+# ref: https://docs.docker.com/build/building/context/#dockerignore-files
 # ref: https://www.golinuxcloud.com/dockerignore-file/
-setup
-README.md
-Makefile
-Dockerfile
-ops/docker/pin
-.git
-*/k8s*
-*/docker-*
-*/.tool-versions
-*/.editorconfig
-*/.env*
-*/.idea*
-**/*.DS_Store
-**/*.gitignore
-/src/.env
-src/docker-compose.yml
-src/testimony
-src/vendor
-src/personalizedflyer/vendor
-src/node_modules
-src/storage/app/public/**
-src/storage/logs/**
-src/storage/framework/cache/**
-src/storage/framework/sessions/**
-src/storage/framework/views/**
+#! important
+**/dclm-*
+
+# files
+**/.env
+**/*.env
+**/*.md
+**/*.log*
+**/Makefile
+**/.gitignore
+**/Dockerfile
+**/.dockerignore
+**/docker-compose.yml
+**/.DS_Store
+**/.tool-versions
+**/.editorconfig
+**/.flaskenv*
+**/*.sublime-project
+**/*.sublime-workspace
+
+# folders
+docs/
+**/.git/
+**/vendor/
+**/.idea/
+**/.vscode/
+**/.vagrant/
+**/src/node_modules
+
+# laravel specific
+*/storage/app/*
+*/storage/framework/cache/*
+*/storage/framework/sessions/*
+*/storage/framework/views/*
+*/storage/logs/*

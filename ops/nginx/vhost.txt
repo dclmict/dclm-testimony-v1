@@ -1,0 +1,16 @@
+# $DL_APP_URL (docker)
+server {
+  server_name $DL_APP_URL;
+
+  location / {
+    proxy_pass $DL_NGX_PROXY;
+    include /etc/nginx/proxy_params;
+  }
+
+  listen [::]:443 ssl http2;
+  listen 443 ssl http2;
+  include /etc/nginx/global/security.conf;
+  include /etc/nginx/global/ssl.conf; 
+  ssl_certificate $DL_NGX_CERT;
+  ssl_certificate_key $DL_NGX_KEY;
+}

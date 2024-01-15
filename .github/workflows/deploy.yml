@@ -1,206 +1,211 @@
-name: Deploy App
+name: Build & Deploy App (Public Repo)
 
 on:
   push:
     branches:
-      - main
+      - release/dev
+      - release/prod
   pull_request:
-    branches:    
-      - main
+    branches:
+      - release/dev
+      - release/prod
     types:
       - closed
 
 env:
-  APP_URL: ${{ secrets.APP_URL }}
-  APP_DIR: ${{ secrets.APP_DIR }}
-  SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-  SSH_HOST: ${{ secrets.SSH_HOST }}
-  WORK_DIR: ${{ secrets.WORK_DIR }}
-  SRC_APP_ENV_DIR: ${{ secrets.SRC_APP_ENV_DIR }}
-  DEST_APP_ENV_DIR: ${{ secrets.DEST_APP_ENV_DIR }}
+  DL_APP_NAME: ${{ secrets.DL_APP_NAME }}
+  DL_HOST_URL: ${{ secrets.DL_HOST_URL }}
+  DL_HOST_USER: ${{ secrets.DL_HOST_USER }}
+  DL_APP_URL: ${{ secrets.DL_APP_URL }}
+  DL_APP_DIR: ${{ secrets.DL_APP_DIR }}
+  DL_ENV_FILE: ${{ secrets.DL_ENV_FILE }}
+  DL_ENV_SRC: ${{ secrets.DL_ENV_SRC }}
+  DL_ENV_DEST: ${{ secrets.DL_ENV_DEST }}
+  DL_WORK_DIR: ${{ secrets.DL_WORK_DIR }}
 
 jobs:
   build-image:
     runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/release/prod' && 'prod' || 'dev' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Build and push Docker image
-        env:
-          DLU: ${{ secrets.DLU }}
-          DLP: ${{ secrets.DLP }}
-          DIN: ${{ secrets.DIN}}
-          DIV: ${{ secrets.DIV}}
-          DOCKERFILE: ${{ secrets.DOCKERFILE}}
+      - name: Check NODE_ENV 
+        id: check_node_env
         run: |
-          docker build -t $DIN:$DIV -f $DOCKERFILE .
-          echo $DLP | docker login -u $DLU --password-stdin
-          docker push $DIN:$DIV
+          if [ -n "${{ secrets.NODE_ENV }}" ]; then  
+            echo "::set-output name=exists::true"
+          else
+            echo "::set-output name=exists::false"
+          fi
+      - name: If NODE_ENV exists
+        if: steps.check_node_env.outputs.exists == 'true'
+        env:
+          DL_DK_HUB: ${{ secrets.DL_DK_HUB}}
+          DL_DK_TOKEN: ${{ secrets.DL_DK_TOKEN }}
+          DL_APP_DK_FILE: ${{ secrets.DL_APP_DK_FILE}}
+          DL_DK_IMAGE: ${{ secrets.DL_DK_IMAGE}}
+          NODE_ENV: ${{ secrets.NODE_ENV}}
+        run: |
+          # Build and push Docker image
+          ln -s ops/docker/.dockerignore .dockerignore
+          docker build --build-arg NODE_ENV=$NODE_ENV -t $DL_DK_IMAGE -f $DL_APP_DK_FILE .
+          rm .dockerignore
+          echo $DL_DK_TOKEN | docker login -u $DL_DK_HUB --password-stdin
+          docker push $DL_DK_IMAGE
+      - name: If NODE_ENV does NOT exist
+        if: steps.check_node_env.outputs.exists == 'false'
+        env:
+          DL_DK_HUB: ${{ secrets.DL_DK_HUB}}
+          DL_DK_TOKEN: ${{ secrets.DL_DK_TOKEN }}
+          DL_APP_DK_FILE: ${{ secrets.DL_APP_DK_FILE}}
+          DL_DK_IMAGE: ${{ secrets.DL_DK_IMAGE}}
+        run: |
+          # Build and push Docker image
+          ln -s ops/docker/.dockerignore .dockerignore
+          docker build -t $DL_DK_IMAGE -f $DL_APP_DK_FILE .
+          rm .dockerignore
+          echo $DL_DK_TOKEN | docker login -u $DL_DK_HUB --password-stdin
+          docker push $DL_DK_IMAGE
 
   create-dns-record:
     runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/release/prod' && 'prod' || 'dev' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.DL_AWS_KEY }}
+          aws-secret-access-key: ${{ secrets.DL_AWS_SECRET }}
           aws-region: us-east-1
-
       - name: Create Route 53 DNS Record
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          HOSTED_ZONE_ID: ${{ secrets.HOSTED_ZONE_ID }}
-          SERVER_IP: ${{ secrets.SERVER_IP }}
-          URL1: ${{ secrets.URL1 }}
-          URL2: ${{ secrets.URL2 }}
-          URL3: ${{ secrets.URL3 }}
+          DL_AWS_R53_ZONE_ID: ${{ secrets.DL_AWS_R53_ZONE_ID }}
+          DL_HOST_PUBLIC_IP: ${{ secrets.DL_HOST_PUBLIC_IP }}
+          DL_URL1: ${{ secrets.DL_URL1 }}
+          DL_URL2: ${{ secrets.DL_URL2 }}
+          DL_URL3: ${{ secrets.DL_URL3 }}
         run: |
-          chmod +x create-dns-record.sh
-          ./create-dns-record.sh
-        working-directory: ${{ env.WORK_DIR }}
-
-  create-nginx-vhost:
+          chmod +x app.sh
+          ./app.sh 7
+        working-directory: ${{ env.DL_WORK_DIR }}
+  
+  create-app-dir:
     runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/release/prod' && 'prod' || 'dev' }}
     needs: create-dns-record
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Export vhost into file
+          ssh-private-key: ${{ secrets.DL_HOST_SSH_KEY }}
+      - name: Create app directory
         env:
-          VHOST_CONFIG: ${{ vars.NGX }}
+          DL_APP_DK_DIR: ${{ secrets.DL_APP_DK_DIR }}
         run: |
-          echo -e "$VHOST_CONFIG" > vhost.conf
+          # Create app directory
+          ssh -T -o "StrictHostKeyChecking=no" "$DL_HOST_USER@$DL_HOST_URL" \
+          "DL_APP_NAME=$DL_APP_NAME" \
+          "DL_APP_DK_DIR=$DL_APP_DK_DIR" \
+          'bash -s' < ./app.sh 8
+        working-directory: ${{ env.DL_WORK_DIR }}
+  
+  clone-app-repo:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/release/prod' && 'prod' || 'dev' }}
+    needs: create-app-dir
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.DL_HOST_SSH_KEY }}
+      - name: Clone app
+        env:
+          DL_GH_REPO: ${{ secrets.DL_GH_REPO }}
+          DL_GH_BRANCH: ${{ secrets.DL_GH_BRANCH }}
+        run: |
+          ssh -T -o "StrictHostKeyChecking=no" "$DL_HOST_USER@$DL_HOST_URL" \
+          "DL_APP_DIR=$DL_APP_DIR" \
+          "DL_GH_REPO=$DL_GH_REPO" \
+          "DL_GH_BRANCH=$DL_GH_BRANCH" \
+          'bash -s' < ./app.sh 9
+        working-directory: ${{ env.DL_WORK_DIR }}
+  
+  create-nginx-vhost:
+    runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/release/prod' && 'prod' || 'dev' }}
+    needs: clone-app-repo
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.DL_HOST_SSH_KEY }}
+      - name: Create vhost config file
+        env:
+          DL_NGX_VHOST: ${{ vars.DL_NGX_VHOST }}
+        run: |
+          echo -e "$DL_NGX_VHOST" > vhost.conf
           tr -d '\r' < vhost.conf > vhost_fixed.conf
           mv vhost_fixed.conf vhost.conf
-
-      - name: Copy file to SSH server
-        run: |
-          scp -o "StrictHostKeyChecking=no" -r vhost.conf "$SSH_USERNAME@$SSH_HOST:$DEST_APP_ENV_DIR"
-
+          scp -o "StrictHostKeyChecking=no" -r vhost.conf "$DL_HOST_USER@$DL_HOST_URL:$DL_ENV_DEST"
       - name: Create Nginx vhost
         env:
-          CERT: ${{ secrets.CERT }}
-          CERT_KEY: ${{ secrets.CERT_KEY }}
-          APP_PROXY_URL: ${{ secrets.APP_PROXY_URL }}
-          NGINX_CONF_DIR: ${{ secrets.NGINX_CONF_DIR }}
-          NGINX_CONF_FILE: ${{ secrets.NGINX_CONF_FILE }}
+          DL_APP1: ${{ secrets.DL_APP1 }}
+          DL_APP2: ${{ secrets.DL_APP2 }}
+          DL_NGX_PROXY: ${{ secrets.DL_NGX_PROXY }}
+          DL_NGX_CONF: ${{ secrets.DL_NGX_CONF }}
+          DL_NGX_CERT: ${{ secrets.DL_NGX_CERT }}
+          DL_NGX_KEY: ${{ secrets.DL_NGX_KEY }}
+          DL_HOST_NGX_DIR: ${{ secrets.DL_HOST_NGX_DIR }}
         run: |
-          ssh -T -o "StrictHostKeyChecking=no" "$SSH_USERNAME@$SSH_HOST" \
-          "CERT=$CERT" \
-          "CERT_KEY=$CERT_KEY" \
-          "APP_URL=$APP_URL" \
-          "APP_PROXY_URL=$APP_PROXY_URL" \
-          "NGINX_CONF_DIR=$NGINX_CONF_DIR" \
-          "NGINX_CONF_FILE=$NGINX_CONF_FILE" \
-          "DEST_APP_ENV_DIR=$DEST_APP_ENV_DIR" \
-          'bash -s' < ./create-nginx-vhost.sh
-        working-directory: ${{ env.WORK_DIR }}
-
-  clone-app:
+          ssh -T -o "StrictHostKeyChecking=no" "$DL_HOST_USER@$DL_HOST_URL" \
+          "DL_APP1=$DL_APP1" \
+          "DL_APP2=$DL_APP2" \
+          "DL_ENV_DEST=$DL_ENV_DEST" \
+          "DL_APP_URL=$DL_APP_URL" \
+          "DL_NGX_PROXY=$DL_NGX_PROXY" \
+          "DL_NGX_CONF=$DL_NGX_CONF" \
+          "DL_NGX_CERT=$DL_NGX_CERT" \
+          "DL_NGX_KEY=$DL_NGX_KEY" \
+          "DL_HOST_NGX_DIR=$DL_HOST_NGX_DIR" \
+          'bash -s' < ./app.sh 10
+        working-directory: ${{ env.DL_WORK_DIR }}
+  
+  deploy-app:
     runs-on: ubuntu-latest
+    environment: ${{ github.ref == 'refs/heads/release/prod' && 'prod' || 'dev' }}
     needs: create-nginx-vhost
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-    
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Clone app
-        env:
-          REPO: ${{ secrets.REPO }}
-          GIT_BRANCH: ${{ secrets.GIT_BRANCH }}
-        run: |
-          ssh -T -o "StrictHostKeyChecking=no" "$SSH_USERNAME@$SSH_HOST" \
-          "APP_DIR=$APP_DIR" \
-          "REPO=$REPO" \
-          "GIT_BRANCH=$GIT_BRANCH" \
-          'bash -s' < ./clone-app.sh
-        working-directory: ${{ env.WORK_DIR }}
-
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Make envfile
+      - name: Generate envfile
         id: envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_COMPOSE_PROJECT_NAME: ${{ secrets.COMPOSE_PROJECT_NAME }}
-          envkey_COMPOSE_NETWORK: ${{ secrets.COMPOSE_NETWORK }}
-          envkey_COMPOSE_PORT: ${{ secrets.COMPOSE_PORT }}
-          envkey_CERT: ${{ secrets.CERT }}
-          envkey_CERT_KEY: ${{ secrets.CERT_KEY }}
-          envkey_CN: ${{ secrets.CN }}
-          envkey_DIN: ${{ secrets.DIN }}
-          envkey_DIV: ${{ secrets.DIV }}
-          envkey_DLU: ${{ secrets.DLU }}
-          envkey_DLP: ${{ secrets.DLP }}
-          envkey_DCF: ${{ secrets.DCF }}
-          envkey_DOCKERFILE: ${{ secrets.DOCKERFILE }}
-          envkey_ENV: ${{ secrets.ENV }}
-          envkey_ENV_ENV: ${{ secrets.ENV_ENV }}
-          envkey_REPO: ${{ secrets.REPO }}
-          envkey_APP_NAME: ${{ secrets.APP_NAME }}
-          envkey_APP_ENV: ${{ secrets.APP_ENV }}
-          envkey_APP_KEY: ${{ secrets.APP_KEY }}
-          envkey_APP_DEBUG: ${{ secrets.APP_DEBUG }}
-          envkey_APP_URL: ${{ secrets.APP_URL }}
-          envkey_LOG_CHANNEL: ${{ secrets.LOG_CHANNEL }}
-          envkey_LOG_DEPRECATIONS_CHANNEL: ${{ secrets.LOG_DEPRECATIONS_CHANNEL }}
-          envkey_LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
-          envkey_DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
-          envkey_DB_HOST: ${{ secrets.DB_HOST }}
-          envkey_DB_PORT: ${{ secrets.DB_PORT }}
-          envkey_DB_DATABASE: ${{ secrets.DB_DATABASE }}
-          envkey_DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          envkey_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          envkey_BROADCAST_DRIVER: ${{ secrets.BROADCAST_DRIVER }}
-          envkey_CACHE_DRIVER: ${{ secrets.CACHE_DRIVER }}
-          envkey_FILESYSTEM_DRIVER: ${{ secrets.FILESYSTEM_DRIVER }}
-          envkey_QUEUE_CONNECTION: ${{ secrets.QUEUE_CONNECTION }}
-          envkey_SESSION_DRIVER: ${{ secrets.SESSION_DRIVER }}
-          envkey_SESSION_LIFETIME: ${{ secrets.SESSION_LIFETIME }}
-          envkey_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          envkey_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          envkey_AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          envkey_AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
-          envkey_AWS_USE_PATH_STYLE_ENDPOINT: ${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }}
-          directory: ${{ env.WORK_DIR }}
-          file_name: ${{ env.ENV_FILE }}
+          directory: ${{ env.DL_ENV_SRC }}
+          file_name: ${{ env.DL_ENV_FILE }}
           fail_on_empty: false
           sort_keys: false
-
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
+          ssh-private-key: ${{ secrets.DL_HOST_SSH_KEY }}
       - name: Copy envfile
         run: |
           # Copy .env file into deploy server
-          scp -o "StrictHostKeyChecking=no" -r "$SRC_APP_ENV_DIR" "$SSH_USERNAME@$SSH_HOST:$DEST_APP_ENV_DIR"
-
-      - name: Deploy app   
+          scp -o "StrictHostKeyChecking=no" -r "$DL_ENV_SRC/$DL_ENV_FILE" "$DL_HOST_USER@$DL_HOST_URL:$DL_ENV_DEST"
+      - name: Deploy app
         run: |
-          # Deploy the app
-          ssh -T -o "StrictHostKeyChecking=no" "$SSH_USERNAME@$SSH_HOST" \
-          "APP_DIR=$APP_DIR" \
-          'bash -s' < ./deploy-app.sh
-        working-directory: ${{ env.WORK_DIR }}
+          ssh -T -o "StrictHostKeyChecking=no" "$DL_HOST_USER@$DL_HOST_URL" \
+          "DL_APP_DIR=$DL_APP_DIR" \
+          'bash -s' < ./app.sh 11
+        working-directory: ${{ env.DL_WORK_DIR }}
