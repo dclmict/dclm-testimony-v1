@@ -1,13 +1,8 @@
+# https://git-scm.com/docs/gitignore
 # files
-dclm-testimony
-ops/bams-dev.env
-ops/dclm-prod.env
+dclm-*
+.cache*
+**/*.env*
 
 # folders
 _
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-/storage

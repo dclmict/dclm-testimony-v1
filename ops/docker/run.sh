@@ -22,7 +22,18 @@ rm -rf /var/www/html
 # laravel something
 echo -e "\033[31mRunning laravel commands\033[0m"
 cd /var/www
+# clear cache
 php artisan cache:clear
+php artisan config:clear
+php artisan event:clear
+php artisan route:clear
+php artisan view:clear
+php artisan optimize:clear
+# set cache
+php artisan config:cache
+php artisan event:cache
+php artisan route:cache
+php artisan view:cache
 php artisan optimize
 # php artisan migrate:fresh --seed
 

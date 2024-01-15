@@ -155,7 +155,7 @@ jobs:
           envkey_DCF: ${{ secrets.DCF }}
           envkey_DOCKERFILE: ${{ secrets.DOCKERFILE }}
           envkey_ENV: ${{ secrets.ENV }}
-          envkey_APP_ENV: ${{ secrets.APP_ENV }}
+          envkey_ENV_ENV: ${{ secrets.ENV_ENV }}
           envkey_REPO: ${{ secrets.REPO }}
           envkey_APP_NAME: ${{ secrets.APP_NAME }}
           envkey_APP_ENV: ${{ secrets.APP_ENV }}
