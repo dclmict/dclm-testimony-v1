@@ -190,7 +190,64 @@ jobs:
         id: envfile
         uses: SpicyPizza/create-envfile@v2.0
         with:
+          envkey_DL_APP1: ${{ secrets.DL_APP1 }}
+          envkey_DL_APP2: ${{ secrets.DL_APP2 }}
+          envkey_DL_APP3: ${{ secrets.DL_APP3 }}
+          envkey_DL_TLD: ${{ secrets.DL_TLD }}
+          envkey_DL_ORG_ID: ${{ secrets.DL_ORG_ID }}
+          envkey_DL_HOST_ENV: ${{ secrets.DL_HOST_ENV }}
+          envkey_DL_HOST_NAME: ${{ secrets.DL_HOST_NAME }}
+          envkey_DL_HOST_LOCAL_IP: ${{ secrets.DL_HOST_LOCAL_IP }}
+          envkey_DL_HOST_SSH_DIR: ${{ secrets.DL_HOST_SSH_DIR }}
+          envkey_DL_APP_STACK: ${{ secrets.DL_APP_STACK }}
+          envkey_DL_APP_ENV_FILE: ${{ secrets.DL_APP_ENV_FILE }}
+          envkey_DL_APP_OPS_DIR: ${{ secrets.DL_APP_OPS_DIR }}
+          envkey_DL_APP_OPS_SH_DIR: ${{ secrets.DL_APP_OPS_SH_DIR }}
+          envkey_DL_APP_OPS_NGX_DIR: ${{ secrets.DL_APP_OPS_NGX_DIR }}
+          envkey_DL_APP_HOST_PORT1: ${{ secrets.DL_APP_HOST_PORT1 }}
+          envkey_DL_APP_DK_PORT1: ${{ secrets.DL_APP_DK_PORT1 }}
+          envkey_DL_APP_DK_FILE: ${{ secrets.DL_APP_DK_FILE }}
+          envkey_DL_DK_HUB: ${{ secrets.DL_DK_HUB }}
+          envkey_DL_GH_REPO_APP_NAME: ${{ secrets.DL_GH_REPO_APP_NAME }}
+          envkey_DL_GH_SSH: ${{ secrets.DL_GH_SSH }}
+          envkey_DL_APP_NAME: ${{ secrets.DL_APP_NAME }}
+          envkey_DL_DK_IMAGE: ${{ secrets.DL_DK_IMAGE }}
+          envkey_DL_DK_REPO: ${{ secrets.DL_DK_REPO }}
+          envkey_DL_GH_REPO: ${{ secrets.DL_GH_REPO }}
+          envkey_DL_GH_OWNER_REPO: ${{ secrets.DL_GH_OWNER_REPO }}
+          envkey_DL_NGX_CERT: ${{ secrets.DL_NGX_CERT }}
+          envkey_DL_NGX_KEY: ${{ secrets.DL_NGX_KEY }}
+          envkey_DL_APP_DIR: ${{ secrets.DL_APP_DIR }}
+          envkey_DL_ENV_EXCLUDE: ${{ secrets.DL_ENV_EXCLUDE }}
+          envkey_COMPOSE_NETWORK: ${{ secrets.COMPOSE_NETWORK }}
           envkey_COMPOSE_PROJECT_NAME: ${{ secrets.COMPOSE_PROJECT_NAME }}
+          envkey_COMPOSE_PORT: ${{ secrets.COMPOSE_PORT }}
+          envkey_COMPOSE_FILE: ${{ secrets.COMPOSE_FILE }}
+          envkey_APP_NAME: ${{ secrets.APP_NAME }}
+          envkey_APP_ENV: ${{ secrets.APP_ENV }}
+          envkey_APP_KEY: ${{ secrets.APP_KEY }}
+          envkey_APP_DEBUG: ${{ secrets.APP_DEBUG }}
+          envkey_APP_URL: ${{ secrets.APP_URL }}
+          envkey_LOG_CHANNEL: ${{ secrets.LOG_CHANNEL }}
+          envkey_LOG_DEPRECATIONS_CHANNEL: ${{ secrets.LOG_DEPRECATIONS_CHANNEL }}
+          envkey_LOG_LEVEL: ${{ secrets.LOG_LEVEL }}
+          envkey_DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+          envkey_DB_HOST: ${{ secrets.DB_HOST }}
+          envkey_DB_PORT: ${{ secrets.DB_PORT }}
+          envkey_DB_DATABASE: ${{ secrets.DB_DATABASE }}
+          envkey_DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          envkey_DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          envkey_BROADCAST_DRIVER: ${{ secrets.BROADCAST_DRIVER }}
+          envkey_CACHE_DRIVER: ${{ secrets.CACHE_DRIVER }}
+          envkey_FILESYSTEM_DRIVER: ${{ secrets.FILESYSTEM_DRIVER }}
+          envkey_QUEUE_CONNECTION: ${{ secrets.QUEUE_CONNECTION }}
+          envkey_SESSION_DRIVER: ${{ secrets.SESSION_DRIVER }}
+          envkey_SESSION_LIFETIME: ${{ secrets.SESSION_LIFETIME }}
+          envkey_AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          envkey_AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          envkey_AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          envkey_AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
+          envkey_AWS_USE_PATH_STYLE_ENDPOINT: ${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }}
           directory: ${{ env.DL_ENV_SRC }}
           file_name: ${{ env.DL_ENV_FILE }}
           fail_on_empty: false
