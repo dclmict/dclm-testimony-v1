@@ -22,8 +22,8 @@
 
 # folders
 docs/
+vendor/
 **/.git/
-**/vendor/
 **/.idea/
 **/.vscode/
 **/.vagrant/
