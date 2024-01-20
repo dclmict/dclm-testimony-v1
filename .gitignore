@@ -1,13 +1,9 @@
-# folders
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-/storage
-
+# https://git-scm.com/docs/gitignore
 # files
-setup
-ops/docker/pin
-ops/.env.dev
-ops/.env.prod
+dclm-*
+.cache*
+**/*.env*
+**/.DS_Store*
+
+# folders
+_
