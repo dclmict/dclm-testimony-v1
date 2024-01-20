@@ -11,12 +11,9 @@ App url: [DCLM Testimony](https://testimony.dclm.org)
 - make sure you have `git` installed. Run `git --version` to check.
 - make sure you have `docker` installed. Learn how [here](https://docs.docker.com/desktop/install/mac-install/)
 - make sure you have `docker compose` installed. Learn how [here](https://docs.docker.com/compose/install/)
-- create a directory: `mkdir -p <directory-name>`
+- create a directory: `mkdir -p <app-name>`
 - run `git clone https://github.com/dclmict/dclm-testimony.git .`
 - run `make run`
-- run `make key`
-- run `make migrate`
-- run `make seed`
 
 <a id="windows-setup"></a>
 ### On Windows (Docker)
@@ -24,13 +21,10 @@ App url: [DCLM Testimony](https://testimony.dclm.org)
 - make sure you have `make` installed. Learn how [here](docs/make.md)
 - make sure you have `docker` installed. Learn how [here](https://docs.docker.com/desktop/install/windows-install/)
 - make sure you have `docker compose` installed. Learn how [here](https://docs.docker.com/compose/install/)
-- create a directory: `mkdir -p <directory-name>`
+- create a directory: `mkdir <app-name>`
 - run `git config --global core.autocrlf input`
 - run `git clone https://github.com/dclmict/dclm-testimony.git .`
 - run `make run`
-- run `make key`
-- run `make migrate`
-- run `make seed`
 
 ## Credit
-App built and released by [DCLM Developers Community](https://developers.dclm.org).
+App built and released by [DCLM Tech Community](https://tech.dclm.org).
