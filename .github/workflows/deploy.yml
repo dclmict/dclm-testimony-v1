@@ -218,7 +218,6 @@ jobs:
           envkey_DL_NGX_CERT: ${{ secrets.DL_NGX_CERT }}
           envkey_DL_NGX_KEY: ${{ secrets.DL_NGX_KEY }}
           envkey_DL_APP_DIR: ${{ secrets.DL_APP_DIR }}
-          envkey_DL_ENV_EXCLUDE: ${{ secrets.DL_ENV_EXCLUDE }}
           envkey_COMPOSE_NETWORK: ${{ secrets.COMPOSE_NETWORK }}
           envkey_COMPOSE_PROJECT_NAME: ${{ secrets.COMPOSE_PROJECT_NAME }}
           envkey_COMPOSE_PORT: ${{ secrets.COMPOSE_PORT }}
