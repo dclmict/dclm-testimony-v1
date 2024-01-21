@@ -3,6 +3,7 @@
 dclm-*
 .cache*
 **/*.env*
+**/.DS_Store*
 
 # folders
 _
